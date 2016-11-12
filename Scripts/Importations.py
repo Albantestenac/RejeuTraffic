@@ -1,7 +1,8 @@
 author = 'Alban'
 
 import Models as mod
-from sqlalchemy.orm import sessionmaker, query
+import Clock
+from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker(bind=mod.engine)
 
@@ -62,11 +63,57 @@ def f_import_flights(filename):
     :param filename: fichier texte contenant les vols a importer
     :return:
     """
+    with open(filename, 'r') as f:
+        (start, count, nb_vols) = (0, 0, 0)
+        l_flights= []
+        lines = f.readlines()
+        for (i, line) in enumerate(lines):
+            if "NbVols:" in line:
+                nb_vols = int(line.split()[1])
+                start = i
+            if start > i and "$" in line and count<=nb_vols:
+                l_flights.add(line)
+                count += 1
+
+    #Remplissage des tables
+    for beacon in l_flights:
+        (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr) = beacon.split()[1:10]
+        #Conversions
+        f_h_dep = Clock.str_to_sec(f_h_dep)
+        f_h_arr = Clock.str_to_sec(f_h_arr)
+
+        #Ecriture dans un objet Flight
+        tmp_flight = mod.Flight(id=f_id, h_dep=f_h_dep, h_arr=f_h_arr, fl=int(f_fl), v=int(f_speed), callsign=f_callsign,
+                                type=f_type, dep=f_dep, arr=f_arr)
+
+        #Remplissage des tables avec les vols
+        tmp_session = Session()
+        if (tmp_session.query(mod.Flight).filter(mod.Flight.id==f_id).first()) == None :
+            #Ajout du vol a la bdd si il n'y est pas deja
+            tmp_session.add(tmp_flight)
+        else:
+            #Cas ou un vol ayant le meme id est dans la bdd
+            conflicting_flight = tmp_session.query(mod.Flight).filter(mod.Flight.id == f_id).first()
+            if conflicting_flight is not tmp_flight:
+            #Modification des champs si differents
+                pass
+        tmp_session.commit()
+    return 0
+
+
+
 
 print("Importation des balises ...")
 f_import_beacons("../exemple_donnees.txt")
 print("Fait")
-#session_test = Session()
-#test_beacon = session_test.query(mod.Beacon).first()
-#print test_beacon
-#session_test.commit()
+print("Importation des vols ...")
+f_import_flights("../exemple_donnees.txt")
+print("Fait")
+
+#Test rapide sur la BDD importee
+session_test = Session()
+test_beacon = session_test.query(mod.Beacon).first()
+print test_beacon
+test_flight = session_test.query(mod.Flight).first()
+print test_flight
+session_test.commit()
