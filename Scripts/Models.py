@@ -1,4 +1,4 @@
-author = "Alban"
+author = "Alban", "Alexandre"
 
 import sqlalchemy
 from sqlalchemy import create_engine
@@ -25,7 +25,7 @@ class Beacon(Base):
 class Flight(Base):
     __tablename__='flights'
 
-    id = Column(Integer, primary_key=True)                  # Numéro de vol
+    id = Column(Integer, primary_key=True)                  # Numero de vol
     callsign = Column(String(10))                           # Identifiant appel pour controleur
     type = Column(String(10))                               # Type d avion
     dep = Column(String(10))                                # Aeroport de depart
@@ -42,15 +42,15 @@ class Cone(Base):
     __tablename__='cones'
 
     id = Column(Integer, primary_key=True)              # Identifiant du plot
-    pos_x = Column(FLoat)                               # Position du plot sur l'axe x
+    pos_x = Column(Float)                               # Position du plot sur l'axe x
     pos_y = Column(Float)                               # Position du plot sur l'axe y
     vit_x = Column(Float)                               # Vitesse de l'avion correspondant au plot sur l'axe x
     vit_y = Column(Float)                               # Vitesse de l'avion correspondant au plot sur l'axe y
     flight_level = Column(Integer)                      # FL de l'avion correspondant au plot
     rate = Column(Float)                                # Vitesse verticale de l'avion correspondant au plot
-    tendency = Column(String(10))                       # Tendance, montée ou descente
+    tendency = Column(String(10))                       # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
-    flight = Column(Integer, ForeignKey('flights.id'))  # Numéro de vol correspondant au plot
+    flight = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
 
     def __repr__(self):
         return"<Cone(pos_x=%f, pos_y=%f, vit_x=%f, vit_y=%f, flight_level=%d, rate=%f, tendency=%s, hour=%d, flight=%d)>" % \
@@ -60,11 +60,12 @@ class FLightPlan(Base):
     __tablename__='flightplans'
 
     id = Column(Integer, primary_key=True)                  # Identifiant du plan de vol
-    flight = Column(Integer, ForeignKey('flights.id'))      # Numéro du vol correspondant
-    beacon_dep = Column(Integer, ForeignKey('beacons.id'))  # Balise de départ
+    flight = Column(Integer, ForeignKey('flights.id'))      # Numero du vol correspondant
+    beacon_dep = Column(Integer, ForeignKey('beacons.id'))  # Balise de depart
 
     def __repr__(self):
-        return"<FlightPlan(flight=%d, beacon_dep=%d)>" % \ (self.flight, self.beacon_dep)
+        return"<FlightPlan(flight=%d, beacon_dep=%d)>" % \
+              (self.flight, self.beacon_dep)
 
 class FLightPlanBeacon:
     __tablename__='flightplan_beacons'
@@ -80,7 +81,7 @@ class FLightPlanBeacon:
               (self.id_flp, self.order, self.beacon_name, self.hour)
 
 
-#Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 balise = Beacon(name='Test', pos_x=10.2, pos_y=-1563.869)
 vol = Flight(callsign='AF4185', type='A320', dep='LFBO', arr='LFPO', h_dep=1020, h_arr=1125, id_flp=20)
