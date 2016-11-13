@@ -57,6 +57,7 @@ def f_import_beacons(filename):
         tmp_session.commit()
     return 0
 
+
 def f_import_flights(filename):
     """
     Importe les donnees relative aux vols a partir d un fichier texte passe en entree et les stocke dans la BDD
@@ -64,26 +65,25 @@ def f_import_flights(filename):
     :return:
     """
     with open(filename, 'r') as f:
-        (start, count, nb_vols) = (0, 0, 0)
+        (start, nb_vols) = (0, 0)
         l_flights= []
         lines = f.readlines()
         for (i, line) in enumerate(lines):
             if "NbVols:" in line:
-                nb_vols = int(line.split()[1])
                 start = i
-            if start > i and "$" in line and count<=nb_vols:
-                l_flights.add(line)
-                count += 1
+            if start > 0 and i>start and "$" in line:
+                l_flights.append(line)
 
+    l_id = []
     #Remplissage des tables
-    for beacon in l_flights:
-        (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr) = beacon.split()[1:10]
+    for flight in l_flights:
+        (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr) = flight.split()[1:10]
         #Conversions
         f_h_dep = Clock.str_to_sec(f_h_dep)
         f_h_arr = Clock.str_to_sec(f_h_arr)
 
         #Ecriture dans un objet Flight
-        tmp_flight = mod.Flight(id=f_id, h_dep=f_h_dep, h_arr=f_h_arr, fl=int(f_fl), v=int(f_speed), callsign=f_callsign,
+        tmp_flight = mod.Flight(id=int(f_id), h_dep=f_h_dep, h_arr=f_h_arr, fl=int(f_fl), v=int(f_speed), callsign=f_callsign,
                                 type=f_type, dep=f_dep, arr=f_arr)
 
         #Remplissage des tables avec les vols
@@ -98,22 +98,68 @@ def f_import_flights(filename):
             #Modification des champs si differents
                 pass
         tmp_session.commit()
+        l_id.append(int(f_id))
+    return l_id
+
+
+def f_import_plots(filename, flight_id):
+    """
+    Importe les donnees des plots correspondant a un vol a partir du fichier apsse en parametre et les stock dans la bdd
+    :param filename: Nom du fichier contenant les donnes
+    :param flight_id: identifiant du vol dont on veut recuperer les plots
+    :return:
+    """
+    #Extraction des lignes concernant les plots du vol
+    with open(filename, 'r') as f:
+        (block_start, block_end, marker) = (0, 0, 0)
+        lines = f.readlines()
+        for (i, line) in enumerate(lines):
+            if "NbVols:" in line:
+                marker = i
+            if marker > 0 and i>marker and ("$" and str(flight_id) in line):
+                marker = i
+            if marker > 0 and i>marker and "NbPlots:" in line:
+                block_start = i+1                                     #debut du bloc = ligne premier plot
+                block_end = block_start + int(line.split()[1])        #fin du bloc = ligne du dernier plot + 1 (ATTENTION)
+                break                                                 #On quitte une fois fini
+        l_cones = lines[block_start:block_end]
+
+    #Remplissage des tables
+    for cone in l_cones:
+        (c_hour, c_pos_x, c_pos_y, c_vit_x, c_vit_y, c_fl, c_rate, c_tendency) = cone.split()
+
+        #Conversion
+        c_hour = Clock.str_to_sec(c_hour)
+
+        # Ecriture dans un objet Cone
+        tmp_cone = mod.Cone(pos_x=int(c_pos_x), pos_y=int(c_pos_y), vit_x=int(c_vit_x), vit_y=int(c_vit_y), flight_level=int(c_fl),
+                            rate=int(c_rate), hour=c_hour, flight=flight_id)
+
+        # Remplissage des tables avec les cones
+        tmp_session = Session()
+        tmp_session.add(tmp_cone)
+        tmp_session.commit()
+
+
     return 0
 
 
 
-
-print("Importation des balises ...")
-f_import_beacons("../exemple_donnees.txt")
-print("Fait")
+# print("Importation des balises ...")
+# f_import_beacons("../exemple_donnees.txt")
+# print("Fait")
 print("Importation des vols ...")
-f_import_flights("../exemple_donnees.txt")
+liste_vols = f_import_flights("../exemple_donnees.txt")
 print("Fait")
+print ("Importation des plots ...")
+for id_vol in liste_vols:
+    f_import_plots("../exemple_donnees.txt", id_vol)
+print "Fait"
 
-#Test rapide sur la BDD importee
-session_test = Session()
-test_beacon = session_test.query(mod.Beacon).first()
-print test_beacon
-test_flight = session_test.query(mod.Flight).first()
-print test_flight
-session_test.commit()
+# #Test rapide sur la BDD importee
+# session_test = Session()
+# test_beacon = session_test.query(mod.Beacon).first()
+# print test_beacon
+# test_flight = session_test.query(mod.Flight).first()
+# print test_flight
+# session_test.commit()
