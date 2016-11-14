@@ -50,15 +50,15 @@ class Cone(Base):
     vit_y = Column(Float)                               # Vitesse de l'avion correspondant au plot sur l'axe y
     flight_level = Column(Integer)                      # FL de l'avion correspondant au plot
     rate = Column(Float)                                # Vitesse verticale de l'avion correspondant au plot
-    tendency = Column(String(10))                       # Tendance, montee ou descente
+    tendency = Column(Integer)                          # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
     flight = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
 
     def __repr__(self):
-        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%f, vit_y=%f, flight_level=%d, rate=%f, tendency=%s, hour=%d, flight=%d)>" % \
+        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%f, vit_y=%f, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
               (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight)
 
-class FLightPlan(Base):
+class FlightPlan(Base):
     __tablename__='flightplans'
 
     id = Column(Integer, primary_key=True)                  # Identifiant du plan de vol
@@ -69,7 +69,7 @@ class FLightPlan(Base):
         return"<FlightPlan(flight=%d, beacon_dep=%d)>" % \
               (self.flight, self.beacon_dep)
 
-class FLightPlanBeacon:
+class FlightPlanBeacon:
     __tablename__='flightplan_beacons'
 
     id = Column(Integer, primary_key=True)

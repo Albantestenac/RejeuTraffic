@@ -65,7 +65,7 @@ def f_import_flights(filename):
     :return:
     """
     with open(filename, 'r') as f:
-        (start, nb_vols) = (0, 0)
+        start = 0
         l_flights= []
         lines = f.readlines()
         for (i, line) in enumerate(lines):
@@ -140,14 +140,58 @@ def f_import_plots(filename, flight_id):
         tmp_session.add(tmp_cone)
         tmp_session.commit()
 
+    return 0
+
+
+def f_import_flightplan(filename, flight_id):
+    #Extraction de la ligne crrespondant au plan de vol
+    with open(filename, 'r') as f:
+        marker = 0
+        flightplan_str = ""
+        lines = f.readlines()
+        for (i, line) in enumerate(lines):
+            if "NbVols:" in line:
+                marker = i
+            if marker > 0 and i>marker and ("$" and str(flight_id) in line):
+                marker = i
+            if marker > 0 and i>marker and "!" in line:
+                flightplan_str = line
+                break                                                 #On quitte une fois fini
+
+    #Remplissable des tables
+    if flightplan_str != "":
+        tmp_tab = flightplan_str.split()
+        datas = []
+        index = 1
+        if (len(tmp_tab)-1)%5 == 0:
+            while index<len(tmp_tab):
+                (fp_beacon, dummy1, fp_hour, dummy2, fp_fl) = tmp_tab[index:index+5]
+                datas.append((fp_beacon, dummy1, fp_hour, dummy2, fp_fl))
+                index += 5
+
+        #Creation et remplissage objet Flightplan
+        fpl_session = Session()
+        first_beacon = fpl_session.query(mod.Beacon).filter(mod.Beacon.name == data[0]).first()
+        tmp_flightplan = mod.FlightPlan(flight=flight_id, beacon_dep=first_beacon.id)
+        fpl_session.add(tmp_flightplan)
+        fpl_session.commit()
+        #Remplissage objets Flightplanbeacon
+        for (i, data) in enumerate(datas):
+            #A FAIRE
+            pass
+
+
+
+
+
 
     return 0
 
 
 
-# print("Importation des balises ...")
-# f_import_beacons("../exemple_donnees.txt")
-# print("Fait")
+print("Importation des balises ...")
+f_import_beacons("../exemple_donnees.txt")
+print("Fait")
 print("Importation des vols ...")
 liste_vols = f_import_flights("../exemple_donnees.txt")
 print("Fait")
@@ -156,10 +200,11 @@ for id_vol in liste_vols:
     f_import_plots("../exemple_donnees.txt", id_vol)
 print "Fait"
 
+
 # #Test rapide sur la BDD importee
 # session_test = Session()
 # test_beacon = session_test.query(mod.Beacon).first()
 # print test_beacon
 # test_flight = session_test.query(mod.Flight).first()
-# print test_flight
+# print test_flight.id
 # session_test.commit()
