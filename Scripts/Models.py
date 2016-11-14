@@ -69,7 +69,7 @@ class FlightPlan(Base):
         return"<FlightPlan(flight=%d, beacon_dep=%d)>" % \
               (self.flight, self.beacon_dep)
 
-class FlightPlanBeacon:
+class FlightPlanBeacon(Base):
     __tablename__='flightplan_beacons'
 
     id = Column(Integer, primary_key=True)

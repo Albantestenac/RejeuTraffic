@@ -37,11 +37,13 @@ def f_import_beacons(filename):
         print("Aucune balise dans le fichier %s") % (filename)
         return 1
 
+    tmp_session = Session()
+
     for beacon in l_beacons:
         (b_name, b_x_pos, b_y_pos) = beacon.split()[0:3]                  #Attention: la position est une str ici, pas un entier
         tmp_beacon = mod.Beacon(name=b_name, pos_x=int(b_x_pos), pos_y=int(b_y_pos))
         #Remplissage des tables avec les balises
-        tmp_session = Session()
+
         if (tmp_session.query(mod.Beacon).filter(mod.Beacon.name==b_name).first()) == None :
             #Ajout de la balise a la bdd si elle n'y est pas deja
             tmp_session.add(tmp_beacon)
@@ -54,7 +56,8 @@ def f_import_beacons(filename):
                     conflicting_beacon.pos_x = b_x_pos
                 elif conflicting_beacon.pos_y != b_y_pos:
                     conflicting_beacon.pos_y = b_y_pos
-        tmp_session.commit()
+
+    tmp_session.commit()
     return 0
 
 
@@ -75,6 +78,8 @@ def f_import_flights(filename):
                 l_flights.append(line)
 
     l_id = []
+    tmp_session = Session()
+
     #Remplissage des tables
     for flight in l_flights:
         (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr) = flight.split()[1:10]
@@ -87,7 +92,6 @@ def f_import_flights(filename):
                                 type=f_type, dep=f_dep, arr=f_arr)
 
         #Remplissage des tables avec les vols
-        tmp_session = Session()
         if (tmp_session.query(mod.Flight).filter(mod.Flight.id==f_id).first()) == None :
             #Ajout du vol a la bdd si il n'y est pas deja
             tmp_session.add(tmp_flight)
@@ -97,8 +101,9 @@ def f_import_flights(filename):
             if conflicting_flight is not tmp_flight:
             #Modification des champs si differents
                 pass
-        tmp_session.commit()
         l_id.append(int(f_id))
+
+    tmp_session.commit()
     return l_id
 
 
@@ -124,7 +129,9 @@ def f_import_plots(filename, flight_id):
                 break                                                 #On quitte une fois fini
         l_cones = lines[block_start:block_end]
 
-    #Remplissage des tables
+    tmp_session = Session()
+
+    # Remplissage des tables
     for cone in l_cones:
         (c_hour, c_pos_x, c_pos_y, c_vit_x, c_vit_y, c_fl, c_rate, c_tendency) = cone.split()
 
@@ -136,9 +143,10 @@ def f_import_plots(filename, flight_id):
                             rate=int(c_rate), hour=c_hour, flight=flight_id)
 
         # Remplissage des tables avec les cones
-        tmp_session = Session()
+
         tmp_session.add(tmp_cone)
-        tmp_session.commit()
+
+    tmp_session.commit()
 
     return 0
 
@@ -158,6 +166,8 @@ def f_import_flightplan(filename, flight_id):
                 flightplan_str = line
                 break                                                 #On quitte une fois fini
 
+    tmp_session = Session()
+
     #Remplissable des tables
     if flightplan_str != "":
         tmp_tab = flightplan_str.split()
@@ -170,20 +180,19 @@ def f_import_flightplan(filename, flight_id):
                 index += 5
 
         #Creation et remplissage objet Flightplan
-        fpl_session = Session()
-        first_beacon = fpl_session.query(mod.Beacon).filter(mod.Beacon.name == data[0]).first()
+        first_beacon = tmp_session.query(mod.Beacon).filter(mod.Beacon.name == datas[0][0]).first()
         tmp_flightplan = mod.FlightPlan(flight=flight_id, beacon_dep=first_beacon.id)
-        fpl_session.add(tmp_flightplan)
-        fpl_session.commit()
+        tmp_session.add(tmp_flightplan)
+        tmp_session.commit()
+
         #Remplissage objets Flightplanbeacon
+        tmp_session = Session()
+        flightplan = tmp_session.query(mod.FlightPlan).filter(mod.FlightPlan.flight == flight_id).first()
         for (i, data) in enumerate(datas):
-            #A FAIRE
-            pass
+            tmp_flightplanbeacon = mod.FlightPlanBeacon(id_flp=flightplan.id, order=i+1, beacon_name=data[0], hour=Clock.str_to_sec(data[2]))
+            tmp_session.add(tmp_flightplanbeacon)
 
-
-
-
-
+    tmp_session.commit()
 
     return 0
 
@@ -199,6 +208,10 @@ print ("Importation des plots ...")
 for id_vol in liste_vols:
     f_import_plots("../exemple_donnees.txt", id_vol)
 print "Fait"
+print("Importation des plans de vol ...")
+for id_vol in liste_vols:
+    f_import_flightplan("../exemple_donnees.txt", id_vol)
+print("Fait")
 
 
 # #Test rapide sur la BDD importee
