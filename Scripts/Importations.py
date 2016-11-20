@@ -74,7 +74,7 @@ def f_import_flights(filename):
         for (i, line) in enumerate(lines):
             if "NbVols:" in line:
                 start = i
-            if start > 0 and i>start and "$" in line:
+            if start > 0 and i>start and line[0]=='$':
                 l_flights.append(line)
 
     l_id = []
@@ -119,9 +119,7 @@ def f_import_plots(filename, flight_id):
         (block_start, block_end, marker) = (0, 0, 0)
         lines = f.readlines()
         for (i, line) in enumerate(lines):
-            if "NbVols:" in line:
-                marker = i
-            if marker > 0 and i>marker and ("$" and str(flight_id) in line):
+            if line[0]=="$" and (str(flight_id) in line):
                 marker = i
             if marker > 0 and i>marker and "NbPlots:" in line:
                 block_start = i+1                                     #debut du bloc = ligne premier plot
@@ -140,7 +138,7 @@ def f_import_plots(filename, flight_id):
 
         # Ecriture dans un objet Cone
         tmp_cone = mod.Cone(pos_x=int(c_pos_x), pos_y=int(c_pos_y), vit_x=int(c_vit_x), vit_y=int(c_vit_y), flight_level=int(c_fl),
-                            rate=int(c_rate), hour=c_hour, flight=flight_id)
+                            rate=int(c_rate), tendency= c_tendency, hour=c_hour, flight=flight_id)
 
         # Remplissage des tables avec les cones
 
@@ -158,11 +156,9 @@ def f_import_flightplan(filename, flight_id):
         flightplan_str = ""
         lines = f.readlines()
         for (i, line) in enumerate(lines):
-            if "NbVols:" in line:
+            if line[0]=="$" and (str(flight_id) in line):
                 marker = i
-            if marker > 0 and i>marker and ("$" and str(flight_id) in line):
-                marker = i
-            if marker > 0 and i>marker and "!" in line:
+            if marker > 0 and i>marker and line[0]=='!':
                 flightplan_str = line
                 break                                                 #On quitte une fois fini
 
@@ -218,6 +214,8 @@ print("Fait")
 # session_test = Session()
 # test_beacon = session_test.query(mod.Beacon).first()
 # print test_beacon
-# test_flight = session_test.query(mod.Flight).first()
-# print test_flight.id
+# for flight in session_test.query(mod.Flight):
+#     print flight.id, flight.callsign, Clock.sec_to_str(flight.h_dep), flight.fl
+# for plot in session_test.query(mod.Cone).filter(mod.Cone.flight == liste_vols[1]):
+#     print plot
 # session_test.commit()
