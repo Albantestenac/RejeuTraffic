@@ -7,7 +7,7 @@ def str_to_sec(string):
     :return: Entier correspondant au nombre de secondes ecoulees depuis 00:00:00
     """
     (h,m,s)= string.split(':')
-    return (int(h)*3600 + int(m)*60 + int(s))
+    return int(h)*3600 + int(m)*60 + int(s)
 
 def sec_to_str(nb_sec):
     """

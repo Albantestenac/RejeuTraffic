@@ -1,11 +1,11 @@
 author = "Alban", "Alexandre"
 
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 
-engine = create_engine('sqlite:///:memory', echo=False)         #Mettre echo a True pour acceder au mode verbeux
+# Mettre echo a True pour acceder au mode verbeux
+engine = create_engine('sqlite:///:memory:', echo=False)
 
 Base = declarative_base()
 
@@ -85,8 +85,9 @@ class FlightPlanBeacon(Base):
 
 Base.metadata.create_all(engine)
 
-balise = Beacon(name='Test', pos_x=10.2, pos_y=-1563.869)
-vol = Flight(h_dep=1020, h_arr=1125, fl=340, v=235 ,callsign='AF4185', type='A320', dep='LFBO', arr='LFPO', id_flp=20)
+if __name__ == "__main__":
+    balise = Beacon(name='Test', pos_x=10.2, pos_y=-1563.869)
+    vol = Flight(h_dep=1020, h_arr=1125, fl=340, v=235 ,callsign='AF4185', type='A320', dep='LFBO', arr='LFPO', id_flp=20)
 
-# print balise
-# print vol
+    print balise
+    print vol

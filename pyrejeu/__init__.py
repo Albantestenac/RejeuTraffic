@@ -1,0 +1,5 @@
+
+
+class PyRejeuException(Exception):
+    pass
+
