@@ -24,10 +24,10 @@ class RejeuImportation(object):
             lines = f.readlines()
             self.__import_beacons(lines)
 
-            f_ids = self.__import_flights(lines)
-            for f_id in f_ids:
-                self.__import_plots(lines, f_id)
-                self.__import_flightplan(lines, f_id)
+            self.__import_flights(lines)
+            for flight in self.session.query(mod.Flight).all():
+                self.__import_plots(lines, flight)
+                self.__import_flightplan(lines, flight)
         self.session.commit()
 
     def __line_search(self, lines, beginning_pattern, ending_pattern):
@@ -82,11 +82,10 @@ passe en entree et les stocke dans la BDD
         """
 Importe les donnees relative aux vols a partir d un fichier texte passe
 en entree et les stocke dans la BDD
-    :param filename: fichier texte contenant les vols a importer
+    :param lines: lignes du fichier contenant les vols a importer
     :return: None
 """
         logging.debug("Importation des vols")
-        l_ids = []
         start = 0
         l_flights= []
 
@@ -122,24 +121,22 @@ en entree et les stocke dans la BDD
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
-            l_ids.append(int(f_id))
             self.session.add(r_flight)
 
-        logging.debug("%d vols ont été importés" % len(l_ids))
-        return l_ids
+        logging.debug("%d vols ont été importés" % len(l_flights))
 
-    def __import_plots(self, lines, flight_id):
+    def __import_plots(self, lines, flight):
         """
         Importe les donnees des plots correspondant a un vol a partir du fichier apsse en parametre et les stock dans la bdd
-        :param filename: Nom du fichier contenant les donnes
-        :param flight_id: identifiant du vol dont on veut recuperer les plots
+        :param lines: lignes du fichier contenant les donnes
+        :param flight: vol dont on veut recuperer les plots
         :return:
         """
-        logging.debug("Importation des plots pour le vol %s" % flight_id)
+        logging.debug("Importation des plots pour le vol %s" % flight.callsign)
         # Extraction des lignes concernant les plots du vol
         block_start, block_end, marker = 0, 0, 0
         for (i, line) in enumerate(lines):
-            if line[0]=="$" and (str(flight_id) in line):
+            if line[0]=="$" and (str(flight.id) in line):
                 marker = i
             if marker > 0 and i>marker and "NbPlots:" in line:
                 block_start = i+1                                     #debut du bloc = ligne premier plot
@@ -158,17 +155,16 @@ en entree et les stocke dans la BDD
             tmp_cone = mod.Cone(pos_x=int(c_pos_x), pos_y=int(c_pos_y),
                                 vit_x=int(c_vit_x), vit_y=int(c_vit_y),
                                 flight_level=int(c_fl), rate=int(c_rate),
-                                tendency= c_tendency, hour=c_hour, flight=flight_id)
-
+                                tendency= c_tendency, hour=c_hour, flight_id=flight.id)
             self.session.add(tmp_cone)
 
-    def __import_flightplan(self, lines, flight_id):
+    def __import_flightplan(self, lines, flight):
         # Extraction de la ligne crrespondant au plan de vol
-        logging.debug("Importation plan de vol pour le vol %s" % flight_id)
+        logging.debug("Importation plan de vol pour le vol %s" % flight.callsign)
         marker = 0
         flightplan_str = ""
         for (i, line) in enumerate(lines):
-            if line[0]=="$" and (str(flight_id) in line):
+            if line[0]=="$" and (str(flight.id) in line):
                 marker = i
             if marker > 0 and i > marker and line[0] == '!':
                 flightplan_str = line
@@ -185,22 +181,13 @@ en entree et les stocke dans la BDD
                     datas.append((fp_beacon, dummy1, fp_hour, dummy2, fp_fl))
                     index += 5
 
-            # Creation et remplissage objet Flightplan
-            first_beacon = self.session.query(mod.Beacon)\
-                                       .filter(mod.Beacon.name == datas[0][0])\
-                                       .first()
-            tmp_flightplan = mod.FlightPlan(flight=flight_id, beacon_dep=first_beacon.id)
-            self.session.add(tmp_flightplan)
-
-            #Remplissage objets Flightplanbeacon
-            flightplan = self.session.query(mod.FlightPlan)\
-                                     .filter(mod.FlightPlan.flight == flight_id)\
-                                     .first()
+            flight_plan = mod.FlightPlan(flight_id=flight.id)
             for (i, data) in enumerate(datas):
-                tmp_flightplanbeacon = mod.FlightPlanBeacon(id_flp=flightplan.id, order=i+1,
-                                                            beacon_name=data[0],
-                                                            hour=utils.str_to_sec(data[2]))
-                self.session.add(tmp_flightplanbeacon)
+                beacon = mod.FlightPlanBeacon(order=i+1,
+                                              beacon_name=data[0],
+                                              hour=utils.str_to_sec(data[2]))
+                flight_plan.beacons.append(beacon)
+            self.session.add(flight_plan)
 
 
 if __name__ == "__main__":
@@ -211,10 +198,15 @@ if __name__ == "__main__":
     import_obj = RejeuImportation()
     import_obj.import_file(sys.argv[1])
 
-
-    #Test rapide sur la BDD importee
+    # Test rapide sur la BDD importee
+    print("------------ Test sur la base de données --------------")
     session_test = Session()
-    test_beacon = session_test.query(mod.Beacon).first()
-    print test_beacon
+    print("Affichage d'une balise")
+    print(session_test.query(mod.Beacon).first())
+    print("Affichage des informations sur les vols")
     for flight in session_test.query(mod.Flight):
-        print flight.id, flight.callsign, utils.sec_to_str(flight.h_dep), flight.fl
+        print(flight)
+        print(flight.display_cones_extract())
+    print("Affichage des plans de vol")
+    for fpl in session_test.query(mod.FlightPlan):
+        print(fpl)

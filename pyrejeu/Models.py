@@ -1,13 +1,16 @@
+# -*- coding: utf-8 -*-
 author = "Alban", "Alexandre"
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
+
 
 # Mettre echo a True pour acceder au mode verbeux
 engine = create_engine('sqlite:///:memory:', echo=False)
-
 Base = declarative_base()
+
 
 class Beacon(Base):
     __tablename__='beacons'
@@ -34,11 +37,21 @@ class Flight(Base):
     type = Column(String(10))                               # Type d avion
     dep = Column(String(10))                                # Aeroport de depart
     arr = Column(String(10))                                # Aeroport d arrivee
-    id_flp = Column(Integer, ForeignKey('flightplans.id'))  # Id plan de vol associe
+
+    # déclaration des relations
+    flight_plan = relationship("FlightPlan", uselist=False, back_populates="flight")
+    cones = relationship("Cone", back_populates="flight")
 
     def __repr__(self):
-        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, id_flp=%d)>" % \
-               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, self.id_flp)
+        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s)>" % \
+               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr)
+
+    def display_cones_extract(self):
+        def repr(c_list):
+            return "\n\t".join([str(c) for c in c_list])
+
+        return "\t%s\n\t ... \n\t%s" % (repr(self.cones[0:2]), repr(self.cones[-3:-1]))
+
 
 class Cone(Base):
     __tablename__='cones'
@@ -52,35 +65,48 @@ class Cone(Base):
     rate = Column(Float)                                # Vitesse verticale de l'avion correspondant au plot
     tendency = Column(Integer)                          # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
-    flight = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
+    flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
+
+    # déclaration des relations
+    flight = relationship("Flight", back_populates="cones")
 
     def __repr__(self):
         return"<Cone(pos_x=%f, pos_y=%f, vit_x=%f, vit_y=%f, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
-              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight)
+              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id)
+
 
 class FlightPlan(Base):
     __tablename__='flightplans'
 
     id = Column(Integer, primary_key=True)                  # Identifiant du plan de vol
-    flight = Column(Integer, ForeignKey('flights.id'))      # Numero du vol correspondant
-    beacon_dep = Column(Integer, ForeignKey('beacons.id'))  # Balise de depart
+    flight_id = Column(Integer, ForeignKey('flights.id'))      # Numero du vol correspondant
+
+    # déclaration des relations
+    flight = relationship("Flight", back_populates="flight_plan")
+    beacons = relationship("FlightPlanBeacon", back_populates="flight_plan")
 
     def __repr__(self):
-        return"<FlightPlan(flight=%d, beacon_dep=%d)>" % \
-              (self.flight, self.beacon_dep)
+        res = "<FlightPlan(flight=%d)>" % self.flight.id
+        for b in self.beacons:
+            res += "\n\t%s" % str(b)
+        return res
+
 
 class FlightPlanBeacon(Base):
     __tablename__='flightplan_beacons'
 
     id = Column(Integer, primary_key=True)
-    id_flp = Column(Integer, ForeignKey('flightplans.id'))
     order = Column(Integer)
-    beacon_name = Column(String(10), ForeignKey('beacons.name'))
     hour = Column(Integer)
+    flight_plan_id = Column(Integer, ForeignKey('flightplans.id'))
+    beacon_name = Column(String(10), ForeignKey('beacons.name'))
+
+    # déclaration des relations
+    flight_plan = relationship("FlightPlan", back_populates="beacons")
 
     def __repr__(self):
-        return"FlightPlanBeacon(id_flp=%d, order=%d, beacon_name=%s, hour=%d)>" % \
-              (self.id_flp, self.order, self.beacon_name, self.hour)
+        return "<FlightPlanBeacon(order=%d, beacon_name=%s, hour=%d)>" % \
+               (self.order, self.beacon_name, self.hour)
 
 
 Base.metadata.create_all(engine)
