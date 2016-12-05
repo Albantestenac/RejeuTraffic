@@ -63,6 +63,7 @@ passe en entree et les stocke dans la BDD
         for beacon in l_beacons:
             # Attention: la position est une str ici, pas un entier
             (b_name, b_x_pos, b_y_pos) = beacon.split()[0:3]
+            ### chercher du becon
             r_beacon = self.session.query(mod.Beacon)\
                                    .filter(mod.Beacon.name==b_name)\
                                    .first()
