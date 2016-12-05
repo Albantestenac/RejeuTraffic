@@ -194,7 +194,7 @@ en entree et les stocke dans la BDD
 if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.DEBUG)
     if len(sys.argv) != 2:
-        sys.exit("Usage : Importation.py <file>")
+        sys.exit("Usage : importation.py <file>")
 
     import_obj = RejeuImportation()
     import_obj.import_file(sys.argv[1])
