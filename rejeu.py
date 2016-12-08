@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+import os
 from ivy.std_api import *
 from optparse import OptionParser
 import logging
@@ -8,18 +10,17 @@ from pyrejeu.clock import RejeuClock
 from pyrejeu.importations import RejeuImportation
 from pyrejeu import utils as ut
 
-logger = logging.getLogger('Ivy')
-
-logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.DEBUG)
+ivy_logger = logging.getLogger('Ivy')
+logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s')
 
 def on_cx_proc(agent, connected):
     if connected == IvyApplicationDisconnected:
-        logger.error('Ivy application %r was disconnected', agent)
+        logging.error('Ivy application %r was disconnected', agent)
     else:
-        logger.info('Ivy application %r was connected', agent)
+        logging.info('Ivy application %r was connected', agent)
 
 def on_die_proc(agent, _id):
-    logger.info('received the order to die from %r with id = %d', agent, _id)
+    logging.info('received the order to die from %r with id = %d', agent, _id)
 
 def connect(app_name, ivy_bus):
     IvyInit(app_name,                   # Nom de l'application fournie à Ivy
@@ -30,10 +31,6 @@ def connect(app_name, ivy_bus):
     IvyStart(ivy_bus)
 
 if __name__ == "__main__":
-    # importation du fichier
-    import_obj = RejeuImportation()
-    import_obj.import_file(sys.argv[1])
-
     # gestion des options
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
@@ -50,10 +47,16 @@ if __name__ == "__main__":
     level = logging.INFO
     if options.verbose:  # Si mode verbeux choisi
         level = logging.DEBUG
-    logger.setLevel(level)
+    logging.getLogger().setLevel(level)
+
+    # importation du fichier
+    if len(args) != 1 or not os.path.isfile(args[0]):
+        sys.exit("Error: Usage rejeu.py [options] <trace_file>")
+    import_obj = RejeuImportation()
+    import_obj.import_file(args[0])
 
     # connection au bus ivy
-    logger.info("Connexion to Ivy bus")
+    logging.info("Connexion to Ivy bus")
     connect(options.app_name, options.ivy_bus)
 
     clock = RejeuClock(ut.str_to_sec("11:58:55"))

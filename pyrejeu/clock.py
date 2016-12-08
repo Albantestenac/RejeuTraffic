@@ -20,8 +20,10 @@ class RejeuClock(object):
 
     def run(self):
         while self.running:
-            time.sleep(1)
-            logging.debug("Loop running, SimTime=%s" % utils.sec_to_str(self.current_time))
+            logging.debug("Loop running, SimTime=%s" \
+                    % utils.sec_to_str(self.current_time))
+            ivy.IvySendMsg("ClockEvent Time=%s Rate=1 Bs=0" \
+                    % utils.sec_to_str(self.current_time))
 
             # récupérer les plots à envoyer
 
@@ -38,6 +40,7 @@ class RejeuClock(object):
                 ivy.IvySendMsg(msg)
 
             self.current_time += 1
+            time.sleep(1)
 
     def pause(self):
         pass
