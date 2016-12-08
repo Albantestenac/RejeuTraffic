@@ -111,7 +111,7 @@ en entree et les stocke dans la BDD
                 r_flight = mod.Flight(id=int(f_id), h_dep=f_h_dep,
                                       h_arr=f_h_arr, fl=int(f_fl),
                                       v=int(f_speed), callsign=f_callsign,
-                                      type=f_type, dep=f_dep, arr=f_arr)
+                                      type=f_type, dep=f_dep, arr=f_arr, pln_event=0)
             else:
                 # Cas ou un vol ayant le meme id est dans la bdd
                 r_flight.h_dep = f_h_dep
@@ -122,6 +122,7 @@ en entree et les stocke dans la BDD
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
+                r_flight.pln_event = 0
             self.session.add(r_flight)
 
         logging.debug("%d vols ont été importés" % len(l_flights))

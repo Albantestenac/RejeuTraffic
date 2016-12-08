@@ -33,8 +33,13 @@ class RejeuClock(object):
             # pour chaque plot
             for cone in list_cones:
                 # par défaut : SSR = 0000 ...
+                if cone.flight.pln_event == 0 :
+                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=0000 Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=TRUE Tcas=TA_ONLY Adsb=NO DLink=NO List=--" %\
+                                    (cone.flight.id, cone.hour, cone.flight.callsign, cone.flight.type, cone.flight.v, cone.flight.fl,cone.flight.dep, cone.flight.arr) #ATTENTION A MODIFIER POUR LIST
+                    ivy.IvySendMsg(msg_pln_event)
+                    cone.flight.pln_event=1
                 g_speed = math.sqrt((cone.vit_x)**2+(cone.vit_y)**2)
-                msg = "TrackMovedEvent Flight=%d CallSign=%s SSR=0000 Sector=SL Layers=F,I X=%f Y=%f Vx=%f Vy=%f Afl=%d Rate=%f Heading=323 GroundSpeed=%f Tendency=%d Time=%s" %\
+                msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=0000 Sector=SL Layers=F,I X=%f Y=%f Vx=%f Vy=%f Afl=%d Rate=%f Heading=323 GroundSpeed=%f Tendency=%d Time=%s" %\
                       ( cone.flight.id, cone.flight.callsign, cone.pos_x, cone.pos_y, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, g_speed, cone.tendency, utils.sec_to_str(cone.hour) )
                 #logging.debug("Message envoye : %s" % msg)
                 ivy.IvySendMsg(msg)

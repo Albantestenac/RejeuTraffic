@@ -37,14 +37,15 @@ class Flight(Base):
     type = Column(String(10))                               # Type d avion
     dep = Column(String(10))                                # Aeroport de depart
     arr = Column(String(10))                                # Aeroport d arrivee
+    pln_event = Column(Integer)                             # PLN Event à 0 ou 1
 
     # déclaration des relations
     flight_plan = relationship("FlightPlan", uselist=False, back_populates="flight")
     cones = relationship("Cone", back_populates="flight")
 
     def __repr__(self):
-        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s)>" % \
-               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr)
+        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, pln_event=%d)>" % \
+               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, self.pln_event)
 
     def display_cones_extract(self):
         def repr(c_list):
