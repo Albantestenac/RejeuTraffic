@@ -32,12 +32,12 @@ class RejeuImportation(object):
 
     def __line_search(self, lines, beginning_pattern, ending_pattern):
         """
-Extrait une liste de lignes comprises entre deux motifs (non inclus) 
-a partir d'un fichier texte passe en parametre
-    :param filename: fichier texte contenant les lignes a extraire
-    :param beginning_pattern: motif indiquant le debut des lignes utiles
-    :param ending_pattern: motif indiquant la fin des lignes utiles
-    :return: list_lines: liste de chaine de caracteres correspondant 
+        Extrait une liste de lignes comprises entre deux motifs (non inclus)
+        a partir d'un fichier texte passe en parametre
+        :param filename: fichier texte contenant les lignes a extraire
+        :param beginning_pattern: motif indiquant le debut des lignes utiles
+        :param ending_pattern: motif indiquant la fin des lignes utiles
+        :return: list_lines: liste de chaine de caracteres correspondant
              aux lignes utiles (un element = une ligne)
         """
         for (i, line) in enumerate(lines):
@@ -49,11 +49,11 @@ a partir d'un fichier texte passe en parametre
 
     def __import_beacons(self, lines):
         """
-Importe les donnees relative aux balise a partir d un fichier texte 
-passe en entree et les stocke dans la BDD
-    :param lines: fichier texte contenant les balises a importer
-    :return: None
-"""
+        Importe les donnees relative aux balise a partir d un fichier texte
+        passe en entree et les stocke dans la BDD
+        :param lines: fichier texte contenant les balises a importer
+        :return: None
+        """
         logging.debug("Importation des balises")
         l_beacons = self.__line_search(lines, "NBeacons:", "########## Layers")
 
@@ -81,11 +81,11 @@ passe en entree et les stocke dans la BDD
 
     def __import_flights(self, lines):
         """
-Importe les donnees relative aux vols a partir d un fichier texte passe
-en entree et les stocke dans la BDD
-    :param lines: lignes du fichier contenant les vols a importer
-    :return: None
-"""
+        Importe les donnees relative aux vols a partir d un fichier texte passe
+        en entree et les stocke dans la BDD
+        :param lines: lignes du fichier contenant les vols a importer
+        :return: None
+        """
         logging.debug("Importation des vols")
         start = 0
         l_flights= []

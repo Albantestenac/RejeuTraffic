@@ -62,13 +62,17 @@ if __name__ == "__main__":
     clock = RejeuClock(ut.str_to_sec("11:58:55"))
 
     # gestion des signaux
+    # A différencier selon le type de signal reçu (horloge en pause, reprise de l'horloge, etc.)
     def handler(signum, frame):
         clock.stop()
         IvyStop()
         logging.info("Clock stopped")
 
+
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
+    #Ajouter gestion de signal à la réception d'un message "ClockStop"
+
 
     #Lancement de l'horloge
     clock.run()
