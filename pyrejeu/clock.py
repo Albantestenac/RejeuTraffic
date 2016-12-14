@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Author = "Alban", "Audrey"
+Author = "Alban", "Audrey", "Alexandre"
 
 import ivy.std_api as ivy
 import time

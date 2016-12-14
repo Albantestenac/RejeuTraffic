@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-author = 'Alban'
+author = 'Alban', 'Alexandre'
 
 import sys
 import os.path
