@@ -179,15 +179,17 @@ class RejeuImportation(object):
             index = 1
             if (len(tmp_tab)-1)%5 == 0:
                 while index<len(tmp_tab):
-                    (fp_beacon, dummy1, fp_hour, dummy2, fp_fl) = tmp_tab[index:index+5]
-                    datas.append((fp_beacon, dummy1, fp_hour, dummy2, fp_fl))
+                    (fp_beacon, V_or_A, fp_hour, dummy2, fp_fl) = tmp_tab[index:index+5]
+                    datas.append((fp_beacon, V_or_A, fp_hour, dummy2, fp_fl))
                     index += 5
 
             flight_plan = mod.FlightPlan(flight_id=flight.id)
             for (i, data) in enumerate(datas):
                 beacon = mod.FlightPlanBeacon(order=i+1,
                                               beacon_name=data[0],
-                                              hour=utils.str_to_sec(data[2]))
+                                              V_or_A=data[1],
+                                              hour=utils.str_to_sec(data[2]),
+                                              FL = data[4])
                 flight_plan.beacons.append(beacon)
             self.session.add(flight_plan)
 

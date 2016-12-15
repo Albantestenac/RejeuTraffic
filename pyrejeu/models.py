@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from pyrejeu import utils
 
 
 # Mettre echo a True pour acceder au mode verbeux
@@ -93,8 +94,13 @@ class FlightPlan(Base):
         return res
 
     def listing(self):
-        #Fonction renvoyant le plan de vol au format "NOM (V ou A) HEURE FL"
-        pass
+        #Fonction renvoyant le plan de vol au format "NOM (V ou A) HEURE FL "
+        for b in self.beacons:
+            res = b.beacon_name + " "
+            res += b.V_or_A + " "
+            res += utils.sec_to_str(b.hour) + " "
+            res += str(b.FL) + " "
+        return res
 
 
 class FlightPlanBeacon(Base):
@@ -103,6 +109,8 @@ class FlightPlanBeacon(Base):
     id = Column(Integer, primary_key=True)
     order = Column(Integer)
     hour = Column(Integer)
+    V_or_A = Column(String)
+    FL = Column(Integer)
     flight_plan_id = Column(Integer, ForeignKey('flightplans.id'))
     beacon_name = Column(String(10), ForeignKey('beacons.name'))
 

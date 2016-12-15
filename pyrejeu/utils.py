@@ -22,6 +22,18 @@ def sec_to_str(nb_sec):
     return "%02d:%02d:%02d" % (h, m, s)
 
 
+def sec_to_str_without_sec(nb_sec):
+    """
+    Convertit un nombre de seconde donne en une chaine au format HH:MM
+    :param nb_sec: nombre de seconde du temps a convertir
+    :return: Chaine de caractere au format HH:MM
+    """
+    h = nb_sec//3600
+    nb_sec -= h*3600
+    m = nb_sec // 60
+    return "%02d:%02d" % (h, m)
+
+
 if __name__ == "__main__":
     print str_to_sec("13:20:50")
     print sec_to_str(str_to_sec("13:20:50"))

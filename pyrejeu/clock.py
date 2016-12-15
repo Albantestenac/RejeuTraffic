@@ -35,8 +35,8 @@ class RejeuClock(object):
                 # par défaut : SSR = 0000 ...
                 if cone.flight.pln_event == 0 :
                     # ATTENTION A MODIFIER POUR LIST (cf focntion "listing" de la classe FlightPlan de models.py)
-                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=0000 Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=TRUE Tcas=TA_ONLY Adsb=NO DLink=NO List=--" %\
-                                    (cone.flight.id, cone.hour, cone.flight.callsign, cone.flight.type, cone.flight.v, cone.flight.fl,cone.flight.dep, cone.flight.arr)
+                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=0000 Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=TRUE Tcas=TA_ONLY Adsb=NO DLink=NO List=%s" %\
+                                    (cone.flight.id, cone.hour, cone.flight.callsign, cone.flight.type, cone.flight.v, cone.flight.fl,cone.flight.dep, cone.flight.arr, cone.flight.flight_plan.listing())
                     ivy.IvySendMsg(msg_pln_event)
                     cone.flight.pln_event=1
                 g_speed = math.sqrt((cone.vit_x)**2+(cone.vit_y)**2)

@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
 
     #Lancement de l'horloge
-    IvyBindMsg(on_msg, 'ClockStart')  #A ADAPTER
+    #IvyBindMsg(on_msg, 'ClockStart')  #A ADAPTER
     clock.run()
 
 
