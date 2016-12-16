@@ -30,9 +30,6 @@ def connect(app_name, ivy_bus):
             on_die_proc)
     IvyStart(ivy_bus)
 
-def receive(agent, *larg):                          #A ADAPTER
-    logger.info("Receive message : %s" % larg[0])
-
 if __name__ == "__main__":
     # gestion des options
     usage = "usage: %prog [options]"
@@ -71,15 +68,23 @@ if __name__ == "__main__":
         IvyStop()
         logging.info("Clock stopped")
 
+    def on_clockstart(agent, *larg):
+        clock.start()
+        logging.info("Clock Started")
+
+    def on_clockstop(agent, *larg):
+        clock.stop()
+        logging.info("Clock Stopped")
+
 
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
     #Ajouter gestion de signal à la réception d'un message "ClockStop"
 
-
-
     #Lancement de l'horloge
-    #IvyBindMsg(on_msg, 'ClockStart')  #A ADAPTER
-    clock.run()
+    IvyBindMsg(on_clockstart, '^ClockStart')
+    IvyBindMsg(on_clockstop , '^ClockStop')
+
+    #clock.run()
 
 

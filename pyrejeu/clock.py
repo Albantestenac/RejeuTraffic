@@ -49,7 +49,11 @@ class RejeuClock(object):
             time.sleep(1)
 
     def pause(self):
-        pass
+        self.running = False
+
+    def start(self):
+        self.running = True
+        self.run()
 
     def stop(self):
         self.running = False

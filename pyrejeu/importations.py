@@ -5,7 +5,7 @@ import sys
 import os.path
 import logging
 from sqlalchemy.orm import sessionmaker
-import pyrejeu.models as mod
+from pyrejeu import models as mod
 from pyrejeu import utils
 from pyrejeu import PyRejeuException
 
