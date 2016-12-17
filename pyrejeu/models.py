@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-author = "Alban", "Alexandre"
+__author__ = "Alban", "Alexandre"
 
+from sqlalchemy.pool import StaticPool
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
@@ -9,7 +10,10 @@ from pyrejeu import utils
 
 
 # Mettre echo a True pour acceder au mode verbeux
-engine = create_engine('sqlite:///:memory:', echo=False)
+engine = create_engine('sqlite:///:memory:', 
+                       connect_args={'check_same_thread':False},
+                       poolclass=StaticPool,
+                       echo=False)
 Base = declarative_base()
 
 
@@ -98,7 +102,7 @@ class FlightPlan(Base):
         for b in self.beacons:
             res = b.beacon_name + " "
             res += b.V_or_A + " "
-            res += utils.sec_to_str(b.hour) + " "
+            res += utils.sec_to_str_without_sec(b.hour) + " "
             res += str(b.FL) + " "
         return res
 
@@ -125,8 +129,7 @@ class FlightPlanBeacon(Base):
 Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
-    balise = Beacon(name='Test', pos_x=10.2, pos_y=-1563.869)
-    vol = Flight(h_dep=1020, h_arr=1125, fl=340, v=235 ,callsign='AF4185', type='A320', dep='LFBO', arr='LFPO', id_flp=20)
-
-    print balise
-    print vol
+    print(Beacon(name='Test', pos_x=10.2, pos_y=-1563.869))
+    print(Flight(h_dep=1020, h_arr=1125, fl=340, v=235 ,
+                 callsign='AF4185', type='A320', 
+                 dep='LFBO', arr='LFPO', id_flp=20))
