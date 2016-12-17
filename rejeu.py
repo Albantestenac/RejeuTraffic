@@ -13,14 +13,17 @@ from pyrejeu import utils as ut
 ivy_logger = logging.getLogger('Ivy')
 logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s')
 
+
 def on_cx_proc(agent, connected):
     if connected == IvyApplicationDisconnected:
-        logging.error('Ivy application %r was disconnected', agent)
+        logging.info('Ivy application %r was disconnected', agent)
     else:
         logging.info('Ivy application %r was connected', agent)
 
+
 def on_die_proc(agent, _id):
     logging.info('received the order to die from %r with id = %d', agent, _id)
+
 
 def connect(app_name, ivy_bus):
     IvyInit(app_name,                   # Nom de l'application fournie à Ivy
@@ -59,32 +62,17 @@ if __name__ == "__main__":
     logging.info("Connexion to Ivy bus")
     connect(options.app_name, options.ivy_bus)
 
+
+    # création de l'horloge
     clock = RejeuClock(ut.str_to_sec("11:58:55"))
-
     # gestion des signaux
-    # A différencier selon le type de signal reçu (horloge en pause, reprise de l'horloge, etc.)
     def handler(signum, frame):
-        clock.stop()
+        clock.close()
         IvyStop()
-        logging.info("Clock stopped")
-
-    def on_clockstart(agent, *larg):
-        clock.start()
-        logging.info("Clock Started")
-
-    def on_clockstop(agent, *larg):
-        clock.stop()
-        logging.info("Clock Stopped")
-
-
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
-    #Ajouter gestion de signal à la réception d'un message "ClockStop"
 
-    #Lancement de l'horloge
-    IvyBindMsg(on_clockstart, '^ClockStart')
-    IvyBindMsg(on_clockstop , '^ClockStop')
-
-    #clock.run()
+    # lancement de la boucle principale
+    clock.main_loop()
 
 
