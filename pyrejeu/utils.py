@@ -1,4 +1,5 @@
-Author = "Alban"
+__author__ = "Alban"
+
 
 def str_to_sec(string):
     """
@@ -8,6 +9,7 @@ def str_to_sec(string):
     """
     (h,m,s)= string.split(':')
     return int(h)*3600 + int(m)*60 + int(s)
+
 
 def sec_to_str(nb_sec):
     """
