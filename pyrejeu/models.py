@@ -55,7 +55,7 @@ class Flight(Base):
 
     def __repr__(self):
         return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, " \
-               "ssr=%s, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, pln_event=%d)>" % \
+               "ssr=%d, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, pln_event=%d)>" % \
                (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, 
                 self.ssr, self.rvsm, self.tcas, self.adsb, self.dlink, self.pln_event)
 
@@ -72,10 +72,10 @@ class Cone(Base):
     id = Column(Integer, primary_key=True)              # Identifiant du plot
     pos_x = Column(Float)                               # Position du plot sur l'axe x
     pos_y = Column(Float)                               # Position du plot sur l'axe y
-    vit_x = Column(Float)                               # Vitesse de l'avion correspondant au plot sur l'axe x
-    vit_y = Column(Float)                               # Vitesse de l'avion correspondant au plot sur l'axe y
+    vit_x = Column(Integer)                               # Vitesse de l'avion correspondant au plot sur l'axe x
+    vit_y = Column(Integer)                               # Vitesse de l'avion correspondant au plot sur l'axe y
     flight_level = Column(Integer)                      # FL de l'avion correspondant au plot
-    rate = Column(Float)                                # Vitesse verticale de l'avion correspondant au plot
+    rate = Column(Integer)                                # Vitesse verticale de l'avion correspondant au plot
     tendency = Column(Integer)                          # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
     flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
@@ -84,7 +84,7 @@ class Cone(Base):
     flight = relationship("Flight", back_populates="cones")
 
     def __repr__(self):
-        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%f, vit_y=%f, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
+        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
               (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id)
 
 
@@ -137,6 +137,5 @@ Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
     print(Beacon(name='Test', pos_x=10.2, pos_y=-1563.869))
-    print(Flight(h_dep=1020, h_arr=1125, fl=340, v=235 ,
-                 callsign='AF4185', type='A320', 
-                 dep='LFBO', arr='LFPO', id_flp=20))
+    print(Flight(h_dep=1020, h_arr=1125, fl=340, v=235 , callsign='AF4185', type='A320',
+                 dep='LFBO', arr='LFPO', ssr=1000, rvsm="TRUE", tcas="OFF", adsb="YES", dlink="FALSE", pln_event=0))

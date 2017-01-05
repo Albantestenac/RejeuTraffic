@@ -28,14 +28,12 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
 
     def main_loop(self):
-
         # Envoi des infos de début et de fin de la simulation
         list_flights = self.session.query(mod.Flight)
         (start_time, stop_time) = utils.extract_sim_bounds(list_flights)
 
         msg_rangeupdate = "RangeUpdateEvent FirstTime=%s LastTime=%s" % (
             utils.sec_to_str(start_time), utils.sec_to_str(stop_time))
-        time.sleep(0.5)
         logging.debug(msg_rangeupdate)
         IvySendMsg(msg_rangeupdate)
 
@@ -61,13 +59,14 @@ class RejeuClock(object):
                 # par défaut : SSR = 0000 ...
                 if cone.flight.pln_event == 0 :
                     # ATTENTION A MODIFIER POUR LIST (cf focntion "listing" de la classe FlightPlan de models.py)
-                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=0000 Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=TRUE Tcas=TA_ONLY Adsb=NO DLink=NO List=%s" %\
-                                    (cone.flight.id, cone.hour, cone.flight.callsign, cone.flight.type, cone.flight.v, cone.flight.fl,cone.flight.dep, cone.flight.arr, cone.flight.flight_plan.listing())
+                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=%d Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=%s Tcas=%s Adsb=%s DLink=%s List=%s" %\
+                                    (cone.flight.id, utils.sec_to_str(cone.hour), cone.flight.callsign, cone.flight.type, cone.flight.ssr, cone.flight.v, cone.flight.fl, cone.flight.dep,
+                                     cone.flight.arr, cone.flight.rvsm, cone.flight.tcas, cone.flight.adsb, cone.flight.dlink, cone.flight.flight_plan.listing())
                     IvySendMsg(msg_pln_event)
                     cone.flight.pln_event=1
                 g_speed = math.sqrt((cone.vit_x)**2+(cone.vit_y)**2)
-                msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=0000 Sector=SL Layers=F,I X=%f Y=%f Vx=%f Vy=%f Afl=%d Rate=%f Heading=323 GroundSpeed=%f Tendency=%d Time=%s" %\
-                      ( cone.flight.id, cone.flight.callsign, cone.pos_x, cone.pos_y, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, g_speed, cone.tendency, utils.sec_to_str(cone.hour) )
+                msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=%d Sector=-- Layers=F X=%f Y=%f Vx=%d Vy=%d Afl=%d Rate=%d Heading=323 GroundSpeed=%d Tendency=%d Time=%s" %\
+                      ( cone.flight.id, cone.flight.callsign, cone.flight.ssr, cone.pos_x/60, cone.pos_y/60, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, int(g_speed), cone.tendency, utils.sec_to_str(cone.hour) )
                 #logging.debug("Message envoye : %s" % msg)
                 IvySendMsg(msg)
 

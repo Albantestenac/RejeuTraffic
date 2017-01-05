@@ -42,7 +42,7 @@ if __name__ == "__main__":
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
     parser.set_defaults(ivy_bus="127.255.255.255:2010", verbose=False,
-                        app_name="RejeuTrafic", ivy_debug=False)
+                        app_name="Rejeu", ivy_debug=False)
     parser.add_option('-d', '--debug', action='store_true', dest='verbose',
                       help='View debug message.')
     parser.add_option('-i', '--ivy-debug', action='store_true', 
@@ -73,7 +73,8 @@ if __name__ == "__main__":
     connect(options.app_name, options.ivy_bus)
 
     # création de l'horloge
-    clock = RejeuClock(ut.str_to_sec("11:58:55"))
+    clock = RejeuClock(ut.str_to_sec("11:24:00"))
+
     # gestion des signaux
     def handler(signum, frame):
         clock.close()
