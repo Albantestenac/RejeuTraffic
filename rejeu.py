@@ -9,6 +9,10 @@ import signal
 from pyrejeu.clock import RejeuClock
 from pyrejeu.importations import RejeuImportation
 from pyrejeu import utils as ut
+from sqlalchemy.orm import sessionmaker
+import pyrejeu.models as mod
+
+Session = sessionmaker(bind=mod.engine)
 
 ivy_logger = logging.getLogger('Ivy')
 logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s')
@@ -71,6 +75,14 @@ if __name__ == "__main__":
         IvyStop()
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
+
+    #Envoi des infos de début et de fin de la simulation
+    tmp_session = Session()
+    list_flights = tmp_session.query(mod.Flight)
+    (start_time, stop_time) = ut.extract_sim_bounds(list_flights)
+
+    msg_rangeupdate = "RangeUpdateEvent FirstTime=%s LastTime=%s" % (ut.sec_to_str(start_time), ut.sec_to_str(stop_time))
+    IvySendMsg(msg_rangeupdate)
 
     # lancement de la boucle principale
     clock.main_loop()
