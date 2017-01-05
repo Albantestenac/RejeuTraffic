@@ -41,9 +41,12 @@ if __name__ == "__main__":
     # gestion des options
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
-    parser.set_defaults(ivy_bus="127.255.255.255:2010", verbose=False, app_name="RejeuTrafic")
-    parser.add_option('-v', '--verbose', action='store_true', dest='verbose',
-                      help='Be verbose.')
+    parser.set_defaults(ivy_bus="127.255.255.255:2010", verbose=False,
+                        app_name="RejeuTrafic", ivy_debug=False)
+    parser.add_option('-d', '--debug', action='store_true', dest='verbose',
+                      help='View debug message.')
+    parser.add_option('-i', '--ivy-debug', action='store_true', 
+                      dest='ivy_debug', help='View ivy debug messages')
     parser.add_option('-b', '--ivybus', type='string', dest='ivy_bus',
                       help='Bus id (format @IP:port, default to 127.255.255.255:2010)')
     parser.add_option('-a', '--appname', type='string', dest='app_name',
@@ -51,10 +54,13 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
 
     # initialisation du log
-    level = logging.INFO
+    level, ivy_level = logging.INFO, logging.ERROR
     if options.verbose:  # Si mode verbeux choisi
         level = logging.DEBUG
+    if options.ivy_debug:
+        ivy_level = logging.INFO
     logging.getLogger().setLevel(level)
+    ivy_logger.setLevel(ivy_level)
 
     # importation du fichier
     if len(args) != 1 or not os.path.isfile(args[0]):
