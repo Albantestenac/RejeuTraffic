@@ -28,6 +28,18 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
 
     def main_loop(self):
+
+        # Envoi des infos de début et de fin de la simulation
+        list_flights = self.session.query(mod.Flight)
+        (start_time, stop_time) = utils.extract_sim_bounds(list_flights)
+
+        msg_rangeupdate = "RangeUpdateEvent FirstTime=%s LastTime=%s" % (
+            utils.sec_to_str(start_time), utils.sec_to_str(stop_time))
+        time.sleep(0.5)
+        logging.debug(msg_rangeupdate)
+        IvySendMsg(msg_rangeupdate)
+
+        #Boucle d'horloge
         while self.running:
             if self.paused:
                 # en pause, on ne doit plus faire avancer l'horloge

@@ -72,7 +72,6 @@ if __name__ == "__main__":
     logging.info("Connexion to Ivy bus")
     connect(options.app_name, options.ivy_bus)
 
-
     # création de l'horloge
     clock = RejeuClock(ut.str_to_sec("11:58:55"))
     # gestion des signaux
@@ -81,14 +80,6 @@ if __name__ == "__main__":
         IvyStop()
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
-
-    #Envoi des infos de début et de fin de la simulation
-    tmp_session = Session()
-    list_flights = tmp_session.query(mod.Flight)
-    (start_time, stop_time) = ut.extract_sim_bounds(list_flights)
-
-    msg_rangeupdate = "RangeUpdateEvent FirstTime=%s LastTime=%s" % (ut.sec_to_str(start_time), ut.sec_to_str(stop_time))
-    IvySendMsg(msg_rangeupdate)
 
     # lancement de la boucle principale
     clock.main_loop()
