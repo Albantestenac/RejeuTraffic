@@ -9,6 +9,10 @@ import signal
 from pyrejeu.clock import RejeuClock
 from pyrejeu.importations import RejeuImportation
 from pyrejeu import utils as ut
+from sqlalchemy.orm import sessionmaker
+import pyrejeu.models as mod
+
+Session = sessionmaker(bind=mod.engine)
 
 ivy_logger = logging.getLogger('Ivy')
 logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s')
@@ -67,7 +71,6 @@ if __name__ == "__main__":
     # connection au bus ivy
     logging.info("Connexion to Ivy bus")
     connect(options.app_name, options.ivy_bus)
-
 
     # création de l'horloge
     clock = RejeuClock(ut.str_to_sec("11:58:55"))

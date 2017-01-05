@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 __author__ = "Alban"
-
 
 def str_to_sec(string):
     """
@@ -35,7 +35,27 @@ def sec_to_str_without_sec(nb_sec):
     m = nb_sec // 60
     return "%02d:%02d" % (h, m)
 
+def extract_sim_bounds(flight_list):
+    """
+    Revoie l'heure de début et l'heure de fin de la simulation à partir d'une liste de vols
+    :param flight_list:
+    :return:
+    """
+    (start_h, stop_h) = (flight_list[0].h_dep, flight_list[0].h_arr)
+    for flight in flight_list:
+        if flight.h_dep < start_h:
+            start_h = flight.h_dep
+        if flight.h_arr > stop_h:
+            stop_h = flight.h_arr
+
+    #Si les heures sortent des limites
+    if start_h < 0: start_h = 0
+    if stop_h > str_to_sec("23:59:59"): stop_h = str_to_sec("23:59:59")
+
+    return (start_h, stop_h)
+
 
 if __name__ == "__main__":
     print str_to_sec("13:20:50")
     print sec_to_str(str_to_sec("13:20:50"))
+

@@ -1,0 +1,1529 @@
+resource Twinkle (droidBorderWidthGL, DroidBorderWidthGL)
+      or Twinkle (BorderWidthGL, BorderWidth)= 3
+
+resource Twinkle (droidBackColorGL, DroidBackColorGL)= #3E3E3E
+
+resource Twinkle (droidConfineGL, DroidConfineGL)
+      or Twinkle (ConfineGL, Confine) doesn't match.
+
+resource Twinkle (droidCursorGL, DroidCursorGL)
+      or Twinkle (CursorGL, Cursor) doesn't match.
+
+resource Twinkle (droidDebugGL, DroidDebugGL)
+      or Twinkle (DebugGL, Debug) doesn't match.
+
+resource Twinkle (droidFontGL, DroidFontGL)
+      or Twinkle (FontGL, Font) doesn't match.
+
+resource Twinkle (droidForeColorGL, DroidForegroundGL)= white
+
+resource Twinkle (droidFullReshapeGL, DroidFullReshapeGL)
+      or Twinkle (FullReshapeGL, FullReshape) doesn't match.
+
+resource Twinkle (droidHeightGL, DroidHeightGL)
+      or Twinkle (HeightGL, Height) doesn't match.
+
+resource Twinkle (droidHighlightBackgroundGL, DroidHighlightBackgroundGL)
+      or Twinkle (HighlightBackgroundGL, HighlightBackground) doesn't match.
+
+resource Twinkle (droidHighlightColorGL, DroidHighlightColorGL)
+      or Twinkle (HighlightColorGL, HighlightColor) doesn't match.
+
+resource Twinkle (droidHighlightThicknessGL, DroidHighlightThicknessGL)
+      or Twinkle (HighlightThicknessGL, HighlightThickness) doesn't match.
+
+resource Twinkle (droidInsertBackgroundGL, DroidForegroundGL)
+      or Twinkle (InsertBackgroundGL, Foreground) doesn't match.
+
+resource Twinkle (droidInsertOffTimeGL, DroidOffTimeGL)
+      or Twinkle (InsertOffTimeGL, OffTime) doesn't match.
+
+resource Twinkle (droidInsertOnTimeGL, DroidOnTimeGL)
+      or Twinkle (InsertOnTimeGL, OnTime) doesn't match.
+
+resource Twinkle (droidInsertWidthGL, DroidInsertWidthGL)
+      or Twinkle (InsertWidthGL, InsertWidth) doesn't match.
+
+resource Twinkle (droidPickApertureGL, DroidPickApertureGL)
+      or Twinkle (PickApertureGL, PickAperture) doesn't match.
+
+resource Twinkle (droidReliefGL, DroidReliefGL)= raised
+
+resource Twinkle (droidRenderGL, DroidRenderGL)
+      or Twinkle (RenderGL, Render) doesn't match.
+
+resource Twinkle (droidReshapeGL, DroidReshapeGL)
+      or Twinkle (ReshapeGL, Reshape) doesn't match.
+
+resource Twinkle (droidScrollRegionGL, DroidScrollRegionGL)
+      or Twinkle (ScrollRegionGL, ScrollRegion) doesn't match.
+
+resource Twinkle (droidSelectBackgroundGL, DroidForegroundGL)
+      or Twinkle (SelectBackgroundGL, Foreground) doesn't match.
+
+resource Twinkle (droidTakeFocusGL, DroidTakeFocusGL)
+      or Twinkle (TakeFocusGL, TakeFocus) doesn't match.
+
+resource Twinkle (droidTileGL, DroidTileGL)
+      or Twinkle (TileGL, Tile) doesn't match.
+
+resource Twinkle (droidWidthGL, DroidWidthGL)
+      or Twinkle (WidthGL, Width) doesn't match.
+
+resource Twinkle (droidXScrollCommandGL, DroidScrollCommandGL)
+      or Twinkle (XScrollCommandGL, ScrollCommand) doesn't match.
+
+resource Twinkle (droidXScrollIncrementGL, DroidScrollIncrementGL)
+      or Twinkle (XScrollIncrementGL, ScrollIncrement) doesn't match.
+
+resource Twinkle (droidYScrollCommandGL, DroidScrollCommandGL)
+      or Twinkle (YScrollCommandGL, ScrollCommand) doesn't match.
+
+resource Twinkle (droidYScrollIncrementGL, DroidScrollIncrementGL)
+      or Twinkle (YScrollIncrementGL, ScrollIncrement) doesn't match.
+
+resource Twinkle (droidDrawBBoxesGL, DroidDrawBBoxesGL)
+      or Twinkle (DrawBBoxesGL, DrawBBoxes) doesn't match.
+
+resource Twinkle (droidBboxColorGL, DroidBBoxColorGL)
+      or Twinkle (BboxColorGL, BBoxColor) doesn't match.
+
+resource Twinkle (droidLightAngleGL, DroidLightAngleGL)
+      or Twinkle (LightAngleGL, LightAngle) doesn't match.
+
+resource Twinkle (droidFollowPointerGL, DroidFollowPointerGL)
+      or Twinkle (FollowPointerGL, FollowPointer) doesn't match.
+
+resource Twinkle (droidMapDistanceSymbolGL, DroidMapDistanceSymbolGL)
+      or Twinkle (MapDistanceSymbolGL, MapDistanceSymbol) doesn't match.
+
+resource Twinkle (droidMapTextFontGL, DroidMapTextFontGL)
+      or Twinkle (MapTextFontGL, MapTextFont) doesn't match.
+
+resource Twinkle (droidOverlapManagerGL, DroidOverlapManagerGL)
+      or Twinkle (OverlapManagerGL, OverlapManager) doesn't match.
+
+resource Twinkle (droidSpeedVectorLengthGL, DroidSpeedVectorLengthGL)
+      or Twinkle (SpeedVectorLengthGL, SpeedVectorLength) doesn't match.
+
+resource Twinkle (droidTrackVisibleHistorySizeGL, DroidTrackVisibleHistorySizeGL)
+      or Twinkle (TrackVisibleHistorySizeGL, TrackVisibleHistorySize) doesn't match.
+
+resource Twinkle (droidTrackManagedHistorySizeGL, DroidTrackManagedHistorySizeGL)
+      or Twinkle (TrackManagedHistorySizeGL, TrackManagedHistorySize) doesn't match.
+
+resource Twinkle (droidTrackSymbolGL, DroidTrackSymbolGL)
+      or Twinkle (TrackSymbolGL, TrackSymbol) doesn't match.
+
+resource Twinkle (droidUseDamageGL, DroidUseDamageGL)
+      or Twinkle (UseDamageGL, UseDamage) doesn't match.
+
+resource Twinkle (lumineuxBorderWidthGL, LumineuxBorderWidthGL)
+      or Twinkle (BorderWidthGL, BorderWidth)= 3
+
+resource Twinkle (lumineuxBackColorGL, LumineuxBackColorGL)= #3E3E3E
+
+resource Twinkle (lumineuxConfineGL, LumineuxConfineGL)
+      or Twinkle (ConfineGL, Confine) doesn't match.
+
+resource Twinkle (lumineuxCursorGL, LumineuxCursorGL)
+      or Twinkle (CursorGL, Cursor) doesn't match.
+
+resource Twinkle (lumineuxDebugGL, LumineuxDebugGL)
+      or Twinkle (DebugGL, Debug) doesn't match.
+
+resource Twinkle (lumineuxFontGL, LumineuxFontGL)
+      or Twinkle (FontGL, Font) doesn't match.
+
+resource Twinkle (lumineuxForeColorGL, LumineuxForegroundGL)
+      or Twinkle (ForeColorGL, Foreground) doesn't match.
+
+resource Twinkle (lumineuxFullReshapeGL, LumineuxFullReshapeGL)
+      or Twinkle (FullReshapeGL, FullReshape) doesn't match.
+
+resource Twinkle (lumineuxHeightGL, LumineuxHeightGL)
+      or Twinkle (HeightGL, Height) doesn't match.
+
+resource Twinkle (lumineuxHighlightBackgroundGL, LumineuxHighlightBackgroundGL)
+      or Twinkle (HighlightBackgroundGL, HighlightBackground) doesn't match.
+
+resource Twinkle (lumineuxHighlightColorGL, LumineuxHighlightColorGL)
+      or Twinkle (HighlightColorGL, HighlightColor) doesn't match.
+
+resource Twinkle (lumineuxHighlightThicknessGL, LumineuxHighlightThicknessGL)
+      or Twinkle (HighlightThicknessGL, HighlightThickness) doesn't match.
+
+resource Twinkle (lumineuxInsertBackgroundGL, LumineuxForegroundGL)
+      or Twinkle (InsertBackgroundGL, Foreground) doesn't match.
+
+resource Twinkle (lumineuxInsertOffTimeGL, LumineuxOffTimeGL)
+      or Twinkle (InsertOffTimeGL, OffTime) doesn't match.
+
+resource Twinkle (lumineuxInsertOnTimeGL, LumineuxOnTimeGL)
+      or Twinkle (InsertOnTimeGL, OnTime) doesn't match.
+
+resource Twinkle (lumineuxInsertWidthGL, LumineuxInsertWidthGL)
+      or Twinkle (InsertWidthGL, InsertWidth) doesn't match.
+
+resource Twinkle (lumineuxPickApertureGL, LumineuxPickApertureGL)
+      or Twinkle (PickApertureGL, PickAperture) doesn't match.
+
+resource Twinkle (lumineuxReliefGL, LumineuxReliefGL)= raised
+
+resource Twinkle (lumineuxRenderGL, LumineuxRenderGL)
+      or Twinkle (RenderGL, Render) doesn't match.
+
+resource Twinkle (lumineuxReshapeGL, LumineuxReshapeGL)
+      or Twinkle (ReshapeGL, Reshape) doesn't match.
+
+resource Twinkle (lumineuxScrollRegionGL, LumineuxScrollRegionGL)
+      or Twinkle (ScrollRegionGL, ScrollRegion) doesn't match.
+
+resource Twinkle (lumineuxSelectBackgroundGL, LumineuxForegroundGL)
+      or Twinkle (SelectBackgroundGL, Foreground) doesn't match.
+
+resource Twinkle (lumineuxTakeFocusGL, LumineuxTakeFocusGL)
+      or Twinkle (TakeFocusGL, TakeFocus) doesn't match.
+
+resource Twinkle (lumineuxTileGL, LumineuxTileGL)
+      or Twinkle (TileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxWidthGL, LumineuxWidthGL)
+      or Twinkle (WidthGL, Width) doesn't match.
+
+resource Twinkle (lumineuxXScrollCommandGL, LumineuxScrollCommandGL)
+      or Twinkle (XScrollCommandGL, ScrollCommand) doesn't match.
+
+resource Twinkle (lumineuxXScrollIncrementGL, LumineuxScrollIncrementGL)
+      or Twinkle (XScrollIncrementGL, ScrollIncrement) doesn't match.
+
+resource Twinkle (lumineuxYScrollCommandGL, LumineuxScrollCommandGL)
+      or Twinkle (YScrollCommandGL, ScrollCommand) doesn't match.
+
+resource Twinkle (lumineuxYScrollIncrementGL, LumineuxScrollIncrementGL)
+      or Twinkle (YScrollIncrementGL, ScrollIncrement) doesn't match.
+
+resource Twinkle (lumineuxDrawBBoxesGL, LumineuxDrawBBoxesGL)
+      or Twinkle (DrawBBoxesGL, DrawBBoxes) doesn't match.
+
+resource Twinkle (lumineuxBboxColorGL, LumineuxBBoxColorGL)
+      or Twinkle (BboxColorGL, BBoxColor) doesn't match.
+
+resource Twinkle (lumineuxLightAngleGL, LumineuxLightAngleGL)
+      or Twinkle (LightAngleGL, LightAngle) doesn't match.
+
+resource Twinkle (lumineuxFollowPointerGL, LumineuxFollowPointerGL)
+      or Twinkle (FollowPointerGL, FollowPointer) doesn't match.
+
+resource Twinkle (lumineuxMapDistanceSymbolGL, LumineuxMapDistanceSymbolGL)
+      or Twinkle (MapDistanceSymbolGL, MapDistanceSymbol) doesn't match.
+
+resource Twinkle (lumineuxMapTextFontGL, LumineuxMapTextFontGL)
+      or Twinkle (MapTextFontGL, MapTextFont) doesn't match.
+
+resource Twinkle (lumineuxOverlapManagerGL, LumineuxOverlapManagerGL)
+      or Twinkle (OverlapManagerGL, OverlapManager) doesn't match.
+
+resource Twinkle (lumineuxSpeedVectorLengthGL, LumineuxSpeedVectorLengthGL)
+      or Twinkle (SpeedVectorLengthGL, SpeedVectorLength) doesn't match.
+
+resource Twinkle (lumineuxTrackVisibleHistorySizeGL, LumineuxTrackVisibleHistorySizeGL)
+      or Twinkle (TrackVisibleHistorySizeGL, TrackVisibleHistorySize) doesn't match.
+
+resource Twinkle (lumineuxTrackManagedHistorySizeGL, LumineuxTrackManagedHistorySizeGL)
+      or Twinkle (TrackManagedHistorySizeGL, TrackManagedHistorySize) doesn't match.
+
+resource Twinkle (lumineuxTrackSymbolGL, LumineuxTrackSymbolGL)
+      or Twinkle (TrackSymbolGL, TrackSymbol) doesn't match.
+
+resource Twinkle (lumineuxUseDamageGL, LumineuxUseDamageGL)
+      or Twinkle (UseDamageGL, UseDamage) doesn't match.
+
+resource Twinkle (droidClipCatcheventGL, DroidClipCatcheventGL)
+      or Twinkle (clipCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidClipComposealphaGL, DroidClipComposealphaGL)
+      or Twinkle (clipComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidClipComposerotationGL, DroidClipComposerotationGL)
+      or Twinkle (clipComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidClipComposescaleGL, DroidClipComposescaleGL)
+      or Twinkle (clipComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidClipFillcolorGL, DroidClipColorGL)
+      or Twinkle (clipFillcolorGL, Color) doesn't match.
+
+resource Twinkle (droidClipFilledGL, DroidClipFilledGL)
+      or Twinkle (clipFilledGL, Filled) doesn't match.
+
+resource Twinkle (droidClipFillpatternGL, DroidClipFillpatternGL)
+      or Twinkle (clipFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidClipLinecolorGL, DroidClipColorGL)
+      or Twinkle (clipLinecolorGL, Color) doesn't match.
+
+resource Twinkle (droidClipLinepatternGL, DroidClipLinepatternGL)
+      or Twinkle (clipLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (droidClipLinestyleGL, DroidClipLinestyleGL)
+      or Twinkle (clipLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (droidClipLinewidthGL, DroidClipLinewidthGL)
+      or Twinkle (clipLinewidthGL, Linewidth) doesn't match.
+
+resource Twinkle (droidClipPriorityGL, DroidClipPriorityGL)
+      or Twinkle (clipPriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidClipReliefGL, DroidClipReliefGL)
+      or Twinkle (clipReliefGL, Relief) doesn't match.
+
+resource Twinkle (droidClipSensitiveGL, DroidClipSensitiveGL)
+      or Twinkle (clipSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidClipTagsGL, DroidClipTagsGL)
+      or Twinkle (clipTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidClipTileGL, DroidClipTileGL)
+      or Twinkle (clipTileGL, Tile) doesn't match.
+
+resource Twinkle (droidClipVisibleGL, DroidClipVisibleGL)
+      or Twinkle (clipVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidClipLabelGL, DroidClipLabelGL)
+      or Twinkle (clipLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxClipCatcheventGL, LumineuxClipCatcheventGL)
+      or Twinkle (clipCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxClipComposealphaGL, LumineuxClipComposealphaGL)
+      or Twinkle (clipComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxClipComposerotationGL, LumineuxClipComposerotationGL)
+      or Twinkle (clipComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxClipComposescaleGL, LumineuxClipComposescaleGL)
+      or Twinkle (clipComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxClipFillcolorGL, LumineuxClipColorGL)
+      or Twinkle (clipFillcolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxClipFilledGL, LumineuxClipFilledGL)
+      or Twinkle (clipFilledGL, Filled) doesn't match.
+
+resource Twinkle (lumineuxClipFillpatternGL, LumineuxClipFillpatternGL)
+      or Twinkle (clipFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxClipLinecolorGL, LumineuxClipColorGL)
+      or Twinkle (clipLinecolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxClipLinepatternGL, LumineuxClipLinepatternGL)
+      or Twinkle (clipLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (lumineuxClipLinestyleGL, LumineuxClipLinestyleGL)
+      or Twinkle (clipLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (lumineuxClipLinewidthGL, LumineuxClipLinewidthGL)
+      or Twinkle (clipLinewidthGL, Linewidth) doesn't match.
+
+resource Twinkle (lumineuxClipPriorityGL, LumineuxClipPriorityGL)
+      or Twinkle (clipPriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxClipReliefGL, LumineuxClipReliefGL)
+      or Twinkle (clipReliefGL, Relief) doesn't match.
+
+resource Twinkle (lumineuxClipSensitiveGL, LumineuxClipSensitiveGL)
+      or Twinkle (clipSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxClipTagsGL, LumineuxClipTagsGL)
+      or Twinkle (clipTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxClipTileGL, LumineuxClipTileGL)
+      or Twinkle (clipTileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxClipVisibleGL, LumineuxClipVisibleGL)
+      or Twinkle (clipVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxClipLabelGL, LumineuxClipLabelGL)
+      or Twinkle (clipLabelGL, Label) doesn't match.
+
+resource Twinkle (droidTextAlignmentGL, DroidTextAlignmentGL)
+      or Twinkle (textAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (droidTextAnchorGL, DroidTextAnchorGL)
+      or Twinkle (textAnchorGL, Anchor) doesn't match.
+
+resource Twinkle (droidTextCatcheventGL, DroidTextCatcheventGL)
+      or Twinkle (textCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidTextColorGL, DroidTextColorGL)
+      or Twinkle (textColorGL, Color) doesn't match.
+
+resource Twinkle (droidTextComposealphaGL, DroidTextComposealphaGL)
+      or Twinkle (textComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidTextComposerotationGL, DroidTextComposerotationGL)
+      or Twinkle (textComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidTextComposescaleGL, DroidTextComposescaleGL)
+      or Twinkle (textComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidTextConnecteditemGL, DroidTextConnecteditemGL)
+      or Twinkle (textConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (droidTextConnectionanchorGL, DroidTextConnectionanchorGL)
+      or Twinkle (textConnectionanchorGL, Connectionanchor) doesn't match.
+
+resource Twinkle (droidTextFillpatternGL, DroidTextFillpatternGL)
+      or Twinkle (textFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidTextFontGL, DroidTextFontGL)
+      or Twinkle (textFontGL, Font) doesn't match.
+
+resource Twinkle (droidTextOverstrikedGL, DroidTextOverstrikedGL)
+      or Twinkle (textOverstrikedGL, Overstriked) doesn't match.
+
+resource Twinkle (droidTextPositionGL, DroidTextPositionGL)
+      or Twinkle (textPositionGL, Position) doesn't match.
+
+resource Twinkle (droidTextPriorityGL, DroidTextPriorityGL)
+      or Twinkle (textPriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidTextSensitiveGL, DroidTextSensitiveGL)
+      or Twinkle (textSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidTextSpacingGL, DroidTextSpacingGL)
+      or Twinkle (textSpacingGL, Spacing) doesn't match.
+
+resource Twinkle (droidTextTagsGL, DroidTextTagsGL)
+      or Twinkle (textTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidTextTextGL, DroidTextTextGL)
+      or Twinkle (textTextGL, Text) doesn't match.
+
+resource Twinkle (droidTextUnderlinedGL, DroidTextUnderlinedGL)
+      or Twinkle (textUnderlinedGL, Underlined) doesn't match.
+
+resource Twinkle (droidTextVisibleGL, DroidTextVisibleGL)
+      or Twinkle (textVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidTextWidthGL, DroidTextWidthGL)
+      or Twinkle (textWidthGL, Width) doesn't match.
+
+resource Twinkle (droidTextLabelGL, DroidTextLabelGL)
+      or Twinkle (textLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxTextAlignmentGL, LumineuxTextAlignmentGL)
+      or Twinkle (textAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (lumineuxTextAnchorGL, LumineuxTextAnchorGL)
+      or Twinkle (textAnchorGL, Anchor) doesn't match.
+
+resource Twinkle (lumineuxTextCatcheventGL, LumineuxTextCatcheventGL)
+      or Twinkle (textCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxTextColorGL, LumineuxTextColorGL)
+      or Twinkle (textColorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxTextComposealphaGL, LumineuxTextComposealphaGL)
+      or Twinkle (textComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxTextComposerotationGL, LumineuxTextComposerotationGL)
+      or Twinkle (textComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxTextComposescaleGL, LumineuxTextComposescaleGL)
+      or Twinkle (textComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxTextConnecteditemGL, LumineuxTextConnecteditemGL)
+      or Twinkle (textConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (lumineuxTextConnectionanchorGL, LumineuxTextConnectionanchorGL)
+      or Twinkle (textConnectionanchorGL, Connectionanchor) doesn't match.
+
+resource Twinkle (lumineuxTextFillpatternGL, LumineuxTextFillpatternGL)
+      or Twinkle (textFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxTextFontGL, LumineuxTextFontGL)
+      or Twinkle (textFontGL, Font) doesn't match.
+
+resource Twinkle (lumineuxTextOverstrikedGL, LumineuxTextOverstrikedGL)
+      or Twinkle (textOverstrikedGL, Overstriked) doesn't match.
+
+resource Twinkle (lumineuxTextPositionGL, LumineuxTextPositionGL)
+      or Twinkle (textPositionGL, Position) doesn't match.
+
+resource Twinkle (lumineuxTextPriorityGL, LumineuxTextPriorityGL)
+      or Twinkle (textPriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxTextSensitiveGL, LumineuxTextSensitiveGL)
+      or Twinkle (textSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxTextSpacingGL, LumineuxTextSpacingGL)
+      or Twinkle (textSpacingGL, Spacing) doesn't match.
+
+resource Twinkle (lumineuxTextTagsGL, LumineuxTextTagsGL)
+      or Twinkle (textTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxTextTextGL, LumineuxTextTextGL)
+      or Twinkle (textTextGL, Text) doesn't match.
+
+resource Twinkle (lumineuxTextUnderlinedGL, LumineuxTextUnderlinedGL)
+      or Twinkle (textUnderlinedGL, Underlined) doesn't match.
+
+resource Twinkle (lumineuxTextVisibleGL, LumineuxTextVisibleGL)
+      or Twinkle (textVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxTextWidthGL, LumineuxTextWidthGL)
+      or Twinkle (textWidthGL, Width) doesn't match.
+
+resource Twinkle (lumineuxTextLabelGL, LumineuxTextLabelGL)
+      or Twinkle (textLabelGL, Label) doesn't match.
+
+resource Twinkle (droidClockViewAlignmentGL, DroidClockViewAlignmentGL)
+      or Twinkle (clockViewAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (droidClockViewAnchorGL, DroidClockViewAnchorGL)
+      or Twinkle (clockViewAnchorGL, Anchor) doesn't match.
+
+resource Twinkle (droidClockViewCatcheventGL, DroidClockViewCatcheventGL)
+      or Twinkle (clockViewCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidClockViewColorGL, DroidClockViewColorGL)
+      or Twinkle (clockViewColorGL, Color) doesn't match.
+
+resource Twinkle (droidClockViewComposealphaGL, DroidClockViewComposealphaGL)
+      or Twinkle (clockViewComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidClockViewComposerotationGL, DroidClockViewComposerotationGL)
+      or Twinkle (clockViewComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidClockViewComposescaleGL, DroidClockViewComposescaleGL)
+      or Twinkle (clockViewComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidClockViewConnecteditemGL, DroidClockViewConnecteditemGL)
+      or Twinkle (clockViewConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (droidClockViewConnectionanchorGL, DroidClockViewConnectionanchorGL)
+      or Twinkle (clockViewConnectionanchorGL, Connectionanchor) doesn't match.
+
+resource Twinkle (droidClockViewFillpatternGL, DroidClockViewFillpatternGL)
+      or Twinkle (clockViewFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidClockViewFontGL, DroidClockViewFontGL)
+      or Twinkle (clockViewFontGL, Font) doesn't match.
+
+resource Twinkle (droidClockViewOverstrikedGL, DroidClockViewOverstrikedGL)
+      or Twinkle (clockViewOverstrikedGL, Overstriked) doesn't match.
+
+resource Twinkle (droidClockViewPositionGL, DroidClockViewPositionGL)
+      or Twinkle (clockViewPositionGL, Position) doesn't match.
+
+resource Twinkle (droidClockViewPriorityGL, DroidClockViewPriorityGL)
+      or Twinkle (clockViewPriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidClockViewSensitiveGL, DroidClockViewSensitiveGL)
+      or Twinkle (clockViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidClockViewSpacingGL, DroidClockViewSpacingGL)
+      or Twinkle (clockViewSpacingGL, Spacing) doesn't match.
+
+resource Twinkle (droidClockViewTagsGL, DroidClockViewTagsGL)
+      or Twinkle (clockViewTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidClockViewTextGL, DroidClockViewTextGL)
+      or Twinkle (clockViewTextGL, Text) doesn't match.
+
+resource Twinkle (droidClockViewUnderlinedGL, DroidClockViewUnderlinedGL)
+      or Twinkle (clockViewUnderlinedGL, Underlined) doesn't match.
+
+resource Twinkle (droidClockViewVisibleGL, DroidClockViewVisibleGL)
+      or Twinkle (clockViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidClockViewWidthGL, DroidClockViewWidthGL)
+      or Twinkle (clockViewWidthGL, Width) doesn't match.
+
+resource Twinkle (droidClockViewLabelGL, DroidClockViewLabelGL)
+      or Twinkle (clockViewLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxClockViewAlignmentGL, LumineuxClockViewAlignmentGL)
+      or Twinkle (clockViewAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (lumineuxClockViewAnchorGL, LumineuxClockViewAnchorGL)
+      or Twinkle (clockViewAnchorGL, Anchor) doesn't match.
+
+resource Twinkle (lumineuxClockViewCatcheventGL, LumineuxClockViewCatcheventGL)
+      or Twinkle (clockViewCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxClockViewColorGL, LumineuxClockViewColorGL)
+      or Twinkle (clockViewColorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxClockViewComposealphaGL, LumineuxClockViewComposealphaGL)
+      or Twinkle (clockViewComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxClockViewComposerotationGL, LumineuxClockViewComposerotationGL)
+      or Twinkle (clockViewComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxClockViewComposescaleGL, LumineuxClockViewComposescaleGL)
+      or Twinkle (clockViewComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxClockViewConnecteditemGL, LumineuxClockViewConnecteditemGL)
+      or Twinkle (clockViewConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (lumineuxClockViewConnectionanchorGL, LumineuxClockViewConnectionanchorGL)
+      or Twinkle (clockViewConnectionanchorGL, Connectionanchor) doesn't match.
+
+resource Twinkle (lumineuxClockViewFillpatternGL, LumineuxClockViewFillpatternGL)
+      or Twinkle (clockViewFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxClockViewFontGL, LumineuxClockViewFontGL)
+      or Twinkle (clockViewFontGL, Font) doesn't match.
+
+resource Twinkle (lumineuxClockViewOverstrikedGL, LumineuxClockViewOverstrikedGL)
+      or Twinkle (clockViewOverstrikedGL, Overstriked) doesn't match.
+
+resource Twinkle (lumineuxClockViewPositionGL, LumineuxClockViewPositionGL)
+      or Twinkle (clockViewPositionGL, Position) doesn't match.
+
+resource Twinkle (lumineuxClockViewPriorityGL, LumineuxClockViewPriorityGL)
+      or Twinkle (clockViewPriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxClockViewSensitiveGL, LumineuxClockViewSensitiveGL)
+      or Twinkle (clockViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxClockViewSpacingGL, LumineuxClockViewSpacingGL)
+      or Twinkle (clockViewSpacingGL, Spacing) doesn't match.
+
+resource Twinkle (lumineuxClockViewTagsGL, LumineuxClockViewTagsGL)
+      or Twinkle (clockViewTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxClockViewTextGL, LumineuxClockViewTextGL)
+      or Twinkle (clockViewTextGL, Text) doesn't match.
+
+resource Twinkle (lumineuxClockViewUnderlinedGL, LumineuxClockViewUnderlinedGL)
+      or Twinkle (clockViewUnderlinedGL, Underlined) doesn't match.
+
+resource Twinkle (lumineuxClockViewVisibleGL, LumineuxClockViewVisibleGL)
+      or Twinkle (clockViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxClockViewWidthGL, LumineuxClockViewWidthGL)
+      or Twinkle (clockViewWidthGL, Width) doesn't match.
+
+resource Twinkle (lumineuxClockViewLabelGL, LumineuxClockViewLabelGL)
+      or Twinkle (clockViewLabelGL, Label) doesn't match.
+
+resource Twinkle (droidGeomapOutlineCapstyleGL, DroidGeomapOutlineCapstyleGL)
+      or Twinkle (geomapOutlineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (droidGeomapOutlineCatcheventGL, DroidGeomapOutlineCatcheventGL)
+      or Twinkle (geomapOutlineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidGeomapOutlineClosedGL, DroidGeomapOutlineClosedGL)
+      or Twinkle (geomapOutlineClosedGL, Closed) doesn't match.
+
+resource Twinkle (droidGeomapOutlineComposealphaGL, DroidGeomapOutlineComposealphaGL)
+      or Twinkle (geomapOutlineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidGeomapOutlineComposerotationGL, DroidGeomapOutlineComposerotationGL)
+      or Twinkle (geomapOutlineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidGeomapOutlineComposescaleGL, DroidGeomapOutlineComposescaleGL)
+      or Twinkle (geomapOutlineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidGeomapOutlineFillcolorGL, DroidGeomapOutlineColorGL)= #645F5F;12
+
+resource Twinkle (droidGeomapOutlineFilledGL, DroidGeomapOutlineFilledGL)
+      or Twinkle (geomapOutlineFilledGL, Filled) doesn't match.
+
+resource Twinkle (droidGeomapOutlineFillpatternGL, DroidGeomapOutlineFillpatternGL)
+      or Twinkle (geomapOutlineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidGeomapOutlineFillruleGL, DroidGeomapOutlineFillruleGL)
+      or Twinkle (geomapOutlineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (droidGeomapOutlineFirstendGL, DroidGeomapOutlineFirstendGL)
+      or Twinkle (geomapOutlineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (droidGeomapOutlineJoinstyleGL, DroidGeomapOutlineJoinstyleGL)
+      or Twinkle (geomapOutlineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (droidGeomapOutlineLastendGL, DroidGeomapOutlineLastendGL)
+      or Twinkle (geomapOutlineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (droidGeomapOutlineLinecolorGL, DroidGeomapOutlineColorGL)= #645F5F;12
+
+resource Twinkle (droidGeomapOutlineLinepatternGL, DroidGeomapOutlineLinepatternGL)
+      or Twinkle (geomapOutlineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (droidGeomapOutlineLinestyleGL, DroidGeomapOutlineLinestyleGL)
+      or Twinkle (geomapOutlineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (droidGeomapOutlineLinewidthGL, DroidGeomapOutlineLinewidthGL)= 5
+
+resource Twinkle (droidGeomapOutlinePriorityGL, DroidGeomapOutlinePriorityGL)
+      or Twinkle (geomapOutlinePriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidGeomapOutlineMarkerGL, DroidGeomapOutlineMarkerGL)
+      or Twinkle (geomapOutlineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (droidGeomapOutlineMarkercolorGL, DroidGeomapOutlineColorGL)= #645F5F;12
+
+resource Twinkle (droidGeomapOutlineReliefGL, DroidGeomapOutlineReliefGL)
+      or Twinkle (geomapOutlineReliefGL, Relief) doesn't match.
+
+resource Twinkle (droidGeomapOutlineSensitiveGL, DroidGeomapOutlineSensitiveGL)
+      or Twinkle (geomapOutlineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidGeomapOutlineSmoothreliefGL, DroidGeomapOutlineSmoothreliefGL)
+      or Twinkle (geomapOutlineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (droidGeomapOutlineTagsGL, DroidGeomapOutlineTagsGL)
+      or Twinkle (geomapOutlineTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidGeomapOutlineTileGL, DroidGeomapOutlineTileGL)
+      or Twinkle (geomapOutlineTileGL, Tile) doesn't match.
+
+resource Twinkle (droidGeomapOutlineVisibleGL, DroidGeomapOutlineVisibleGL)
+      or Twinkle (geomapOutlineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidGeomapOutlineLabelGL, DroidGeomapOutlineLabelGL)
+      or Twinkle (geomapOutlineLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineCapstyleGL, LumineuxGeomapOutlineCapstyleGL)
+      or Twinkle (geomapOutlineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineCatcheventGL, LumineuxGeomapOutlineCatcheventGL)
+      or Twinkle (geomapOutlineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineClosedGL, LumineuxGeomapOutlineClosedGL)
+      or Twinkle (geomapOutlineClosedGL, Closed) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineComposealphaGL, LumineuxGeomapOutlineComposealphaGL)
+      or Twinkle (geomapOutlineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineComposerotationGL, LumineuxGeomapOutlineComposerotationGL)
+      or Twinkle (geomapOutlineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineComposescaleGL, LumineuxGeomapOutlineComposescaleGL)
+      or Twinkle (geomapOutlineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineFillcolorGL, LumineuxGeomapOutlineColorGL)= #494949
+
+resource Twinkle (lumineuxGeomapOutlineFilledGL, LumineuxGeomapOutlineFilledGL)
+      or Twinkle (geomapOutlineFilledGL, Filled) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineFillpatternGL, LumineuxGeomapOutlineFillpatternGL)
+      or Twinkle (geomapOutlineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineFillruleGL, LumineuxGeomapOutlineFillruleGL)
+      or Twinkle (geomapOutlineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineFirstendGL, LumineuxGeomapOutlineFirstendGL)
+      or Twinkle (geomapOutlineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineJoinstyleGL, LumineuxGeomapOutlineJoinstyleGL)
+      or Twinkle (geomapOutlineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineLastendGL, LumineuxGeomapOutlineLastendGL)
+      or Twinkle (geomapOutlineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineLinecolorGL, LumineuxGeomapOutlineColorGL)= #494949
+
+resource Twinkle (lumineuxGeomapOutlineLinepatternGL, LumineuxGeomapOutlineLinepatternGL)
+      or Twinkle (geomapOutlineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineLinestyleGL, LumineuxGeomapOutlineLinestyleGL)
+      or Twinkle (geomapOutlineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineLinewidthGL, LumineuxGeomapOutlineLinewidthGL)= 20
+
+resource Twinkle (lumineuxGeomapOutlinePriorityGL, LumineuxGeomapOutlinePriorityGL)
+      or Twinkle (geomapOutlinePriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineMarkerGL, LumineuxGeomapOutlineMarkerGL)
+      or Twinkle (geomapOutlineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineMarkercolorGL, LumineuxGeomapOutlineColorGL)= #494949
+
+resource Twinkle (lumineuxGeomapOutlineReliefGL, LumineuxGeomapOutlineReliefGL)
+      or Twinkle (geomapOutlineReliefGL, Relief) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineSensitiveGL, LumineuxGeomapOutlineSensitiveGL)
+      or Twinkle (geomapOutlineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineSmoothreliefGL, LumineuxGeomapOutlineSmoothreliefGL)
+      or Twinkle (geomapOutlineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineTagsGL, LumineuxGeomapOutlineTagsGL)
+      or Twinkle (geomapOutlineTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineTileGL, LumineuxGeomapOutlineTileGL)
+      or Twinkle (geomapOutlineTileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineVisibleGL, LumineuxGeomapOutlineVisibleGL)
+      or Twinkle (geomapOutlineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxGeomapOutlineLabelGL, LumineuxGeomapOutlineLabelGL)
+      or Twinkle (geomapOutlineLabelGL, Label) doesn't match.
+
+resource Twinkle (droidSectorOutlineCapstyleGL, DroidSectorOutlineCapstyleGL)
+      or Twinkle (sectorOutlineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (droidSectorOutlineCatcheventGL, DroidSectorOutlineCatcheventGL)
+      or Twinkle (sectorOutlineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidSectorOutlineClosedGL, DroidSectorOutlineClosedGL)
+      or Twinkle (sectorOutlineClosedGL, Closed) doesn't match.
+
+resource Twinkle (droidSectorOutlineComposealphaGL, DroidSectorOutlineComposealphaGL)
+      or Twinkle (sectorOutlineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidSectorOutlineComposerotationGL, DroidSectorOutlineComposerotationGL)
+      or Twinkle (sectorOutlineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidSectorOutlineComposescaleGL, DroidSectorOutlineComposescaleGL)
+      or Twinkle (sectorOutlineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidSectorOutlineFillcolorGL, DroidSectorOutlineColorGL)= #70C5C0;15
+
+resource Twinkle (droidSectorOutlineFilledGL, DroidSectorOutlineFilledGL)= 1
+
+resource Twinkle (droidSectorOutlineFillpatternGL, DroidSectorOutlineFillpatternGL)
+      or Twinkle (sectorOutlineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidSectorOutlineFillruleGL, DroidSectorOutlineFillruleGL)
+      or Twinkle (sectorOutlineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (droidSectorOutlineFirstendGL, DroidSectorOutlineFirstendGL)
+      or Twinkle (sectorOutlineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (droidSectorOutlineJoinstyleGL, DroidSectorOutlineJoinstyleGL)
+      or Twinkle (sectorOutlineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (droidSectorOutlineLastendGL, DroidSectorOutlineLastendGL)
+      or Twinkle (sectorOutlineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (droidSectorOutlineLinecolorGL, DroidSectorOutlineColorGL)= grey3;30
+
+resource Twinkle (droidSectorOutlineLinepatternGL, DroidSectorOutlineLinepatternGL)
+      or Twinkle (sectorOutlineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (droidSectorOutlineLinestyleGL, DroidSectorOutlineLinestyleGL)
+      or Twinkle (sectorOutlineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (droidSectorOutlineLinewidthGL, DroidSectorOutlineLinewidthGL)= 3
+
+resource Twinkle (droidSectorOutlinePriorityGL, DroidSectorOutlinePriorityGL)
+      or Twinkle (sectorOutlinePriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidSectorOutlineMarkerGL, DroidSectorOutlineMarkerGL)
+      or Twinkle (sectorOutlineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (droidSectorOutlineMarkercolorGL, DroidSectorOutlineColorGL)
+      or Twinkle (sectorOutlineMarkercolorGL, Color) doesn't match.
+
+resource Twinkle (droidSectorOutlineReliefGL, DroidSectorOutlineReliefGL)
+      or Twinkle (sectorOutlineReliefGL, Relief) doesn't match.
+
+resource Twinkle (droidSectorOutlineSensitiveGL, DroidSectorOutlineSensitiveGL)
+      or Twinkle (sectorOutlineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidSectorOutlineSmoothreliefGL, DroidSectorOutlineSmoothreliefGL)
+      or Twinkle (sectorOutlineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (droidSectorOutlineTagsGL, DroidSectorOutlineTagsGL)
+      or Twinkle (sectorOutlineTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidSectorOutlineTileGL, DroidSectorOutlineTileGL)
+      or Twinkle (sectorOutlineTileGL, Tile) doesn't match.
+
+resource Twinkle (droidSectorOutlineVisibleGL, DroidSectorOutlineVisibleGL)
+      or Twinkle (sectorOutlineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidSectorOutlineLabelGL, DroidSectorOutlineLabelGL)
+      or Twinkle (sectorOutlineLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineCapstyleGL, LumineuxSectorOutlineCapstyleGL)
+      or Twinkle (sectorOutlineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineCatcheventGL, LumineuxSectorOutlineCatcheventGL)
+      or Twinkle (sectorOutlineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineClosedGL, LumineuxSectorOutlineClosedGL)
+      or Twinkle (sectorOutlineClosedGL, Closed) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineComposealphaGL, LumineuxSectorOutlineComposealphaGL)
+      or Twinkle (sectorOutlineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineComposerotationGL, LumineuxSectorOutlineComposerotationGL)
+      or Twinkle (sectorOutlineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineComposescaleGL, LumineuxSectorOutlineComposescaleGL)
+      or Twinkle (sectorOutlineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineFillcolorGL, LumineuxSectorOutlineColorGL)= #70C5C0;15
+
+resource Twinkle (lumineuxSectorOutlineFilledGL, LumineuxSectorOutlineFilledGL)= 1
+
+resource Twinkle (lumineuxSectorOutlineFillpatternGL, LumineuxSectorOutlineFillpatternGL)
+      or Twinkle (sectorOutlineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineFillruleGL, LumineuxSectorOutlineFillruleGL)
+      or Twinkle (sectorOutlineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineFirstendGL, LumineuxSectorOutlineFirstendGL)
+      or Twinkle (sectorOutlineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineJoinstyleGL, LumineuxSectorOutlineJoinstyleGL)
+      or Twinkle (sectorOutlineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineLastendGL, LumineuxSectorOutlineLastendGL)
+      or Twinkle (sectorOutlineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineLinecolorGL, LumineuxSectorOutlineColorGL)= grey3;30
+
+resource Twinkle (lumineuxSectorOutlineLinepatternGL, LumineuxSectorOutlineLinepatternGL)
+      or Twinkle (sectorOutlineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineLinestyleGL, LumineuxSectorOutlineLinestyleGL)
+      or Twinkle (sectorOutlineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineLinewidthGL, LumineuxSectorOutlineLinewidthGL)= 3
+
+resource Twinkle (lumineuxSectorOutlinePriorityGL, LumineuxSectorOutlinePriorityGL)
+      or Twinkle (sectorOutlinePriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineMarkerGL, LumineuxSectorOutlineMarkerGL)
+      or Twinkle (sectorOutlineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineMarkercolorGL, LumineuxSectorOutlineColorGL)
+      or Twinkle (sectorOutlineMarkercolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineReliefGL, LumineuxSectorOutlineReliefGL)
+      or Twinkle (sectorOutlineReliefGL, Relief) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineSensitiveGL, LumineuxSectorOutlineSensitiveGL)
+      or Twinkle (sectorOutlineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineSmoothreliefGL, LumineuxSectorOutlineSmoothreliefGL)
+      or Twinkle (sectorOutlineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineTagsGL, LumineuxSectorOutlineTagsGL)
+      or Twinkle (sectorOutlineTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineTileGL, LumineuxSectorOutlineTileGL)
+      or Twinkle (sectorOutlineTileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineVisibleGL, LumineuxSectorOutlineVisibleGL)
+      or Twinkle (sectorOutlineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxSectorOutlineLabelGL, LumineuxSectorOutlineLabelGL)
+      or Twinkle (sectorOutlineLabelGL, Label) doesn't match.
+
+resource Twinkle (SetwptcoordsGL, SetWptCoordsGL)
+      or Twinkle (SetwptcoordsGL, SetWptCoords) doesn't match.
+
+resource Twinkle (ToggleselectGL, ToggleSelectGL)
+      or Twinkle (ToggleselectGL, ToggleSelect) doesn't match.
+
+resource Twinkle (SelectfirstGL, SelectFirstGL)
+      or Twinkle (SelectfirstGL, SelectFirst) doesn't match.
+
+resource Twinkle (SelectnextGL, SelectNextGL)
+      or Twinkle (SelectnextGL, SelectNext) doesn't match.
+
+resource Twinkle (DeselectallGL, DeselectGL)
+      or Twinkle (DeselectallGL, Deselect) doesn't match.
+
+resource Twinkle (ChangelookGL, ChangeLookGL)
+      or Twinkle (ChangelookGL, ChangeLook) doesn't match.
+
+resource Twinkle (ShowmarkerGL, ShowmarkerGL)
+      or Twinkle (ShowmarkerGL, Showmarker) doesn't match.
+
+resource Twinkle (TogglevvGL, TogglevvGL)
+      or Twinkle (TogglevvGL, Togglevv) doesn't match.
+
+resource Twinkle (PrintgeometryGL, PrintGeometryGL)
+      or Twinkle (PrintgeometryGL, PrintGeometry) doesn't match.
+
+resource Twinkle (BeginextrapolaterouteGL, BeginExtrapolateRouteGL)
+      or Twinkle (BeginextrapolaterouteGL, BeginExtrapolateRoute) doesn't match.
+
+resource Twinkle (EndextrapolaterouteGL, EndExtrapolateRouteGL)
+      or Twinkle (EndextrapolaterouteGL, EndExtrapolateRoute) doesn't match.
+
+resource Twinkle (BeginalidadeGL, BeginAlidadeGL)
+      or Twinkle (BeginalidadeGL, BeginAlidade) doesn't match.
+
+resource Twinkle (EndalidadeGL, EndAlidadeGL)
+      or Twinkle (EndalidadeGL, EndAlidade) doesn't match.
+
+resource Twinkle (droidStaticWptViewCatcheventGL, DroidStaticWptViewCatcheventGL)
+      or Twinkle (staticWptViewCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidStaticWptViewComposealphaGL, DroidStaticWptViewComposealphaGL)
+      or Twinkle (staticWptViewComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidStaticWptViewComposerotationGL, DroidStaticWptViewComposerotationGL)
+      or Twinkle (staticWptViewComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidStaticWptViewComposescaleGL, DroidStaticWptViewComposescaleGL)
+      or Twinkle (staticWptViewComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidStaticWptViewConnecteditemGL, DroidStaticWptViewConnecteditemGL)
+      or Twinkle (staticWptViewConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (droidStaticWptViewConnectioncolorGL, DroidStaticWptViewColorGL)
+      or Twinkle (staticWptViewConnectioncolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptViewConnectionsensitiveGL, DroidStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewConnectionsensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidStaticWptViewConnectionstyleGL, DroidStaticWptViewConnectionstyleGL)
+      or Twinkle (staticWptViewConnectionstyleGL, Connectionstyle) doesn't match.
+
+resource Twinkle (droidStaticWptViewConnectionwidthGL, DroidStaticWptViewConnectionwidthGL)
+      or Twinkle (staticWptViewConnectionwidthGL, Connectionwidth) doesn't match.
+
+resource Twinkle (droidStaticWptViewFilledmarkerGL, DroidStaticWptViewFilledmarkerGL)
+      or Twinkle (staticWptViewFilledmarkerGL, Filledmarker) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabelanchorGL, DroidStaticWptViewLabelanchorGL)
+      or Twinkle (staticWptViewLabelanchorGL, Labelanchor) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabelangleGL, DroidStaticWptViewLabelangleGL)
+      or Twinkle (staticWptViewLabelangleGL, Labelangle) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabeldistanceGL, DroidStaticWptViewLabeldistanceGL)
+      or Twinkle (staticWptViewLabeldistanceGL, Labeldistance) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabeldxGL, DroidStaticWptViewLabeldxGL)
+      or Twinkle (staticWptViewLabeldxGL, Labeldx) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabeldyGL, DroidStaticWptViewLabeldyGL)
+      or Twinkle (staticWptViewLabeldyGL, Labeldy) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabelformatGL, DroidStaticWptViewLabelformatGL)
+      or Twinkle (staticWptViewLabelformatGL, Labelformat) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeaderanchorsGL, DroidStaticWptViewLeaderanchorsGL)
+      or Twinkle (staticWptViewLeaderanchorsGL, Leaderanchors) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeadercolorGL, DroidStaticWptViewColorGL)
+      or Twinkle (staticWptViewLeadercolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeaderfirstendGL, DroidStaticWptViewLeaderfirstendGL)
+      or Twinkle (staticWptViewLeaderfirstendGL, Leaderfirstend) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeaderlastendGL, DroidStaticWptViewLeaderlastendGL)
+      or Twinkle (staticWptViewLeaderlastendGL, Leaderlastend) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeadersensitiveGL, DroidStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewLeadersensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeadershapeGL, DroidStaticWptViewLeadershapeGL)
+      or Twinkle (staticWptViewLeadershapeGL, Leadershape) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeaderstyleGL, DroidStaticWptViewLeaderstyleGL)
+      or Twinkle (staticWptViewLeaderstyleGL, Leaderstyle) doesn't match.
+
+resource Twinkle (droidStaticWptViewLeaderwidthGL, DroidStaticWptViewLeaderwidthGL)
+      or Twinkle (staticWptViewLeaderwidthGL, Leaderwidth) doesn't match.
+
+resource Twinkle (droidStaticWptViewMarkercolorGL, DroidStaticWptViewColorGL)
+      or Twinkle (staticWptViewMarkercolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptViewMarkerfillpatternGL, DroidStaticWptViewMarkerfillpatternGL)
+      or Twinkle (staticWptViewMarkerfillpatternGL, Markerfillpattern) doesn't match.
+
+resource Twinkle (droidStaticWptViewMarkersizeGL, DroidStaticWptViewMarkersizeGL)
+      or Twinkle (staticWptViewMarkersizeGL, Markersize) doesn't match.
+
+resource Twinkle (droidStaticWptViewMarkerstyleGL, DroidStaticWptViewMarkerstyleGL)
+      or Twinkle (staticWptViewMarkerstyleGL, Markerstyle) doesn't match.
+
+resource Twinkle (droidStaticWptViewPositionGL, DroidStaticWptViewPositionGL)
+      or Twinkle (staticWptViewPositionGL, Position) doesn't match.
+
+resource Twinkle (droidStaticWptViewPriorityGL, DroidStaticWptViewPriorityGL)
+      or Twinkle (staticWptViewPriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidStaticWptViewSensitiveGL, DroidStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidStaticWptViewSymbolGL, DroidStaticWptViewSymbolGL)
+      or Twinkle (staticWptViewSymbolGL, Symbol) doesn't match.
+
+resource Twinkle (droidStaticWptViewSymbolcolorGL, DroidStaticWptViewColorGL)
+      or Twinkle (staticWptViewSymbolcolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptViewSymbolsensitiveGL, DroidStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewSymbolsensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidStaticWptViewTagsGL, DroidStaticWptViewTagsGL)
+      or Twinkle (staticWptViewTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidStaticWptViewVisibleGL, DroidStaticWptViewVisibleGL)
+      or Twinkle (staticWptViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidStaticWptViewLabelGL, DroidStaticWptViewLabelGL)= Atc::Hci::WptNameView StaticWptNameView wptname=a2a0+0+0
+
+resource Twinkle (lumineuxStaticWptViewCatcheventGL, LumineuxStaticWptViewCatcheventGL)
+      or Twinkle (staticWptViewCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewComposealphaGL, LumineuxStaticWptViewComposealphaGL)
+      or Twinkle (staticWptViewComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewComposerotationGL, LumineuxStaticWptViewComposerotationGL)
+      or Twinkle (staticWptViewComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewComposescaleGL, LumineuxStaticWptViewComposescaleGL)
+      or Twinkle (staticWptViewComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewConnecteditemGL, LumineuxStaticWptViewConnecteditemGL)
+      or Twinkle (staticWptViewConnecteditemGL, Connecteditem) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewConnectioncolorGL, LumineuxStaticWptViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptViewConnectionsensitiveGL, LumineuxStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewConnectionsensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewConnectionstyleGL, LumineuxStaticWptViewConnectionstyleGL)
+      or Twinkle (staticWptViewConnectionstyleGL, Connectionstyle) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewConnectionwidthGL, LumineuxStaticWptViewConnectionwidthGL)
+      or Twinkle (staticWptViewConnectionwidthGL, Connectionwidth) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewFilledmarkerGL, LumineuxStaticWptViewFilledmarkerGL)
+      or Twinkle (staticWptViewFilledmarkerGL, Filledmarker) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabelanchorGL, LumineuxStaticWptViewLabelanchorGL)
+      or Twinkle (staticWptViewLabelanchorGL, Labelanchor) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabelangleGL, LumineuxStaticWptViewLabelangleGL)
+      or Twinkle (staticWptViewLabelangleGL, Labelangle) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabeldistanceGL, LumineuxStaticWptViewLabeldistanceGL)
+      or Twinkle (staticWptViewLabeldistanceGL, Labeldistance) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabeldxGL, LumineuxStaticWptViewLabeldxGL)
+      or Twinkle (staticWptViewLabeldxGL, Labeldx) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabeldyGL, LumineuxStaticWptViewLabeldyGL)
+      or Twinkle (staticWptViewLabeldyGL, Labeldy) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabelformatGL, LumineuxStaticWptViewLabelformatGL)
+      or Twinkle (staticWptViewLabelformatGL, Labelformat) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeaderanchorsGL, LumineuxStaticWptViewLeaderanchorsGL)
+      or Twinkle (staticWptViewLeaderanchorsGL, Leaderanchors) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeadercolorGL, LumineuxStaticWptViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptViewLeaderfirstendGL, LumineuxStaticWptViewLeaderfirstendGL)
+      or Twinkle (staticWptViewLeaderfirstendGL, Leaderfirstend) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeaderlastendGL, LumineuxStaticWptViewLeaderlastendGL)
+      or Twinkle (staticWptViewLeaderlastendGL, Leaderlastend) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeadersensitiveGL, LumineuxStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewLeadersensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeadershapeGL, LumineuxStaticWptViewLeadershapeGL)
+      or Twinkle (staticWptViewLeadershapeGL, Leadershape) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeaderstyleGL, LumineuxStaticWptViewLeaderstyleGL)
+      or Twinkle (staticWptViewLeaderstyleGL, Leaderstyle) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLeaderwidthGL, LumineuxStaticWptViewLeaderwidthGL)
+      or Twinkle (staticWptViewLeaderwidthGL, Leaderwidth) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewMarkercolorGL, LumineuxStaticWptViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptViewMarkerfillpatternGL, LumineuxStaticWptViewMarkerfillpatternGL)
+      or Twinkle (staticWptViewMarkerfillpatternGL, Markerfillpattern) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewMarkersizeGL, LumineuxStaticWptViewMarkersizeGL)
+      or Twinkle (staticWptViewMarkersizeGL, Markersize) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewMarkerstyleGL, LumineuxStaticWptViewMarkerstyleGL)
+      or Twinkle (staticWptViewMarkerstyleGL, Markerstyle) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewPositionGL, LumineuxStaticWptViewPositionGL)
+      or Twinkle (staticWptViewPositionGL, Position) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewPriorityGL, LumineuxStaticWptViewPriorityGL)
+      or Twinkle (staticWptViewPriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewSensitiveGL, LumineuxStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewSymbolGL, LumineuxStaticWptViewSymbolGL)
+      or Twinkle (staticWptViewSymbolGL, Symbol) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewSymbolcolorGL, LumineuxStaticWptViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptViewSymbolsensitiveGL, LumineuxStaticWptViewSensitiveGL)
+      or Twinkle (staticWptViewSymbolsensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewTagsGL, LumineuxStaticWptViewTagsGL)
+      or Twinkle (staticWptViewTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewVisibleGL, LumineuxStaticWptViewVisibleGL)
+      or Twinkle (staticWptViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxStaticWptViewLabelGL, LumineuxStaticWptViewLabelGL)= Atc::Hci::WptNameView StaticWptNameView wptname=a2a0+0+0
+
+resource Twinkle (droidStaticWptNameViewAlignmentGL, DroidStaticWptNameViewAlignmentGL)
+      or Twinkle (staticWptNameViewAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewAutoalignmentGL, DroidStaticWptNameViewAutoalignmentGL)
+      or Twinkle (staticWptNameViewAutoalignmentGL, Autoalignment) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewBackcolorGL, DroidStaticWptNameViewColorGL)
+      or Twinkle (staticWptNameViewBackcolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewBorderGL, DroidStaticWptNameViewBorderGL)
+      or Twinkle (staticWptNameViewBorderGL, Border) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewBordercolorGL, DroidStaticWptNameViewColorGL)
+      or Twinkle (staticWptNameViewBordercolorGL, Color) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewColorGL, DroidStaticWptNameViewColorGL)= #517c82
+
+resource Twinkle (droidStaticWptNameViewFilledGL, DroidStaticWptNameViewFilledGL)
+      or Twinkle (staticWptNameViewFilledGL, Filled) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewFillpatternGL, DroidStaticWptNameViewFillpatternGL)
+      or Twinkle (staticWptNameViewFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewFontGL, DroidStaticWptNameViewFontGL)
+      or Twinkle (staticWptNameViewFontGL, Font) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewImageGL, DroidStaticWptNameViewImageGL)
+      or Twinkle (staticWptNameViewImageGL, Image) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewReliefGL, DroidStaticWptNameViewReliefGL)
+      or Twinkle (staticWptNameViewReliefGL, Relief) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewReliefthicknessGL, DroidStaticWptNameViewReliefthicknessGL)
+      or Twinkle (staticWptNameViewReliefthicknessGL, Reliefthickness) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewSensitiveGL, DroidStaticWptNameViewSensitiveGL)
+      or Twinkle (staticWptNameViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewTextGL, DroidStaticWptNameViewTextGL)
+      or Twinkle (staticWptNameViewTextGL, Text) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewTileGL, DroidStaticWptNameViewTileGL)
+      or Twinkle (staticWptNameViewTileGL, Tile) doesn't match.
+
+resource Twinkle (droidStaticWptNameViewVisibleGL, DroidStaticWptNameViewVisibleGL)
+      or Twinkle (staticWptNameViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewAlignmentGL, LumineuxStaticWptNameViewAlignmentGL)
+      or Twinkle (staticWptNameViewAlignmentGL, Alignment) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewAutoalignmentGL, LumineuxStaticWptNameViewAutoalignmentGL)
+      or Twinkle (staticWptNameViewAutoalignmentGL, Autoalignment) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewBackcolorGL, LumineuxStaticWptNameViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptNameViewBorderGL, LumineuxStaticWptNameViewBorderGL)
+      or Twinkle (staticWptNameViewBorderGL, Border) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewBordercolorGL, LumineuxStaticWptNameViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptNameViewColorGL, LumineuxStaticWptNameViewColorGL)= #517c82
+
+resource Twinkle (lumineuxStaticWptNameViewFilledGL, LumineuxStaticWptNameViewFilledGL)
+      or Twinkle (staticWptNameViewFilledGL, Filled) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewFillpatternGL, LumineuxStaticWptNameViewFillpatternGL)
+      or Twinkle (staticWptNameViewFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewFontGL, LumineuxStaticWptNameViewFontGL)
+      or Twinkle (staticWptNameViewFontGL, Font) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewImageGL, LumineuxStaticWptNameViewImageGL)
+      or Twinkle (staticWptNameViewImageGL, Image) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewReliefGL, LumineuxStaticWptNameViewReliefGL)
+      or Twinkle (staticWptNameViewReliefGL, Relief) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewReliefthicknessGL, LumineuxStaticWptNameViewReliefthicknessGL)
+      or Twinkle (staticWptNameViewReliefthicknessGL, Reliefthickness) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewSensitiveGL, LumineuxStaticWptNameViewSensitiveGL)
+      or Twinkle (staticWptNameViewSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewTextGL, LumineuxStaticWptNameViewTextGL)
+      or Twinkle (staticWptNameViewTextGL, Text) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewTileGL, LumineuxStaticWptNameViewTileGL)
+      or Twinkle (staticWptNameViewTileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxStaticWptNameViewVisibleGL, LumineuxStaticWptNameViewVisibleGL)
+      or Twinkle (staticWptNameViewVisibleGL, Visible) doesn't match.
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (StaticWptNameViewWptnameviewdisplayGL, StaticWptNameViewWptNameViewDisplayGL)
+      or Twinkle (staticWptNameViewWptnameviewdisplayGL, WptNameViewDisplay)= estim
+
+resource Twinkle (droidLineCapstyleGL, DroidLineCapstyleGL)
+      or Twinkle (lineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (droidLineCatcheventGL, DroidLineCatcheventGL)
+      or Twinkle (lineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (droidLineClosedGL, DroidLineClosedGL)
+      or Twinkle (lineClosedGL, Closed) doesn't match.
+
+resource Twinkle (droidLineComposealphaGL, DroidLineComposealphaGL)
+      or Twinkle (lineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (droidLineComposerotationGL, DroidLineComposerotationGL)
+      or Twinkle (lineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (droidLineComposescaleGL, DroidLineComposescaleGL)
+      or Twinkle (lineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (droidLineFillcolorGL, DroidLineColorGL)
+      or Twinkle (lineFillcolorGL, Color) doesn't match.
+
+resource Twinkle (droidLineFilledGL, DroidLineFilledGL)
+      or Twinkle (lineFilledGL, Filled) doesn't match.
+
+resource Twinkle (droidLineFillpatternGL, DroidLineFillpatternGL)
+      or Twinkle (lineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (droidLineFillruleGL, DroidLineFillruleGL)
+      or Twinkle (lineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (droidLineFirstendGL, DroidLineFirstendGL)
+      or Twinkle (lineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (droidLineJoinstyleGL, DroidLineJoinstyleGL)
+      or Twinkle (lineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (droidLineLastendGL, DroidLineLastendGL)
+      or Twinkle (lineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (droidLineLinecolorGL, DroidLineColorGL)
+      or Twinkle (lineLinecolorGL, Color) doesn't match.
+
+resource Twinkle (droidLineLinepatternGL, DroidLineLinepatternGL)
+      or Twinkle (lineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (droidLineLinestyleGL, DroidLineLinestyleGL)
+      or Twinkle (lineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (droidLineLinewidthGL, DroidLineLinewidthGL)
+      or Twinkle (lineLinewidthGL, Linewidth) doesn't match.
+
+resource Twinkle (droidLinePriorityGL, DroidLinePriorityGL)
+      or Twinkle (linePriorityGL, Priority) doesn't match.
+
+resource Twinkle (droidLineMarkerGL, DroidLineMarkerGL)
+      or Twinkle (lineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (droidLineMarkercolorGL, DroidLineColorGL)
+      or Twinkle (lineMarkercolorGL, Color) doesn't match.
+
+resource Twinkle (droidLineReliefGL, DroidLineReliefGL)
+      or Twinkle (lineReliefGL, Relief) doesn't match.
+
+resource Twinkle (droidLineSensitiveGL, DroidLineSensitiveGL)
+      or Twinkle (lineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (droidLineSmoothreliefGL, DroidLineSmoothreliefGL)
+      or Twinkle (lineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (droidLineTagsGL, DroidLineTagsGL)
+      or Twinkle (lineTagsGL, Tags) doesn't match.
+
+resource Twinkle (droidLineTileGL, DroidLineTileGL)
+      or Twinkle (lineTileGL, Tile) doesn't match.
+
+resource Twinkle (droidLineVisibleGL, DroidLineVisibleGL)
+      or Twinkle (lineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (droidLineLabelGL, DroidLineLabelGL)
+      or Twinkle (lineLabelGL, Label) doesn't match.
+
+resource Twinkle (lumineuxLineCapstyleGL, LumineuxLineCapstyleGL)
+      or Twinkle (lineCapstyleGL, Capstyle) doesn't match.
+
+resource Twinkle (lumineuxLineCatcheventGL, LumineuxLineCatcheventGL)
+      or Twinkle (lineCatcheventGL, Catchevent) doesn't match.
+
+resource Twinkle (lumineuxLineClosedGL, LumineuxLineClosedGL)
+      or Twinkle (lineClosedGL, Closed) doesn't match.
+
+resource Twinkle (lumineuxLineComposealphaGL, LumineuxLineComposealphaGL)
+      or Twinkle (lineComposealphaGL, Composealpha) doesn't match.
+
+resource Twinkle (lumineuxLineComposerotationGL, LumineuxLineComposerotationGL)
+      or Twinkle (lineComposerotationGL, Composerotation) doesn't match.
+
+resource Twinkle (lumineuxLineComposescaleGL, LumineuxLineComposescaleGL)
+      or Twinkle (lineComposescaleGL, Composescale) doesn't match.
+
+resource Twinkle (lumineuxLineFillcolorGL, LumineuxLineColorGL)
+      or Twinkle (lineFillcolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxLineFilledGL, LumineuxLineFilledGL)
+      or Twinkle (lineFilledGL, Filled) doesn't match.
+
+resource Twinkle (lumineuxLineFillpatternGL, LumineuxLineFillpatternGL)
+      or Twinkle (lineFillpatternGL, Fillpattern) doesn't match.
+
+resource Twinkle (lumineuxLineFillruleGL, LumineuxLineFillruleGL)
+      or Twinkle (lineFillruleGL, Fillrule) doesn't match.
+
+resource Twinkle (lumineuxLineFirstendGL, LumineuxLineFirstendGL)
+      or Twinkle (lineFirstendGL, Firstend) doesn't match.
+
+resource Twinkle (lumineuxLineJoinstyleGL, LumineuxLineJoinstyleGL)
+      or Twinkle (lineJoinstyleGL, Joinstyle) doesn't match.
+
+resource Twinkle (lumineuxLineLastendGL, LumineuxLineLastendGL)
+      or Twinkle (lineLastendGL, Lastend) doesn't match.
+
+resource Twinkle (lumineuxLineLinecolorGL, LumineuxLineColorGL)
+      or Twinkle (lineLinecolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxLineLinepatternGL, LumineuxLineLinepatternGL)
+      or Twinkle (lineLinepatternGL, Linepattern) doesn't match.
+
+resource Twinkle (lumineuxLineLinestyleGL, LumineuxLineLinestyleGL)
+      or Twinkle (lineLinestyleGL, Linestyle) doesn't match.
+
+resource Twinkle (lumineuxLineLinewidthGL, LumineuxLineLinewidthGL)
+      or Twinkle (lineLinewidthGL, Linewidth) doesn't match.
+
+resource Twinkle (lumineuxLinePriorityGL, LumineuxLinePriorityGL)
+      or Twinkle (linePriorityGL, Priority) doesn't match.
+
+resource Twinkle (lumineuxLineMarkerGL, LumineuxLineMarkerGL)
+      or Twinkle (lineMarkerGL, Marker) doesn't match.
+
+resource Twinkle (lumineuxLineMarkercolorGL, LumineuxLineColorGL)
+      or Twinkle (lineMarkercolorGL, Color) doesn't match.
+
+resource Twinkle (lumineuxLineReliefGL, LumineuxLineReliefGL)
+      or Twinkle (lineReliefGL, Relief) doesn't match.
+
+resource Twinkle (lumineuxLineSensitiveGL, LumineuxLineSensitiveGL)
+      or Twinkle (lineSensitiveGL, Sensitive) doesn't match.
+
+resource Twinkle (lumineuxLineSmoothreliefGL, LumineuxLineSmoothreliefGL)
+      or Twinkle (lineSmoothreliefGL, Smoothrelief) doesn't match.
+
+resource Twinkle (lumineuxLineTagsGL, LumineuxLineTagsGL)
+      or Twinkle (lineTagsGL, Tags) doesn't match.
+
+resource Twinkle (lumineuxLineTileGL, LumineuxLineTileGL)
+      or Twinkle (lineTileGL, Tile) doesn't match.
+
+resource Twinkle (lumineuxLineVisibleGL, LumineuxLineVisibleGL)
+      or Twinkle (lineVisibleGL, Visible) doesn't match.
+
+resource Twinkle (lumineuxLineLabelGL, LumineuxLineLabelGL)
+      or Twinkle (lineLabelGL, Label) doesn't match.
+
