@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from pyrejeu import utils
+import utils
 
 
 # Mettre echo a True pour acceder au mode verbeux
@@ -42,15 +42,22 @@ class Flight(Base):
     type = Column(String(10))                               # Type d avion
     dep = Column(String(10))                                # Aeroport de depart
     arr = Column(String(10))                                # Aeroport d arrivee
-    pln_event = Column(Integer)                             # PLN Event à 0 ou 1
+    ssr = Column(Integer)									# ssr = Code transpondeur. 0000 si inconnu.
+    rvsm = Column(String(10))                  			    # rvsm = TRUE ou FALSE suivant l'équipement RVSM de l'avion.)-
+    tcas = Column(String(10))								# tcas = OFF ou TA_ONLY ou TA_RA suivant l'équipement TCAS de l'avion
+    adsb = Column(String(10))								# adbs = NO ou YES ou OUT_ONLY
+    dlink = Column(String(10))								# dlink = TRUE ou FALSE suivant l'équipement Data Link de l'avion
+    pln_event = Column(Integer)                             # PLN Event émis oui=1 ou non=0 
 
     # déclaration des relations
     flight_plan = relationship("FlightPlan", uselist=False, back_populates="flight")
     cones = relationship("Cone", back_populates="flight")
 
     def __repr__(self):
-        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, pln_event=%d)>" % \
-               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, self.pln_event)
+        return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, " \
+               "ssr=%s, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, pln_event=%d)>" % \
+               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, 
+                self.ssr, self.rvsm, self.tcas, self.adsb, self.dlink, self.pln_event)
 
     def display_cones_extract(self):
         def repr(c_list):

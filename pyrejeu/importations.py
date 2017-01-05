@@ -5,9 +5,9 @@ import sys
 import os.path
 import logging
 from sqlalchemy.orm import sessionmaker
-from pyrejeu import models as mod
-from pyrejeu import utils
-from pyrejeu import PyRejeuException
+import models as mod
+import utils
+from __init__ import PyRejeuException
 
 Session = sessionmaker(bind=mod.engine)
 
@@ -98,7 +98,7 @@ class RejeuImportation(object):
 
         # Remplissage des tables
         for flight in l_flights:
-            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr) = flight.split()[1:10]
+            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr, f_ssr, f_rvsm, f_tcas, f_adsb, f_dlink) = flight.split()[1:15]
             # Conversions
             f_h_dep = utils.str_to_sec(f_h_dep)
             f_h_arr = utils.str_to_sec(f_h_arr)
@@ -111,7 +111,9 @@ class RejeuImportation(object):
                 r_flight = mod.Flight(id=int(f_id), h_dep=f_h_dep,
                                       h_arr=f_h_arr, fl=int(f_fl),
                                       v=int(f_speed), callsign=f_callsign,
-                                      type=f_type, dep=f_dep, arr=f_arr, pln_event=0)
+                                      type=f_type, dep=f_dep, arr=f_arr, 
+									  ssr = int(f_ssr), rvsm=f_rvsm, tcas=f_tcas, adsb=f_adsb, dlink=f_dlink,
+									  pln_event=0)
             else:
                 # Cas ou un vol ayant le meme id est dans la bdd
                 r_flight.h_dep = f_h_dep
