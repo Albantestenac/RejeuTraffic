@@ -72,8 +72,13 @@ class RejeuClock(object):
                 #logging.debug("Message envoye : %s" % msg)
                 IvySendMsg(msg)
 
-            self.current_time += 1
-            time.sleep(1.0/self.rate)
+            if self.rate>0 :
+                self.current_time += 1
+                time.sleep(1.0 / self.rate)
+            else :
+                self.current_time -=1
+                time.sleep(-1.0 / self.rate)
+
 
     def stop(self):
         logging.debug("Clock Stopped")
