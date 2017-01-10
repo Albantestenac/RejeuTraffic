@@ -26,6 +26,8 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
+        IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.modify_init_time(l[1]), '^SetClock Time=(\S+)')
 
     def main_loop(self):
         # Envoi des infos de début et de fin de la simulation
@@ -47,8 +49,8 @@ class RejeuClock(object):
 
             logging.debug("Loop running, SimTime=%s" \
                     % utils.sec_to_str(self.current_time))
-            IvySendMsg("ClockEvent Time=%s Rate=1 Bs=0" \
-                    % utils.sec_to_str(self.current_time))
+            IvySendMsg("ClockEvent Time=%s Rate=%d Bs=0" \
+                    % (utils.sec_to_str(self.current_time), self.rate))
 
             # récupérer les plots à envoyer
             list_cones = self.session.query(mod.Cone) \
@@ -70,8 +72,13 @@ class RejeuClock(object):
                 #logging.debug("Message envoye : %s" % msg)
                 IvySendMsg(msg)
 
-            self.current_time += 1
-            time.sleep(1.0/self.rate)
+            if self.rate>0 :
+                self.current_time += 1
+                time.sleep(1.0 / self.rate)
+            else :
+                self.current_time -=1
+                time.sleep(-1.0 / self.rate)
+
 
     def stop(self):
         logging.debug("Clock Stopped")
@@ -83,3 +90,11 @@ class RejeuClock(object):
 
     def close(self):
         self.running = False
+
+    def modify_rate(self, rate_value):
+        logging.debug("SetClock")
+        self.rate = int(rate_value)
+
+    def modify_init_time(self, init_time):
+        logging.debug("Set Init Time")
+        self.current_time = utils.str_to_sec(init_time)
