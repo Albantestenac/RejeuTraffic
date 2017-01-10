@@ -26,7 +26,8 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
-        IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)') #voir comment catcher la valeur du rate
+        IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.modify_init_time(l[1]), '^SetClock Time=(\S+)')
 
     def main_loop(self):
         # Envoi des infos de début et de fin de la simulation
@@ -88,3 +89,7 @@ class RejeuClock(object):
     def modify_rate(self, rate_value):
         logging.debug("SetClock")
         self.rate = int(rate_value)
+
+    def modify_init_time(self, init_time):
+        logging.debug("Set Init Time")
+        self.current_time = utils.str_to_sec(init_time)
