@@ -63,6 +63,28 @@ def layer_s_name_from_FL(layers_list, fl):
     return found_name
 
 
+def extract_route(flight_plan, start_beacon=None):
+    # Fonction renvoyant le plan de vol au format "NOM (V ou A) HEURE FL "
+    res=""
+    if start_beacon == None:
+        for b in flight_plan.beacons:
+            res += b.beacon_name + " "
+            res += b.V_or_A + " "
+            res += sec_to_str_without_sec(b.hour) + " "
+            res += str(b.FL) + " "
+    else:
+        for (i,beacon) in enumerate(flight_plan.beacons):
+            if beacon.beacon_name == start_beacon:
+                start = i
+                break
+        for b in flight_plan.beacons[start:]:
+            res += b.beacon_name + " "
+            res += b.V_or_A + " "
+            res += sec_to_str_without_sec(b.hour) + " "
+            res += str(b.FL) + " "
+    return res
+
+
 if __name__ == "__main__":
     print str_to_sec("13:20:50")
     print sec_to_str(str_to_sec("13:20:50"))

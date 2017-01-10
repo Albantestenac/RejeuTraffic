@@ -26,9 +26,11 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
-        IvyBindMsg(lambda *l: self.get_beacons(l[1]), "^GetAllBeacons MsgName=(.*) Type=")
         IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)')
         IvyBindMsg(lambda *l: self.modify_init_time(l[1]), '^SetClock Time=(\S+)')
+        IvyBindMsg(lambda *l: self.send_beacons(l[1]), "^GetAllBeacons MsgName=(\S+)")
+        IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3])), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)"
+
 
     def main_loop(self):
         # Envoi des infos de début et de fin de la simulation
@@ -92,7 +94,15 @@ class RejeuClock(object):
     def close(self):
         self.running = False
 
-    def get_beacons(self, msg_name):
+    def modify_rate(self, rate_value):
+        logging.debug("SetClock")
+        self.rate = int(rate_value)
+
+    def modify_init_time(self, init_time):
+        logging.debug("Set Init Time")
+        self.current_time = utils.str_to_sec(init_time)
+
+    def send_beacons(self, msg_name):
         l_beacons = self.session.query(mod.Beacon)
         count = 0
         msg = "AllBeacons %s Slice=" % (msg_name)
@@ -107,11 +117,14 @@ class RejeuClock(object):
             IvySendMsg(msg)
         IvySendMsg("AllBeacons %s EndSlice" % msg_name)
 
-    def modify_rate(self, rate_value):
-        logging.debug("SetClock")
-        self.rate = int(rate_value)
+    def send_pln(self, msg_name, flight_id, init_beacon):
+        if init_beacon == "now":
+            pass
 
-    def modify_init_time(self, init_time):
-        logging.debug("Set Init Time")
-        self.current_time = utils.str_to_sec(init_time)
+        msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=%d Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=%s Tcas=%s Adsb=%s DLink=%s List=%s" % \
+                        (flight.id, utils.sec_to_str(self.current_time), flight.callsign, flight.type, flight.ssr, flight.v, flight.fl, flight.dep, flight.arr,
+                         flight.rvsm, flight.tcas, flight.adsb, flight.dlink, flight.flight_plan.listing())
+        IvySendMsg(msg_pln_event)
+
+
 

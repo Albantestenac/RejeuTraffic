@@ -107,15 +107,6 @@ class FlightPlan(Base):
             res += "\n\t%s" % str(b)
         return res
 
-    def listing(self):
-        #Fonction renvoyant le plan de vol au format "NOM (V ou A) HEURE FL "
-        for b in self.beacons:
-            res = b.beacon_name + " "
-            res += b.V_or_A + " "
-            res += utils.sec_to_str_without_sec(b.hour) + " "
-            res += str(b.FL) + " "
-        return res
-
 
 class FlightPlanBeacon(Base):
     __tablename__='flightplan_beacons'
