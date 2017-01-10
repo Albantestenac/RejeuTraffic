@@ -263,8 +263,9 @@ if __name__ == "__main__":
     for fpl in session_test.query(mod.FlightPlan):
         print(fpl)
     print("Affichage des couches")
-    for layer in session_test.query(mod.Layer):
+    imported_layers = session_test.query(mod.Layer)
+    for layer in imported_layers:
         print(layer)
     print("Test couche")
-    print("Layer pour FL=100 est : %s." % layer.layer_s_name_from_FL(100))
+    print("Layer pour FL=100 est : %s." % utils.layer_s_name_from_FL(imported_layers , 100) )
 
