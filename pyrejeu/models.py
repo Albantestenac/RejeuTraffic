@@ -136,6 +136,24 @@ class FlightPlanBeacon(Base):
                (self.order, self.beacon_name, self.hour)
 
 
+class Layer(Base):
+    __tablename__='layer'
+
+    name = Column(String, primary_key=True)             # Name: nom de la couche => 1 caractere
+    floor = Column(Integer)                             # Floor : Niveau plancher
+    ceiling = Column(Integer)                           # Ceiling : Niveau plafond
+    climb_delay_first = Column(Integer)                 # Climb_delay_first : combien de temps (minutes) avant la premiere balise de la couche
+                                                        #               il faut mettre l'avion dans cette couche, quand il y arrive en montant
+    climb_delay_others = Column(Integer)                # Climb_delay_others : non implemente
+    descent_delay = Column(Integer)                     # Descent_delay : combien de temps (minutes) avant la premiere balise de la couche il faut
+                                                        #               mettre l'avion dans cette couche, quand il y arrive en descendant
+    descent_distance = Column(Float)                  # Descent_Distance: non implemente
+
+    def __repr__(self):
+        return "<Layer(name=%s, floor=%d, ceiling=%d, climb_delay_first=%d, climb_delay_others=%d, descent_delay=%d, descent_distance=%f)>" % \
+               (self.name, self.floor, self.ceiling, self.climb_delay_first, self.climb_delay_others, self.descent_delay, self.descent_distance)
+
+
 Base.metadata.create_all(engine)
 
 if __name__ == "__main__":

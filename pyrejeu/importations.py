@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-author = 'Alban', 'Alexandre'
+author = 'Alban', 'Alexandre', 'Audrey'
 
 import sys
 import os.path
@@ -23,6 +23,7 @@ class RejeuImportation(object):
         with open(filename, 'r') as f:
             lines = f.readlines()
             self.__import_beacons(lines)
+            self.__import_layer(lines)
 
             self.__import_flights(lines)
             for flight in self.session.query(mod.Flight).all():
@@ -49,7 +50,7 @@ class RejeuImportation(object):
 
     def __import_beacons(self, lines):
         """
-        Importe les donnees relative aux balise a partir d un fichier texte
+        Importe les donnees relative aux balises a partir d un fichier texte
         passe en entree et les stocke dans la BDD
         :param lines: fichier texte contenant les balises a importer
         :return: None
@@ -195,6 +196,51 @@ class RejeuImportation(object):
                 flight_plan.beacons.append(beacon)
             self.session.add(flight_plan)
 
+    def __import_layer(self, lines):
+
+        logging.debug("Importation des couches")
+
+        block_start, block_end = 0, 0
+        for (i, line) in enumerate(lines):
+            if "NLayers:" in line:
+                block_start = i+1                                     #début du bloc = ligne première couche
+                block_end = block_start + int(line.split()[1])        #fin du bloc = ligne du dernier plot + 1 (ATTENTION)
+                break                                                 #On quitte une fois fini
+        l_layers = lines[block_start:block_end]
+
+        # Remplissage des tables
+        for layer in l_layers:
+            (l_name, l_floor, l_ceiling, l_climb_delay_first, l_climb_delay_others,
+             l_descent_delay, l_descent_distance) = layer.split()
+
+            r_layer = self.session.query(mod.Layer) \
+                .filter(mod.Layer.name == l_name) \
+                .first()
+
+            if r_layer is None:
+                 # Ajout de la balise a la bdd si elle n'y est pas deja
+                 r_layer = mod.Layer(name = l_name,
+                                     floor = int(l_floor),
+                                     ceiling = int(l_ceiling),
+                                     climb_delay_first = int(l_climb_delay_first),
+                                     climb_delay_others = int(l_climb_delay_others),
+                                     descent_delay = int(l_descent_delay),
+                                     descent_distance = float(l_descent_distance))
+
+            else:
+                 # Cas ou une balise portant le meme nom est dans la bdd
+                 r_layer.floor = l_floor,
+                 r_layer.ceiling = l_ceiling,
+                 r_layer.climb_delay_first = l_climb_delay_first,
+                 r_layer.climb_delay_others = l_climb_delay_others,
+                 r_layer.descent_delay = l_descent_delay,
+                 r_layer.descent_distance = l_descent_distance
+
+            self.session.add(r_layer)
+
+        logging.debug("%d balises ont été importées" % len(l_layers))
+
+
 
 if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.DEBUG)
@@ -216,3 +262,10 @@ if __name__ == "__main__":
     print("Affichage des plans de vol")
     for fpl in session_test.query(mod.FlightPlan):
         print(fpl)
+    print("Affichage des couches")
+    imported_layers = session_test.query(mod.Layer)
+    for layer in imported_layers:
+        print(layer)
+    print("Test couche")
+    print("Layer pour FL=100 est : %s." % utils.layer_s_name_from_FL(imported_layers , 100) )
+

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-__author__ = "Alban"
+__author__ = "Alban", "Audrey"
+
 
 def str_to_sec(string):
     """
@@ -53,6 +54,13 @@ def extract_sim_bounds(flight_list):
     if stop_h > str_to_sec("23:59:59"): stop_h = str_to_sec("23:59:59")
 
     return (start_h, stop_h)
+
+
+def layer_s_name_from_FL(layers_list, fl):
+    for layer in layers_list:
+        if fl >= layer.floor and fl < layer.ceiling:
+            found_name = layer.name
+    return found_name
 
 
 if __name__ == "__main__":
