@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-__author__ = "Alban"
+__author__ = "Alban", "Audrey"
+
+import models as mod
+from importations import *
 
 def str_to_sec(string):
     """
@@ -53,6 +56,15 @@ def extract_sim_bounds(flight_list):
     if stop_h > str_to_sec("23:59:59"): stop_h = str_to_sec("23:59:59")
 
     return (start_h, stop_h)
+
+
+# def layer_s_name_from_FL(liste, FL=int):
+#     liste =
+#     if FL >= mod.Layer.floor and FL < mod.Layer.ceiling:
+#         found_name = mod.Layer.name
+#     else:
+#         found_name = "Not found"
+#     return found_name
 
 
 if __name__ == "__main__":

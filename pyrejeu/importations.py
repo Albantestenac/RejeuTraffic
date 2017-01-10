@@ -265,3 +265,6 @@ if __name__ == "__main__":
     print("Affichage des couches")
     for layer in session_test.query(mod.Layer):
         print(layer)
+    print("Test couche")
+    print("Layer pour FL=100 est : %s." % layer.layer_s_name_from_FL(100))
+
