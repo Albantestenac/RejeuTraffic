@@ -26,6 +26,7 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
+        IvyBindMsg(lambda *l: self.get_beacons(l[1]), "^GetAllBeacons MsgName=(.*) Type=")
 
     def main_loop(self):
         # Envoi des infos de début et de fin de la simulation
@@ -83,3 +84,20 @@ class RejeuClock(object):
 
     def close(self):
         self.running = False
+
+    def get_beacons(self, msg_name):
+        l_beacons = self.session.query(mod.Beacon)
+        count = 0
+        msg = "AllBeacons %s Slice=" % (msg_name)
+        for beacon in l_beacons:
+            msg += beacon.display_beacon() + " "
+            count += 1
+            if count == 50:
+                IvySendMsg(msg.strip())
+                count = 0
+                msg = "AllBeacons %s Slice=" % (msg_name)
+        if count > 0:
+            IvySendMsg(msg)
+        IvySendMsg("AllBeacons %s EndSlice" % msg_name)
+
+

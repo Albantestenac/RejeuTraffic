@@ -70,12 +70,12 @@ class RejeuImportation(object):
             if r_beacon is None:
                 # Ajout de la balise a la bdd si elle n'y est pas deja
                 r_beacon = mod.Beacon(name = b_name, 
-                                      pos_x = int(b_x_pos), 
-                                      pos_y = int(b_y_pos))
+                                      pos_x = int(b_x_pos)/8.0,
+                                      pos_y = int(b_y_pos)/8.0)
             else:
                 # Cas ou une balise portant le meme nom est dans la bdd
-                r_beacon.pos_x = b_x_pos
-                r_beacon.pos_y = b_y_pos
+                r_beacon.pos_x = int(b_x_pos)/8.0
+                r_beacon.pos_y = int(b_y_pos)/8.0
             self.session.add(r_beacon)
         logging.debug("%d balises ont été importées" % len(l_beacons))
 

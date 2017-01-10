@@ -28,6 +28,9 @@ class Beacon(Base):
     def __repr__(self):
         return "<Beacon(name='%s', pos_x=%f, pos_y=%f)>" % (self.name, self.pos_x, self.pos_y)
 
+    def display_beacon(self):
+        #Fonction renvoyant la balise au format "NOM X,xx Y,yy" (pour messages Ivy principalement)
+        return "%s %f %f" % (self.name, self.pos_x, self.pos_y)
 
 
 class Flight(Base):
@@ -136,6 +139,6 @@ class FlightPlanBeacon(Base):
 Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
-    print(Beacon(name='Test', pos_x=10.2, pos_y=-1563.869))
+    print(Beacon(name='Test', pos_x=10.2, pos_y=-1563.869).display_beacon())
     print(Flight(h_dep=1020, h_arr=1125, fl=340, v=235 , callsign='AF4185', type='A320',
                  dep='LFBO', arr='LFPO', ssr=1000, rvsm="TRUE", tcas="OFF", adsb="YES", dlink="FALSE", pln_event=0))
