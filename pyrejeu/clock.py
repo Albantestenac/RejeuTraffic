@@ -29,7 +29,8 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)')
         IvyBindMsg(lambda *l: self.modify_init_time(l[1]), '^SetClock Time=(\S+)')
         IvyBindMsg(lambda *l: self.send_beacons(l[1]), "^GetAllBeacons MsgName=(\S+)")
-        IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3])), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)"
+        IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
+        IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
 
 
     def main_loop(self):
@@ -61,19 +62,14 @@ class RejeuClock(object):
 
             # pour chaque plot
             for cone in list_cones:
-                # par défaut : SSR = 0000 ...
-                if cone.flight.pln_event == 0 :
-                    # ATTENTION A MODIFIER POUR LIST (cf focntion "listing" de la classe FlightPlan de models.py)
-                    msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=%d Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=%s Tcas=%s Adsb=%s DLink=%s List=%s" %\
-                                    (cone.flight.id, utils.sec_to_str(cone.hour), cone.flight.callsign, cone.flight.type, cone.flight.ssr, cone.flight.v, cone.flight.fl, cone.flight.dep,
-                                     cone.flight.arr, cone.flight.rvsm, cone.flight.tcas, cone.flight.adsb, cone.flight.dlink, cone.flight.flight_plan.listing())
-                    IvySendMsg(msg_pln_event)
-                    cone.flight.pln_event=1
                 g_speed = math.sqrt((cone.vit_x)**2+(cone.vit_y)**2)
-                msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=%d Sector=-- Layers=F X=%f Y=%f Vx=%d Vy=%d Afl=%d Rate=%d Heading=323 GroundSpeed=%d Tendency=%d Time=%s" %\
-                      ( cone.flight.id, cone.flight.callsign, cone.flight.ssr, cone.pos_x/60, cone.pos_y/60, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, int(g_speed), cone.tendency, utils.sec_to_str(cone.hour) )
+                heading = utils.get_heading(cone.vit_x, cone.vit_y)
+                msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=%d Sector=-- Layers=F X=%f Y=%f Vx=%d Vy=%d Afl=%d Rate=%d Heading=%d GroundSpeed=%d Tendency=%d Time=%s" %\
+                      ( cone.flight.id, cone.flight.callsign, cone.flight.ssr, cone.pos_x/60, cone.pos_y/60, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, heading,int(g_speed), cone.tendency, utils.sec_to_str(cone.hour) )
                 #logging.debug("Message envoye : %s" % msg)
                 IvySendMsg(msg)
+
+            IvySendMsg("EndTransmissionEvent Time=%s" % (utils.sec_to_str(self.current_time)))
 
             if self.rate>0 :
                 self.current_time += 1
@@ -117,14 +113,30 @@ class RejeuClock(object):
             IvySendMsg(msg)
         IvySendMsg("AllBeacons %s EndSlice" % msg_name)
 
-    def send_pln(self, msg_name, flight_id, init_beacon):
-        if init_beacon == "now":
-            pass
+    def send_pln(self, msg_name, flight_id, init_order):
+        flight = self.session.query(mod.Flight).filter(mod.Flight.id == flight_id).first()
+        if init_order == "now":
+            starting_time = self.current_time
+            starting_beacon = None
+        elif init_order == "origin":
+            starting_beacon = None
+            starting_time = None
+        elif len(init_order.split(':'))>1:
+            starting_beacon = None
+            starting_time = utils.str_to_sec(init_order)
+        else :
+            starting_beacon = init_order
+            starting_time = None
+        route = utils.extract_route(flight.flight_plan, starting_beacon, starting_time)
+        msg_pln = "Pln %s Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=%d Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=%s Tcas=%s Adsb=%s DLink=%s List=%s" % \
+                        (msg_name, flight.id, utils.sec_to_str(self.current_time), flight.callsign, flight.type, flight.ssr, flight.v, flight.fl, flight.dep, flight.arr,
+                         flight.rvsm, flight.tcas, flight.adsb, flight.dlink, route.strip())
+        flight.pln_event = 1
+        IvySendMsg(msg_pln)
 
-        msg_pln_event = "PlnEvent Flight=%d Time=%s CallSign=%s AircraftType=%s Ssr=%d Speed=%d Rfl=%d Dep=%s Arr=%s Rvsm=%s Tcas=%s Adsb=%s DLink=%s List=%s" % \
-                        (flight.id, utils.sec_to_str(self.current_time), flight.callsign, flight.type, flight.ssr, flight.v, flight.fl, flight.dep, flight.arr,
-                         flight.rvsm, flight.tcas, flight.adsb, flight.dlink, flight.flight_plan.listing())
-        IvySendMsg(msg_pln_event)
+    def send_sectors_info(self, msg_name, flight_id):
+        msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
+        IvySendMsg(msg)
 
 
 

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "Alban", "Audrey"
 
+import math
+
 
 def str_to_sec(string):
     """
@@ -63,29 +65,42 @@ def layer_s_name_from_FL(layers_list, fl):
     return found_name
 
 
-def extract_route(flight_plan, start_beacon=None):
+def extract_route(flight_plan, start_beacon=None, start_time=None):
     # Fonction renvoyant le plan de vol au format "NOM (V ou A) HEURE FL "
     res=""
+    start = 0
     if start_beacon == None:
-        for b in flight_plan.beacons:
-            res += b.beacon_name + " "
-            res += b.V_or_A + " "
-            res += sec_to_str_without_sec(b.hour) + " "
-            res += str(b.FL) + " "
+        if start_time == None:
+            start = 0;
+        else:
+            for (i, beacon) in enumerate(flight_plan.beacons):
+                if beacon.hour >= start_time:
+                    start = i
+                    break
     else:
         for (i,beacon) in enumerate(flight_plan.beacons):
             if beacon.beacon_name == start_beacon:
                 start = i
                 break
-        for b in flight_plan.beacons[start:]:
-            res += b.beacon_name + " "
-            res += b.V_or_A + " "
-            res += sec_to_str_without_sec(b.hour) + " "
-            res += str(b.FL) + " "
+    for b in flight_plan.beacons[start:]:
+        res += b.beacon_name + " "
+        res += b.V_or_A + " "
+        res += sec_to_str_without_sec(b.hour) + " "
+        res += str(b.FL) + " "
     return res
+
+def get_heading(x_speed, y_speed):
+    if x_speed == 0:
+        if y_speed >= 0: return 0
+        else: return 180
+    angle = math.atan(y_speed/x_speed)
+
+    if x_speed > 0: return math.degrees(math.pi/2 - angle)
+    else: return math.degrees(3*math.pi/2 - angle)
 
 
 if __name__ == "__main__":
     print str_to_sec("13:20:50")
     print sec_to_str(str_to_sec("13:20:50"))
+    print get_heading(0,-1)
 
