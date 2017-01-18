@@ -160,7 +160,7 @@ class RejeuImportation(object):
             tmp_cone = mod.Cone(pos_x=int(c_pos_x), pos_y=int(c_pos_y),
                                 vit_x=int(c_vit_x), vit_y=int(c_vit_y),
                                 flight_level=int(c_fl), rate=int(c_rate),
-                                tendency= c_tendency, hour=c_hour, flight_id=flight.id)
+                                tendency= c_tendency, hour=c_hour, flight_id=flight.id, version=1)
             self.session.add(tmp_cone)
 
     def __import_flightplan(self, lines, flight):
