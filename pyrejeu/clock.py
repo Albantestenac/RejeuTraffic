@@ -26,11 +26,12 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
-        IvyBindMsg(lambda *l: self.modify_rate(l[1]), '^SetClock Rate=(\S+)')
-        IvyBindMsg(lambda *l: self.modify_init_time(l[1]), '^SetClock Time=(\S+)')
+        IvyBindMsg(lambda *l: self.set_rate(l[1]), '^SetClock Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.set_init_time(l[1]), '^SetClock Time=(\S+)')
         IvyBindMsg(lambda *l: self.send_beacons(l[1]), "^GetAllBeacons MsgName=(\S+)")
         IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
         IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
+        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^Aircraft Heading Flight=(\S+) To=(\S+)')
 
 
     def main_loop(self):
@@ -57,8 +58,7 @@ class RejeuClock(object):
                     % (utils.sec_to_str(self.current_time), self.rate))
 
             # récupérer les plots à envoyer
-            list_cones = self.session.query(mod.Cone) \
-                                     .filter(mod.Cone.hour == self.current_time)
+            list_cones = self.session.query(mod.Cone).filter(mod.Cone.hour == self.current_time)
 
             # pour chaque plot
             for cone in list_cones:
@@ -90,11 +90,11 @@ class RejeuClock(object):
     def close(self):
         self.running = False
 
-    def modify_rate(self, rate_value):
+    def set_rate(self, rate_value):
         logging.debug("SetClock")
         self.rate = int(rate_value)
 
-    def modify_init_time(self, init_time):
+    def set_init_time(self, init_time):
         logging.debug("Set Init Time")
         self.current_time = utils.str_to_sec(init_time)
 
@@ -137,6 +137,10 @@ class RejeuClock(object):
     def send_sectors_info(self, msg_name, flight_id):
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
         IvySendMsg(msg)
+
+    def set_heading(self, flight_id, new_heading):
+        logging.debug("Set Heading")
+        #appeler fonction Audrey en donnant new_heading et flight_id et current_time
 
 
 
