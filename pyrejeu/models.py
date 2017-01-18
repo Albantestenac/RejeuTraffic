@@ -82,13 +82,14 @@ class Cone(Base):
     tendency = Column(Integer)                          # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
     flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
+    version = Column(Integer)                               # Version du cone (modification de trajectoire)
 
     # déclaration des relations
     flight = relationship("Flight", back_populates="cones")
 
     def __repr__(self):
-        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
-              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id)
+        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d, version=%d)>" % \
+              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id, self.version)
 
 
 class FlightPlan(Base):
