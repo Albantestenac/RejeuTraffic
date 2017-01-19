@@ -60,7 +60,7 @@ class RejeuClock(object):
                     % (utils.sec_to_str(self.current_time), self.rate))
 
             # récupérer les plots à envoyer
-            list_cones = self.session.query(mod.Cone).filter(mod.Cone.hour == self.current_time, mod.Cone.version == mod.Cone.last_version)
+            list_cones = self.session.query(mod.Cone).filter(mod.Cone.hour == self.current_time, mod.Cone.version == mod.Cone.flight.last_version)
 
 
             # pour chaque plot
