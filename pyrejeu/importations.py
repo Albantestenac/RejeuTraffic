@@ -114,7 +114,7 @@ class RejeuImportation(object):
                                       v=int(f_speed), callsign=f_callsign,
                                       type=f_type, dep=f_dep, arr=f_arr, 
 									  ssr = int(f_ssr), rvsm=f_rvsm, tcas=f_tcas, adsb=f_adsb, dlink=f_dlink,
-									  pln_event=0)
+									  last_version=1)
             else:
                 # Cas ou un vol ayant le meme id est dans la bdd
                 r_flight.h_dep = f_h_dep
@@ -125,7 +125,7 @@ class RejeuImportation(object):
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
-                r_flight.pln_event = 0
+                r_flight.last_version = 1
             self.session.add(r_flight)
 
         logging.debug("%d vols ont été importés" % len(l_flights))
