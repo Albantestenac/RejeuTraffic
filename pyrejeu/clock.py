@@ -5,10 +5,11 @@ from ivy.std_api import IvyBindMsg
 from ivy.std_api import IvySendMsg
 import time
 import logging
-import pyrejeu.models as mod
+import models as mod
 import utils
 import math
 from sqlalchemy.orm import sessionmaker
+import control
 
 Session = sessionmaker(bind=mod.engine)
 
@@ -32,6 +33,7 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
         IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
         IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^Aircraft Heading Flight=(\S+) To=(\S+)')
+        IvyBindMsg(lambda *l: self.reset_heading(int(l[1])), '^CancelLastOrder Flight=(\S+)')
 
 
     def main_loop(self):
@@ -58,7 +60,8 @@ class RejeuClock(object):
                     % (utils.sec_to_str(self.current_time), self.rate))
 
             # récupérer les plots à envoyer
-            list_cones = self.session.query(mod.Cone).filter(mod.Cone.hour == self.current_time)
+            list_cones = self.session.query(mod.Cone).filter(mod.Cone.hour == self.current_time, mod.Cone.version == mod.Cone.last_version)
+
 
             # pour chaque plot
             for cone in list_cones:
@@ -140,7 +143,11 @@ class RejeuClock(object):
 
     def set_heading(self, flight_id, new_heading):
         logging.debug("Set Heading")
-        #appeler fonction Audrey en donnant new_heading et flight_id et current_time
+        control.set_heading(flight_id, new_heading, self.current_time)
+
+    def reset_heading(self, flight_id):
+        logging.debug("Reset Heading")
+        #appeler fonction pour revenir à l'ordre de cap précédent
 
 
 
