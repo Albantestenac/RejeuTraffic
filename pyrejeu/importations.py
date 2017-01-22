@@ -18,6 +18,11 @@ class RejeuImportation(object):
         self.session = Session()
 
     def import_file(self, filename):
+        """
+        Importe les balises, couches, vols, plots et plans de vols contenus dans le fichier texte passé en paramètre
+        :param filename: nom du fichier contenant les informations de simulation
+        :return: None
+        """
         if not os.path.isfile(filename):
             raise PyRejeuException("Le fichier %s n'existe pas" % filename)
         with open(filename, 'r') as f:
@@ -33,13 +38,11 @@ class RejeuImportation(object):
 
     def __line_search(self, lines, beginning_pattern, ending_pattern):
         """
-        Extrait une liste de lignes comprises entre deux motifs (non inclus)
-        a partir d'un fichier texte passe en parametre
-        :param filename: fichier texte contenant les lignes a extraire
+        Extrait une sous-liste de lignes comprises entre deux motifs (non inclus) à partir d'une liste de lignes
+        :param lines: liste des lignes à parser
         :param beginning_pattern: motif indiquant le debut des lignes utiles
         :param ending_pattern: motif indiquant la fin des lignes utiles
-        :return: list_lines: liste de chaine de caracteres correspondant
-             aux lignes utiles (un element = une ligne)
+        :return: liste des lignes utiles
         """
         for (i, line) in enumerate(lines):
             if beginning_pattern in line:
@@ -50,9 +53,8 @@ class RejeuImportation(object):
 
     def __import_beacons(self, lines):
         """
-        Importe les donnees relative aux balises a partir d un fichier texte
-        passe en entree et les stocke dans la BDD
-        :param lines: fichier texte contenant les balises a importer
+        Importe les données relatives aux balises a partir d'une liste de lignes en entrée et les stocke dans la BDD
+        :param lines: liste des lignes contenant les balises a importer
         :return: None
         """
         logging.debug("Importation des balises")
@@ -82,9 +84,8 @@ class RejeuImportation(object):
 
     def __import_flights(self, lines):
         """
-        Importe les donnees relative aux vols a partir d un fichier texte passe
-        en entree et les stocke dans la BDD
-        :param lines: lignes du fichier contenant les vols a importer
+        Importe les données relatives aux vols à partir d'une liste de lignes en entrée et les stocke dans la BDD
+        :param lines: liste des lignes contenant les vols à importer
         :return: None
         """
         logging.debug("Importation des vols")
@@ -114,7 +115,7 @@ class RejeuImportation(object):
                                       v=int(f_speed), callsign=f_callsign,
                                       type=f_type, dep=f_dep, arr=f_arr, 
 									  ssr = int(f_ssr), rvsm=f_rvsm, tcas=f_tcas, adsb=f_adsb, dlink=f_dlink,
-									  pln_event=0)
+									  last_version=1)
             else:
                 # Cas ou un vol ayant le meme id est dans la bdd
                 r_flight.h_dep = f_h_dep
@@ -125,17 +126,17 @@ class RejeuImportation(object):
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
-                r_flight.pln_event = 0
+                r_flight.last_version = 1
             self.session.add(r_flight)
 
         logging.debug("%d vols ont été importés" % len(l_flights))
 
     def __import_plots(self, lines, flight):
         """
-        Importe les donnees des plots correspondant a un vol a partir du fichier apsse en parametre et les stock dans la bdd
-        :param lines: lignes du fichier contenant les donnes
-        :param flight: vol dont on veut recuperer les plots
-        :return:
+        Importe les plots relatifs à un vol à partir d'une liste de lignes en entrée et les stocke dans la BDD
+        :param lines: liste des lignes contenant les plots à importer
+        :param flight: vol dont on veut importer les plots
+        :return: None
         """
         logging.debug("Importation des plots pour le vol %s" % flight.callsign)
         # Extraction des lignes concernant les plots du vol
@@ -160,11 +161,17 @@ class RejeuImportation(object):
             tmp_cone = mod.Cone(pos_x=int(c_pos_x), pos_y=int(c_pos_y),
                                 vit_x=int(c_vit_x), vit_y=int(c_vit_y),
                                 flight_level=int(c_fl), rate=int(c_rate),
-                                tendency= c_tendency, hour=c_hour, flight_id=flight.id)
+                                tendency= c_tendency, hour=c_hour, flight_id=flight.id, version=1, last_version=1)
             self.session.add(tmp_cone)
 
     def __import_flightplan(self, lines, flight):
-        # Extraction de la ligne crrespondant au plan de vol
+        """
+        Importe le plan de vol relatif à un vol à partir d'une liste de lignes en entrée et les stocke dans la BDD
+        :param lines: liste des lignes contenant le plan de vol à importer
+        :param flight: vol concerné
+        :return: None
+        """
+        # Extraction de la ligne correspondant au plan de vol
         logging.debug("Importation plan de vol pour le vol %s" % flight.callsign)
         marker = 0
         flightplan_str = ""
@@ -197,7 +204,11 @@ class RejeuImportation(object):
             self.session.add(flight_plan)
 
     def __import_layer(self, lines):
-
+        """
+        Importe les couches à partir d'une liste de lignes en entrée et les stocke dans la BDD
+        :param lines: liste des lignes contenant les couches à importer
+        :return: None
+        """
         logging.debug("Importation des couches")
 
         block_start, block_end = 0, 0
@@ -238,7 +249,7 @@ class RejeuImportation(object):
 
             self.session.add(r_layer)
 
-        logging.debug("%d balises ont été importées" % len(l_layers))
+        logging.debug("%d couches ont été importées" % len(l_layers))
 
 
 

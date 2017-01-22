@@ -1,0 +1,2 @@
+class PyRejeuTestException(Exception):
+    pass

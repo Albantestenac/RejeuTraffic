@@ -50,7 +50,7 @@ class Flight(Base):
     tcas = Column(String(10))								# tcas = OFF ou TA_ONLY ou TA_RA suivant l'équipement TCAS de l'avion
     adsb = Column(String(10))								# adbs = NO ou YES ou OUT_ONLY
     dlink = Column(String(10))								# dlink = TRUE ou FALSE suivant l'équipement Data Link de l'avion
-    pln_event = Column(Integer)                             # PLN Event émis oui=1 ou non=0 
+    last_version = Column(Integer)                          # Dernière version des plots associés au vol
 
     # déclaration des relations
     flight_plan = relationship("FlightPlan", uselist=False, back_populates="flight")
@@ -58,9 +58,9 @@ class Flight(Base):
 
     def __repr__(self):
         return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, " \
-               "ssr=%d, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, pln_event=%d)>" % \
+               "ssr=%d, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, last_version=%d)>" % \
                (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, 
-                self.ssr, self.rvsm, self.tcas, self.adsb, self.dlink, self.pln_event)
+                self.ssr, self.rvsm, self.tcas, self.adsb, self.dlink, self.last_version)
 
     def display_cones_extract(self):
         def repr(c_list):
@@ -82,13 +82,14 @@ class Cone(Base):
     tendency = Column(Integer)                          # Tendance, montee ou descente
     hour = Column(Integer)                              # Heure d'activation du plot
     flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
+    version = Column(Integer)                               # Version du cone (modification de trajectoire)
 
     # déclaration des relations
     flight = relationship("Flight", back_populates="cones")
 
     def __repr__(self):
-        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d)>" % \
-              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id)
+        return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d, version=%d)>" % \
+              (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id, self.version)
 
 
 class FlightPlan(Base):
