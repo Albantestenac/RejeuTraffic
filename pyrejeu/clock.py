@@ -8,19 +8,17 @@ import logging
 import models as mod
 import utils
 import math
-from sqlalchemy.orm import sessionmaker
 import control
-
-Session = sessionmaker(bind=mod.engine)
 
 class RejeuClock(object):
 
-    def __init__(self, start_time=0):
+    def __init__(self, db_connection, start_time=0):
         self.running = True
         self.paused = True
         self.current_time = start_time
         self.rate = 1.0
-        self.session = Session()
+        self.db_con = db_connection
+        self.session = db_connection.get_session()
         # abonnement aux messages relatifs à l'horloge
         self.__set_subscriptions()
 
@@ -83,7 +81,7 @@ class RejeuClock(object):
             else :
                 self.current_time -=1
                 time.sleep(-1.0 / self.rate)
-
+        self.session.close()
 
     def stop(self):
         logging.debug("Clock Stopped")
@@ -105,7 +103,8 @@ class RejeuClock(object):
         self.current_time = utils.str_to_sec(init_time)
 
     def send_beacons(self, msg_name):
-        l_beacons = self.session.query(mod.Beacon)
+        session = self.db_con.get_session()
+        l_beacons = session.query(mod.Beacon)
         count = 0
         msg = "AllBeacons %s Slice=" % (msg_name)
         for beacon in l_beacons:
@@ -118,9 +117,11 @@ class RejeuClock(object):
         if count > 0:
             IvySendMsg(msg)
         IvySendMsg("AllBeacons %s EndSlice" % msg_name)
+        session.close()
 
     def send_pln(self, msg_name, flight_id, init_order):
-        flight = self.session.query(mod.Flight).filter(mod.Flight.id == flight_id).first()
+        session = self.db_con.get_session()
+        flight = session.query(mod.Flight).filter(mod.Flight.id == flight_id).first()
         if init_order == "now":
             starting_time = self.current_time
             starting_beacon = None
@@ -139,6 +140,7 @@ class RejeuClock(object):
                          flight.rvsm, flight.tcas, flight.adsb, flight.dlink, route.strip())
         flight.pln_event = 1
         IvySendMsg(msg_pln)
+        session.close()
 
     def send_sectors_info(self, msg_name, flight_id):
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
@@ -146,12 +148,16 @@ class RejeuClock(object):
 
     def set_heading(self, flight_id, new_heading):
         logging.debug("Set Heading")
-        control.set_heading(flight_id, new_heading, self.current_time)
+        session = self.db_con.get_session()
+        control.set_heading(session, flight_id, new_heading, self.current_time)
+        session.close()
 
     def reset_heading(self, flight_id):
         # appeler fonction pour revenir à l'ordre de cap précédent
         logging.debug("Reset Heading")
-        control.delete_last_version(flight_id)
+        session = self.db_con.get_session()
+        control.delete_last_version(session, flight_id)
+        session.close()
 
 
 
