@@ -146,8 +146,10 @@ class RejeuClock(object):
         control.set_heading(flight_id, new_heading, self.current_time)
 
     def reset_heading(self, flight_id):
+        # appeler fonction pour revenir à l'ordre de cap précédent
         logging.debug("Reset Heading")
-        #appeler fonction pour revenir à l'ordre de cap précédent
+        control.delete_last_version(flight_id)
+
 
 
 
