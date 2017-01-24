@@ -2,6 +2,15 @@
 __author__ = "Alban", "Audrey"
 
 import math
+import traceback
+import logging
+
+
+def log_traceback(level="info"):
+    log_func = level == "info" and logging.info or logging.error
+    log_func("------------------Traceback lines--------------------")
+    log_func(traceback.format_exc())
+    log_func("-----------------------------------------------------")
 
 
 def str_to_sec(string):

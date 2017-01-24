@@ -2,34 +2,35 @@
 author = 'Audrey', 'Alban'
 
 import models as mod
-from sqlalchemy.orm import sessionmaker
 from math import *
-
-Session = sessionmaker(bind=mod.engine)
-session = Session()
-
 
 
 # Calcul des nouveaux plots pour un changement de cap.
-def set_heading(f_id, heading, time): # time en sec
+def set_heading(session, f_id, heading, time): # time en sec
 
     incrementation_time = 8 # Deux plots successifs sont séparés de 8sec.
 
     # Recherche du plot de début du changement de cap.
     list_cones_sup_time = session.query(mod.Cone).filter \
         (mod.Cone.flight_id == f_id, mod.Cone.hour >= (time-incrementation_time+1), mod.Cone.version == mod.Cone.flight.last_version)
-    starting_cone = list_cones_sup_time[0] # Plot de départ.
-    list_cones = [starting_cone]
+    starting_cone = list_cones_sup_time[0]
 
-    mod.Cone.flight.last_version += 1
+    # Copie et incrémentation de la version des plots situés avant et au changement de cap.
+    list_cones_inf_time = session.query(mod.Cone).filter \
+        (mod.Cone.flight_id == f_id, mod.Cone.hour < (time - incrementation_time + 1), mod.Cone.version == mod.Cone.flight.last_version)
+    list_cones = list_cones_inf_time.append(starting_cone)
+    for i, elt in enumerate(list_cones):
+        elt.version += 1
 
     # On considère que la vitesse de l'avion sera constante.
     speed_vector_norm = math.sqrt(starting_cone.vit_x**2 + starting_cone.vit_y**2)  # Calcul de la norme du vecteur vitesse au plot de départ.
     n_vit_x = speed_vector_norm * math.sin(math.radians(heading))  # Calcul de la vitesse en x des nouveaux plots.
     n_vit_y = speed_vector_norm * math.cos(math.radians(heading))  # Calcul de la vitesse en y des nouveaux plots.
 
+
     end_time = list_cones_sup_time[-1].hour
-    for (i, t) in enumerate(range(starting_cone.hour, end_time, incrementation_time)): # Définition des paramètres des nouveaux plots.
+    # Définition des paramètres des nouveaux plots.
+    for (i, t) in enumerate(range(starting_cone.hour, end_time, incrementation_time)):
 
         n_pos_x = incrementation_time * list_cones[i].vit_x # Position en x du plot i+1.
         n_pos_y = incrementation_time * list_cones[i].vit_y # Position en y du plot i+1.
@@ -41,12 +42,15 @@ def set_heading(f_id, heading, time): # time en sec
                  flight_level=starting_cone.flight_level, rate=0, tendency=0,
                  hour=t, flight_id=f_id)
 
-        session.add(n_cone)
         list_cones.append(n_cone)
+
+    session.bulk_save_objects(list_cones)
+
+    mod.Cone.flight.last_version += 1
 
 
 # Suppression la dernière version.
-def delete_last_version(f_id):
+def delete_last_version(session, f_id):
 
     list_cones_last_version = session.query(mod.Cone).filter \
         (mod.Cone.flight_id == f_id, mod.Cone.version == mod.Cone.flight.last_version)
@@ -55,5 +59,4 @@ def delete_last_version(f_id):
         session.delete(list_cones_last_version[i])
 
     mod.Cone.flight.last_version -= 1
-
 

@@ -7,13 +7,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 import utils
-
-
-# Mettre echo a True pour acceder au mode verbeux
-engine = create_engine('sqlite:///:memory:', 
-                       connect_args={'check_same_thread':False},
-                       poolclass=StaticPool,
-                       echo=False)
 Base = declarative_base()
 
 
@@ -59,7 +52,7 @@ class Flight(Base):
     def __repr__(self):
         return "<Flight(h_dep=%d, h_arr=%d, fl=%d, v=%d, callsign=%s, type=%s, dep=%s, arr=%s, " \
                "ssr=%d, rvsm=%s, tcas=%s, adsb=%s, datalink=%s, last_version=%d)>" % \
-               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr, 
+               (self.h_dep, self.h_arr, self.fl, self.v, self.callsign, self.type, self.dep, self.arr,
                 self.ssr, self.rvsm, self.tcas, self.adsb, self.dlink, self.last_version)
 
     def display_cones_extract(self):
@@ -145,8 +138,6 @@ class Layer(Base):
         return "<Layer(name=%s, floor=%d, ceiling=%d, climb_delay_first=%d, climb_delay_others=%d, descent_delay=%d, descent_distance=%f)>" % \
                (self.name, self.floor, self.ceiling, self.climb_delay_first, self.climb_delay_others, self.descent_delay, self.descent_distance)
 
-
-Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
     print(Beacon(name='Test', pos_x=10.2, pos_y=-1563.869).display_beacon())
