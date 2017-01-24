@@ -100,7 +100,11 @@ class RejeuImportation(object):
 
         # Remplissage des tables
         for flight in l_flights:
-            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr, f_ssr, f_rvsm, f_tcas, f_adsb, f_dlink) = flight.split()[1:15]
+            tmp_list = flight.split()
+            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr, f_ssr, f_rvsm, f_tcas, f_adsb) = tmp_list[1:14]
+            if len(tmp_list)==15: f_dlink = tmp_list[-1]
+            else: f_dlink = ""
+
             # Conversions
             f_h_dep = utils.str_to_sec(f_h_dep)
             f_h_arr = utils.str_to_sec(f_h_arr)
@@ -126,6 +130,11 @@ class RejeuImportation(object):
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
+                r_flight.ssr = int(f_ssr)
+                r_flight.rvsm = f_rvsm
+                r_flight.tcas = f_tcas
+                r_flight.adsb = f_adsb
+                r_flight.dlink = f_dlink
                 r_flight.last_version = 1
             self.session.add(r_flight)
 
