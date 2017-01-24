@@ -9,13 +9,11 @@ import models as mod
 import utils
 from __init__ import PyRejeuException
 
-Session = sessionmaker(bind=mod.engine)
 
+class RejeuImportation(object):
 
-class RejeuImportation(object): 
-
-    def __init__(self):
-        self.session = Session()
+    def __init__(self, db_connection):
+        self.session = db_connection.get_session()
 
     def import_file(self, filename):
         """
@@ -35,6 +33,7 @@ class RejeuImportation(object):
                 self.__import_plots(lines, flight)
                 self.__import_flightplan(lines, flight)
         self.session.commit()
+        self.session.close()
 
     def __line_search(self, lines, beginning_pattern, ending_pattern):
         """
@@ -72,7 +71,7 @@ class RejeuImportation(object):
                                    .first()
             if r_beacon is None:
                 # Ajout de la balise a la bdd si elle n'y est pas deja
-                r_beacon = mod.Beacon(name = b_name, 
+                r_beacon = mod.Beacon(name = b_name,
                                       pos_x = int(b_x_pos)/8.0,
                                       pos_y = int(b_y_pos)/8.0)
             else:
@@ -113,7 +112,7 @@ class RejeuImportation(object):
                 r_flight = mod.Flight(id=int(f_id), h_dep=f_h_dep,
                                       h_arr=f_h_arr, fl=int(f_fl),
                                       v=int(f_speed), callsign=f_callsign,
-                                      type=f_type, dep=f_dep, arr=f_arr, 
+                                      type=f_type, dep=f_dep, arr=f_arr,
 									  ssr = int(f_ssr), rvsm=f_rvsm, tcas=f_tcas, adsb=f_adsb, dlink=f_dlink,
 									  last_version=1)
             else:

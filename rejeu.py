@@ -9,10 +9,10 @@ import signal
 from pyrejeu.clock import RejeuClock
 from pyrejeu.importations import RejeuImportation
 from pyrejeu import utils as ut
+from pyrejeu.connection import DatabaseConnection
 from sqlalchemy.orm import sessionmaker
 import pyrejeu.models as mod
 
-Session = sessionmaker(bind=mod.engine)
 
 ivy_logger = logging.getLogger('Ivy')
 logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s')
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                         app_name="Rejeu", ivy_debug=False)
     parser.add_option('-d', '--debug', action='store_true', dest='verbose',
                       help='View debug message.')
-    parser.add_option('-i', '--ivy-debug', action='store_true', 
+    parser.add_option('-i', '--ivy-debug', action='store_true',
                       dest='ivy_debug', help='View ivy debug messages')
     parser.add_option('-b', '--ivybus', type='string', dest='ivy_bus',
                       help='Bus id (format @IP:port, default to 127.255.255.255:2010)')
@@ -62,10 +62,16 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(level)
     ivy_logger.setLevel(ivy_level)
 
+    # creation de la base de donnees
+    file_path = "/tmp/rejeu.db"
+    if os.path.isfile(file_path):
+        os.unlink(file_path)
+    db_connection = DatabaseConnection(file_path=file_path)
+
     # importation du fichier
     if len(args) != 1 or not os.path.isfile(args[0]):
         sys.exit("Error: Usage rejeu.py [options] <trace_file>")
-    import_obj = RejeuImportation()
+    import_obj = RejeuImportation(db_connection)
     import_obj.import_file(args[0])
 
     # connection au bus ivy
@@ -73,7 +79,7 @@ if __name__ == "__main__":
     connect(options.app_name, options.ivy_bus)
 
     # création de l'horloge
-    clock = RejeuClock(ut.str_to_sec("11:24:00"))
+    clock = RejeuClock(db_connection, ut.str_to_sec("11:24:00"))
 
     # gestion des signaux
     def handler(signum, frame):
@@ -83,6 +89,13 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, handler)
 
     # lancement de la boucle principale
-    clock.main_loop()
+    try:
+        clock.main_loop()
+    except Exception:
+        logging.error("An error occurs in the main loop, see traceback")
+        ut.log_traceback()
+    finally:
+        os.unlink(file_path)
+
 
 

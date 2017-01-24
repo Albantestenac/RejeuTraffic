@@ -2,16 +2,11 @@
 author = 'Audrey', 'Alban'
 
 import models as mod
-from sqlalchemy.orm import sessionmaker
 from math import *
-
-Session = sessionmaker(bind=mod.engine)
-session = Session()
-
 
 
 # Calcul des nouveaux plots pour un changement de cap.
-def set_heading(f_id, heading, time): # time en sec
+def set_heading(session, f_id, heading, time): # time en sec
 
     incrementation_time = 8 # Deux plots successifs sont séparés de 8sec.
 
@@ -55,7 +50,7 @@ def set_heading(f_id, heading, time): # time en sec
 
 
 # Suppression la dernière version.
-def delete_last_version(f_id):
+def delete_last_version(session, f_id):
 
     list_cones_last_version = session.query(mod.Cone).filter \
         (mod.Cone.flight_id == f_id, mod.Cone.version == mod.Cone.flight.last_version)
