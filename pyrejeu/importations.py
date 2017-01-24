@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 import models as mod
 import utils
 from __init__ import PyRejeuException
-
+import connection
 
 class RejeuImportation(object):
 
@@ -265,13 +265,14 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.DEBUG)
     if len(sys.argv) != 2:
         sys.exit("Usage : importation.py <file>")
-
-    import_obj = RejeuImportation()
+    db_file = "/tmp/importations.db"
+    db_connection = connection.DatabaseConnection(file_path=db_file)
+    import_obj = RejeuImportation(db_connection)
     import_obj.import_file(sys.argv[1])
 
     # Test rapide sur la BDD importee
     print("------------ Test sur la base de données --------------")
-    session_test = Session()
+    session_test = import_obj.session
     print("Affichage d'une balise")
     print(session_test.query(mod.Beacon).first())
     print("Affichage des informations sur les vols")

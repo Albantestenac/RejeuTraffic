@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session
-from pyrejeu.models import Base
+from models import Base
 
 
 class DatabaseConnection(object):
