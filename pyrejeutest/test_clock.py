@@ -50,10 +50,21 @@ class ClockTest(unittest.TestCase):
         self.myClock.stop()
         self.assertTrue(self.myClock.paused)
 
+    def test_close(self):
+        self.myClock.running = True
+        self.myClock.close()
+        self.assertEqual(self.myClock.running, False)
+
     def test_restart_with_rate(self):
         self.myClock.paused = True
         self.myClock.set_rate(2)
         self.assertFalse(self.myClock.paused)
+
+    def test_send_init_time(self):
+        self.current_time = 12*3600
+        self.myClock.set_init_time("14:32:25")
+        self.assertEqual(self.myClock.current_time, 14*3600+32*60+25)
+
 
 if __name__ == '__main__':
     unittest.main()
