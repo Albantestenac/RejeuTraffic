@@ -104,8 +104,8 @@ def get_heading(x_speed, y_speed):
         else: return 180
     angle = math.atan(y_speed/x_speed)
 
-    if x_speed > 0: return math.degrees(math.pi/2 - angle)
-    else: return math.degrees(3*math.pi/2 - angle)
+    if x_speed > 0: return int(math.degrees(math.pi/2 - angle))
+    else: return int(math.degrees(3*math.pi/2 - angle))
 
 
 if __name__ == "__main__":

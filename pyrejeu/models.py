@@ -14,8 +14,8 @@ class Beacon(Base):
 
     id = Column(Integer, primary_key=True)  # Identifiant balise
     name = Column(String(10))               # Nom de la balise
-    pos_x = Column(Float)                   # Position de la balise sur l'axe x
-    pos_y = Column(Float)                   # Position de la balise sur l'axe y
+    pos_x = Column(Float)                   # Position de la balise sur l'axe x (NM)
+    pos_y = Column(Float)                   # Position de la balise sur l'axe y (NM)
 
     def __repr__(self):
         return "<Beacon(name='%s', pos_x=%f, pos_y=%f)>" % (self.name, self.pos_x, self.pos_y)
@@ -29,15 +29,15 @@ class Flight(Base):
     __tablename__='flights'
 
     id = Column(Integer, primary_key=True)                  # Numero de vol
-    h_dep = Column(Integer)                                 # Heure de depart        A VOIR AVEC HORLOGE
-    h_arr = Column(Integer)                                 # Heure d arrivee        A VOIR AVEC HORLOGE
-    fl  = Column(Integer)                                   # Flight level
-    v = Column(Integer)                                     # Vitesse
+    h_dep = Column(Integer)                                 # Heure de depart (sec à partir de 00:00:00)
+    h_arr = Column(Integer)                                 # Heure d arrivee (sec à partir de 00:00:00)
+    fl  = Column(Integer)                                   # Niveau de col de croisière
+    v = Column(Integer)                                     # Vitesse de croisière (kts)
     callsign = Column(String(10))                           # Identifiant appel pour controleur
-    type = Column(String(10))                               # Type d avion
+    type = Column(String(10))                               # Type d'avion
     dep = Column(String(10))                                # Aeroport de depart
     arr = Column(String(10))                                # Aeroport d arrivee
-    ssr = Column(Integer)									# ssr = Code transpondeur. 0000 si inconnu.
+    ssr = Column(Integer)									# Code transpondeur. 0000 si inconnu.
     rvsm = Column(String(10))                  			    # rvsm = TRUE ou FALSE suivant l'équipement RVSM de l'avion.)-
     tcas = Column(String(10))								# tcas = OFF ou TA_ONLY ou TA_RA suivant l'équipement TCAS de l'avion
     adsb = Column(String(10))								# adbs = NO ou YES ou OUT_ONLY
@@ -64,16 +64,16 @@ class Flight(Base):
 class Cone(Base):
     __tablename__='cones'
 
-    id = Column(Integer, primary_key=True)              # Identifiant du plot
-    pos_x = Column(Float)                               # Position du plot sur l'axe x
-    pos_y = Column(Float)                               # Position du plot sur l'axe y
-    vit_x = Column(Integer)                               # Vitesse de l'avion correspondant au plot sur l'axe x
-    vit_y = Column(Integer)                               # Vitesse de l'avion correspondant au plot sur l'axe y
-    flight_level = Column(Integer)                      # FL de l'avion correspondant au plot
-    rate = Column(Integer)                                # Vitesse verticale de l'avion correspondant au plot
-    tendency = Column(Integer)                          # Tendance, montée/palier/descente
-    hour = Column(Integer)                              # Heure d'activation du plot
-    flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
+    id = Column(Integer, primary_key=True)                  # Identifiant du plot
+    pos_x = Column(Float)                                   # Position du plot sur l'axe x (1/64 NM, CAUTRA)
+    pos_y = Column(Float)                                   # Position du plot sur l'axe y (1/64 NM, CAUTRA)
+    vit_x = Column(Integer)                                 # Vitesse de l'avion correspondant au plot sur l'axe x (kts)
+    vit_y = Column(Integer)                                 # Vitesse de l'avion correspondant au plot sur l'axe y (kts)
+    flight_level = Column(Integer)                          # FL de l'avion correspondant au plot
+    rate = Column(Integer)                                  # Vitesse verticale de l'avion correspondant au plot (ft/min)
+    tendency = Column(Integer)                              # Tendance, montée/palier/descente
+    hour = Column(Integer)                                  # Heure d'activation du plot (sec à partir de 00:00:00)
+    flight_id = Column(Integer, ForeignKey('flights.id'))   # Numéro de vol correspondant au plot
     version = Column(Integer)                               # Version du cone (modification de trajectoire)
 
     # déclaration des relations
@@ -87,8 +87,8 @@ class Cone(Base):
 class FlightPlan(Base):
     __tablename__='flightplans'
 
-    id = Column(Integer, primary_key=True)                  # Identifiant du plan de vol
-    flight_id = Column(Integer, ForeignKey('flights.id'))      # Numero du vol correspondant
+    id = Column(Integer, primary_key=True)                      # Identifiant du plan de vol
+    flight_id = Column(Integer, ForeignKey('flights.id'))       # Numero du vol correspondant
 
     # déclaration des relations
     flight = relationship("Flight", back_populates="flight_plan")
@@ -123,15 +123,15 @@ class FlightPlanBeacon(Base):
 class Layer(Base):
     __tablename__='layer'
 
-    name = Column(String, primary_key=True)             # Name: nom de la couche => 1 caractere
-    floor = Column(Integer)                             # Floor : Niveau plancher
-    ceiling = Column(Integer)                           # Ceiling : Niveau plafond
-    climb_delay_first = Column(Integer)                 # Climb_delay_first : combien de temps (minutes) avant la premiere balise de la couche
-                                                        #               il faut mettre l'avion dans cette couche, quand il y arrive en montant
-    climb_delay_others = Column(Integer)                # Climb_delay_others : non implemente
-    descent_delay = Column(Integer)                     # Descent_delay : combien de temps (minutes) avant la premiere balise de la couche il faut
-                                                        #               mettre l'avion dans cette couche, quand il y arrive en descendant
-    descent_distance = Column(Float)                  # Descent_Distance: non implemente
+    name = Column(String, primary_key=True)             # Nome de la couche
+    floor = Column(Integer)                             # Niveau plancher
+    ceiling = Column(Integer)                           # Niveau plafond
+    climb_delay_first = Column(Integer)                 # Temps (min) avant la première balise de la couche.
+                                                            # mettre l'avion dans cette couche, quand il y arrive en descendant
+    climb_delay_others = Column(Integer)                # Non implementé
+    descent_delay = Column(Integer)                     # Temps (min) avant la premiere balise de la couche.
+                                                            # mettre l'avion dans cette couche, quand il y arrive en descendant
+    descent_distance = Column(Float)                    # Non implémenté
 
     def __repr__(self):
         return "<Layer(name=%s, floor=%d, ceiling=%d, climb_delay_first=%d, climb_delay_others=%d, descent_delay=%d, descent_distance=%f)>" % \

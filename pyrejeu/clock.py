@@ -31,6 +31,9 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
         IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
         IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^AircraftHeading Flight=(\S+) To=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), side=l[3]), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), rate=int(l[3])), '^AircraftHeading Flight=(\S+) To=(\S+) Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), side=l[3], rate=int(l[4])), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+) Rate=(\S+)')
         IvyBindMsg(lambda *l: self.reset_heading(int(l[1])), '^CancelLastOrder Flight=(\S+)')
 
 
@@ -146,10 +149,10 @@ class RejeuClock(object):
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
         IvySendMsg(msg)
 
-    def set_heading(self, flight_id, new_heading):
+    def set_heading(self, flight_id, new_heading, side="", rate=3):
         logging.debug("Set Heading")
         session = self.db_con.get_session()
-        control.set_heading(session, flight_id, new_heading, self.current_time)
+        control.set_heading(session, flight_id, new_heading, self.current_time, side, rate)
         session.close()
 
     def reset_heading(self, flight_id):
