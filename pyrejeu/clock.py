@@ -30,7 +30,7 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.send_beacons(l[1]), "^GetAllBeacons MsgName=(\S+)")
         IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
         IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
-        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^Aircraft Heading Flight=(\S+) To=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^AircraftHeading Flight=(\S+) To=(\S+)')
         IvyBindMsg(lambda *l: self.reset_heading(int(l[1])), '^CancelLastOrder Flight=(\S+)')
 
 

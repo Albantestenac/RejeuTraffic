@@ -2,7 +2,8 @@
 author = 'Audrey', 'Alban'
 
 import models as mod
-from math import *
+import math
+import logging
 
 
 # Calcul des nouveaux plots pour un changement de cap.
@@ -11,14 +12,21 @@ def set_heading(session, f_id, heading, time): # time en sec
     incrementation_time = 8 # Deux plots successifs sont séparés de 8sec.
 
     # Recherche du plot de début du changement de cap.
-    list_cones_sup_time = session.query(mod.Cone).filter \
-        (mod.Cone.flight_id == f_id, mod.Cone.hour >= (time-incrementation_time+1), mod.Cone.version == mod.Cone.flight.last_version)
+    list_cones_sup_time = session.query(mod.Cone) \
+        .join(mod.Cone.flight) \
+        .filter(mod.Cone.flight_id == f_id,
+                mod.Cone.hour >= (time-incrementation_time+1),
+                mod.Cone.version == mod.Flight.last_version)
     starting_cone = list_cones_sup_time[0]
 
     # Copie et incrémentation de la version des plots situés avant et au changement de cap.
-    list_cones_inf_time = session.query(mod.Cone).filter \
-        (mod.Cone.flight_id == f_id, mod.Cone.hour < (time - incrementation_time + 1), mod.Cone.version == mod.Cone.flight.last_version)
-    list_cones = list_cones_inf_time.append(starting_cone)
+    list_cones_inf_time = session.query(mod.Cone) \
+        .join(mod.Cone.flight) \
+        .filter(mod.Cone.flight_id == f_id,
+                mod.Cone.hour < (time - incrementation_time + 1),
+                mod.Cone.version == mod.Flight.last_version).all()
+    list_cones = list_cones_inf_time
+    list_cones.append(starting_cone)
     for i, elt in enumerate(list_cones):
         elt.version += 1
 
@@ -36,7 +44,7 @@ def set_heading(session, f_id, heading, time): # time en sec
         n_pos_y = incrementation_time * list_cones[i].vit_y # Position en y du plot i+1.
 
         # On considère que l'avion restera à la même altitude.
-        n_cone = mod.Cone(version=starting_cone.last_version+1,
+        n_cone = mod.Cone(version=starting_cone.flight.last_version+1,
                  pos_x=n_pos_x, pos_y=n_pos_y,
                  vit_x=n_vit_x, vit_y=n_vit_y,
                  flight_level=starting_cone.flight_level, rate=0, tendency=0,
@@ -52,8 +60,10 @@ def set_heading(session, f_id, heading, time): # time en sec
 # Suppression la dernière version.
 def delete_last_version(session, f_id):
 
-    list_cones_last_version = session.query(mod.Cone).filter \
-        (mod.Cone.flight_id == f_id, mod.Cone.version == mod.Cone.flight.last_version)
+    list_cones_last_version = session.query(mod.Cone) \
+        .join(mod.Cone.flight) \
+        .filter(mod.Cone.flight_id == f_id,
+                mod.Cone.version == mod.Flight.last_version)
 
     for i, elt in enumerate(list_cones_last_version):
         session.delete(list_cones_last_version[i])

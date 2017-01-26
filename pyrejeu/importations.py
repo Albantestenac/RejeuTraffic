@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 import models as mod
 import utils
 from __init__ import PyRejeuException
-
+import connection
 
 class RejeuImportation(object):
 
@@ -99,7 +99,11 @@ class RejeuImportation(object):
 
         # Remplissage des tables
         for flight in l_flights:
-            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr, f_ssr, f_rvsm, f_tcas, f_adsb, f_dlink) = flight.split()[1:15]
+            tmp_list = flight.split()
+            (f_id, f_h_dep, f_h_arr, f_fl, f_speed, f_callsign, f_type, f_dep, f_arr, f_ssr, f_rvsm, f_tcas, f_adsb) = tmp_list[1:14]
+            if len(tmp_list)==15: f_dlink = tmp_list[-1]
+            else: f_dlink = ""
+
             # Conversions
             f_h_dep = utils.str_to_sec(f_h_dep)
             f_h_arr = utils.str_to_sec(f_h_arr)
@@ -125,6 +129,11 @@ class RejeuImportation(object):
                 r_flight.type = f_type
                 r_flight.dep = f_dep
                 r_flight.arr = f_arr
+                r_flight.ssr = int(f_ssr)
+                r_flight.rvsm = f_rvsm
+                r_flight.tcas = f_tcas
+                r_flight.adsb = f_adsb
+                r_flight.dlink = f_dlink
                 r_flight.last_version = 1
             self.session.add(r_flight)
 
@@ -256,13 +265,14 @@ if __name__ == "__main__":
     logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.DEBUG)
     if len(sys.argv) != 2:
         sys.exit("Usage : importation.py <file>")
-
-    import_obj = RejeuImportation()
+    db_file = "/tmp/importations.db"
+    db_connection = connection.DatabaseConnection(file_path=db_file)
+    import_obj = RejeuImportation(db_connection)
     import_obj.import_file(sys.argv[1])
 
     # Test rapide sur la BDD importee
     print("------------ Test sur la base de données --------------")
-    session_test = Session()
+    session_test = import_obj.session
     print("Affichage d'une balise")
     print(session_test.query(mod.Beacon).first())
     print("Affichage des informations sur les vols")
