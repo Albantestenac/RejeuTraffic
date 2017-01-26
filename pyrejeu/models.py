@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 __author__ = "Alban", "Alexandre"
 
-from sqlalchemy.pool import StaticPool
-from sqlalchemy import create_engine
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-import utils
+
 Base = declarative_base()
 
 
@@ -72,7 +71,7 @@ class Cone(Base):
     vit_y = Column(Integer)                               # Vitesse de l'avion correspondant au plot sur l'axe y
     flight_level = Column(Integer)                      # FL de l'avion correspondant au plot
     rate = Column(Integer)                                # Vitesse verticale de l'avion correspondant au plot
-    tendency = Column(Integer)                          # Tendance, montee ou descente
+    tendency = Column(Integer)                          # Tendance, montée/palier/descente
     hour = Column(Integer)                              # Heure d'activation du plot
     flight_id = Column(Integer, ForeignKey('flights.id'))  # Numero de vol correspondant au plot
     version = Column(Integer)                               # Version du cone (modification de trajectoire)
