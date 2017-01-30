@@ -9,6 +9,7 @@ import models as mod
 import utils
 import math
 import control
+import re
 
 class RejeuClock(object):
 
@@ -30,12 +31,12 @@ class RejeuClock(object):
         IvyBindMsg(lambda *l: self.send_beacons(l[1]), "^GetAllBeacons MsgName=(\S+)")
         IvyBindMsg(lambda *l: self.send_pln(l[1], int(l[2]), l[3]), "^GetPln MsgName=(\S+) Flight=(\S+) From=(\S+)")
         IvyBindMsg(lambda *l: self.send_sectors_info(l[1], int(l[2])), "^GetSectorsInfos MsgName=(\S+) Flight=(\S+)")
-        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2])), '^AircraftHeading Flight=(\S+) To=(\S+)')
-        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), side=l[3]), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+)')
-        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), rate=int(l[3])), '^AircraftHeading Flight=(\S+) To=(\S+) Rate=(\S+)')
-        IvyBindMsg(lambda *l: self.set_heading(int(l[1]), int(l[2]), side=l[3], rate=int(l[4])), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+) Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(l[0], int(l[1]), int(l[2])), '^AircraftHeading Flight=(\S+) To=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(l[0], int(l[1]), int(l[2]), side=l[3]), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(l[0], int(l[1]), int(l[2]), rate=int(l[3])), '^AircraftHeading Flight=(\S+) To=(\S+) Rate=(\S+)')
+        IvyBindMsg(lambda *l: self.set_heading(l[0], int(l[1]), int(l[2]), side=l[3], rate=int(l[4])), '^AircraftHeading Flight=(\S+) To=(\S+) By=(\S+) Rate=(\S+)')
         IvyBindMsg(lambda *l: self.reset_heading(int(l[1])), '^CancelLastOrder Flight=(\S+)')
-
+        IvyBindMsg(lambda *l: self.send_trajectory(l[1], l[2], l[3]), 'GetTrajectory MsgName=(\S+) Flight=(\S+) From=(\S+)')
 
     def main_loop(self):
         # Envoi des infos de début et de fin de la simulation
@@ -72,7 +73,7 @@ class RejeuClock(object):
                 g_speed = math.sqrt((cone.vit_x)**2+(cone.vit_y)**2)
                 heading = utils.get_heading(cone.vit_x, cone.vit_y)
                 msg = "TrackMovedEvent Flight=%d CallSign=%s Ssr=%d Sector=-- Layers=F X=%f Y=%f Vx=%d Vy=%d Afl=%d Rate=%d Heading=%d GroundSpeed=%d Tendency=%d Time=%s" %\
-                      ( cone.flight.id, cone.flight.callsign, cone.flight.ssr, cone.pos_x/60, cone.pos_y/60, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, heading,int(g_speed), cone.tendency, utils.sec_to_str(cone.hour) )
+                      ( cone.flight.id, cone.flight.callsign, cone.flight.ssr, cone.pos_x/64, cone.pos_y/64, cone.vit_x, cone.vit_y, cone.flight_level, cone.rate, heading,int(g_speed), cone.tendency, utils.sec_to_str(cone.hour) )
                 #logging.debug("Message envoye : %s" % msg)
                 IvySendMsg(msg)
 
@@ -149,7 +150,7 @@ class RejeuClock(object):
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
         IvySendMsg(msg)
 
-    def set_heading(self, flight_id, new_heading, side="", rate=3):
+    def set_heading(self, agent, flight_id, new_heading, side="", rate=3):
         """
         Appelle la fonction set_heading de control qui crée la nouvelle route suite à un ordre
         de changement de cap après réception d'un message Ivy Aircraft Heading
@@ -161,6 +162,12 @@ class RejeuClock(object):
         session = self.db_con.get_session()
         control.set_heading(session, flight_id, new_heading, self.current_time, side, rate)
         session.close()
+        # send report event
+        order = "AircraftHeading|{0}|{1}".format(flight_id, new_heading)
+        IvySendMsg("ReportEvent {0} Result=OK "
+                   "Info=NIL Order={1}".format(agent, order))
+        # send trajectory update event
+        IvySendMsg("TrajectoryUpdateEvent Flight={0}".format(flight_id))
 
     def reset_heading(self, flight_id):
         """
@@ -174,6 +181,29 @@ class RejeuClock(object):
         control.delete_last_version(session, flight_id)
         session.close()
 
+    def send_trajectory(self, msg_name, flight_id, from_type):
+        session = self.db_con.get_session()
+        start = 0
+        if from_type == "now":
+            start = self.current_time
+        elif re.match("^\d{2}:\d{2}:\d{2}$", from_type):
+            start = utils.str_to_sec(from_type)
+        cones = session.query(mod.Cone)\
+                       .join(mod.Cone.flight)\
+                       .filter(mod.Cone.flight_id == flight_id,
+                               mod.Cone.hour > start,
+                               mod.Cone.version == mod.Flight.last_version)\
+                       .order_by(mod.Cone.hour)\
+                       .all()
+
+        nb_msg = (len(cones)/30) + 1
+        for i in range(0, nb_msg):
+            first, last = 30*i, min(30*(i+1), len(cones))
+            data = " ".join([c.format() for c in cones[first:last]])
+            if data != "":
+                IvySendMsg("Trajectory %s Slice=%s" % (msg_name, data))
+        IvySendMsg("Trajectory %s EndSlice" % msg_name)
+        session.close()
 
 
 
