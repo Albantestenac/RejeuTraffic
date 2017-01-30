@@ -13,6 +13,11 @@ import control
 class RejeuClock(object):
 
     def __init__(self, db_connection, start_time=0):
+        """
+        Initialisation d'un objet RejeuClock
+        :param db_connection: Connexion à la base de données
+        :param start_time: Heure de départ à 0 secondes par défaut
+        """
         self.running = True
         self.paused = True
         self.current_time = start_time
@@ -23,6 +28,10 @@ class RejeuClock(object):
         self.__set_subscriptions()
 
     def __set_subscriptions(self):
+        """
+        Abonnements aux messages du bus Ivy afin de traiter les différentes actions de l'utilisateur
+        :return: NONE
+        """
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
         IvyBindMsg(lambda *l: self.stop(), '^ClockStop')
         IvyBindMsg(lambda *l: self.set_rate(l[1]), '^SetClock Rate=(\S+)')
@@ -38,7 +47,10 @@ class RejeuClock(object):
 
 
     def main_loop(self):
-        # Envoi des infos de début et de fin de la simulation
+        """
+        Boucle principale permettant l'utilisation de l'objet RejeuClock
+        :return: NONE
+        """
         list_flights = self.session.query(mod.Flight)
         (start_time, stop_time) = utils.extract_sim_bounds(list_flights)
 
@@ -87,21 +99,43 @@ class RejeuClock(object):
         self.session.close()
 
     def stop(self):
+        """
+        Met en pause l'horloge et donc la simulation
+        :return: NONE
+        """
         logging.debug("Clock Stopped")
         self.paused = True
 
     def start(self):
+        """
+        Lance la simulation en lançant l'horloge
+        :return: NONE
+        """
         logging.debug("Clock Started")
         self.paused = False
 
     def close(self):
+        """
+        Arrête l'horloge et ferme le programme
+        :return: NONE
+        """
         self.running = False
 
     def set_rate(self, rate_value):
+        """
+        Modifie la vitesse de la simulation
+        :param rate_value: Vitesse (Float)
+        :return: NONE
+        """
         logging.debug("SetClock")
         self.rate = int(rate_value)
 
     def set_init_time(self, init_time):
+        """
+        Modifie l'heure à laquelle on effectue la simulation
+        :param init_time: Heure d'initialisation
+        :return: NONE
+        """
         logging.debug("Set Init Time")
         self.current_time = utils.str_to_sec(init_time)
 
@@ -158,6 +192,12 @@ class RejeuClock(object):
         session.close()
 
     def send_sectors_info(self, msg_name, flight_id):
+        """
+        Envoie la liste des secteurs
+        :param msg_name: Identifiant du message envoyé et émis en réponse
+        :param flight_id: Num de vol (Int)
+        :return: NONE
+        """
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
         IvySendMsg(msg)
 
