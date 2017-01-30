@@ -19,7 +19,7 @@ class RejeuImportation(object):
         """
         Importe les balises, couches, vols, plots et plans de vols contenus dans le fichier texte passé en paramètre
         :param filename: nom du fichier contenant les informations de simulation
-        :return: None
+        :return: NONE
         """
         if not os.path.isfile(filename):
             raise PyRejeuException("Le fichier %s n'existe pas" % filename)
@@ -39,7 +39,7 @@ class RejeuImportation(object):
         """
         Extrait une sous-liste de lignes comprises entre deux motifs (non inclus) à partir d'une liste de lignes
         :param lines: liste des lignes à parser
-        :param beginning_pattern: motif indiquant le debut des lignes utiles
+        :param beginning_pattern: motif indiquant le debut des lignes utiles (Str)
         :param ending_pattern: motif indiquant la fin des lignes utiles
         :return: liste des lignes utiles
         """
@@ -215,7 +215,7 @@ class RejeuImportation(object):
         """
         Importe les couches à partir d'une liste de lignes en entrée et les stocke dans la BDD
         :param lines: liste des lignes contenant les couches à importer
-        :return: None
+        :return: NONE
         """
         logging.debug("Importation des couches")
 

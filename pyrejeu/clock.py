@@ -106,6 +106,11 @@ class RejeuClock(object):
         self.current_time = utils.str_to_sec(init_time)
 
     def send_beacons(self, msg_name):
+        """
+        En réponse à GetAllBeacons, Rejeu envoie AllBeacons.
+        :param msg_name: Identifiant du msg envoyé et émis en réponse
+        :return: NONE
+        """
         session = self.db_con.get_session()
         l_beacons = session.query(mod.Beacon)
         count = 0
@@ -123,6 +128,13 @@ class RejeuClock(object):
         session.close()
 
     def send_pln(self, msg_name, flight_id, init_order):
+        """
+        En réponse à GetPln, Rejeu renvoie Pln.
+        :param msg_name: Identifiant du message envoyé et émis en réponse
+        :param flight_id: Num de vol (Int)
+        :param init_order: now, un nom de balise ou une heure (Str)
+        :return: NONE
+        """
         session = self.db_con.get_session()
         flight = session.query(mod.Flight).filter(mod.Flight.id == flight_id).first()
         if init_order == "now":

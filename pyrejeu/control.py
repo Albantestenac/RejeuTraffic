@@ -11,11 +11,11 @@ def set_heading(session, f_id, target_heading, time, side, rate):
     """
     Calcul des nouveaux plots pour un changement de cap.
     :param session:
-    :param f_id: Identifiant du vol (Int).
-    :param target_heading: Valeur du nouveau cap (Int).
-    :param time: Heure de début en sec (Int).
-    :param side: Côté de virage demandé (Str: "gauche" ou "droite").
-    :param rate: Taux de virage (Int).
+    :param f_id: Identifiant du vol (Int)
+    :param target_heading: Valeur du nouveau cap (Int)
+    :param time: Heure de début en sec (Int)
+    :param side: Côté de virage demandé (Str: "Right" ou "Left")
+    :param rate: Taux de virage en °/sec (Int)
     :return: NONE
     """
 
@@ -82,7 +82,7 @@ def set_heading(session, f_id, target_heading, time, side, rate):
 
 def delete_last_version(session, f_id):
     """
-    Suppression la dernière version.
+    Suppression la dernière version de la trajectoire.
     :param session:
     :param f_id: Num de vol (Int).
     :return: NONE
@@ -100,6 +100,15 @@ def delete_last_version(session, f_id):
     session.commit()
 
 def capture_heading(current_hdg, target_hdg, side, rate, incrementation_time=8):
+    """
+    Calcule le cap que prend l'avion pour chaque plot du virage.
+    :param current_hdg: Cap actuel (Int)
+    :param target_hdg: Cap demandé (Int)
+    :param side: Côté du virage (Str: "Right" ou "Left")
+    :param rate: Taux de virage en °/sec (Int)
+    :param incrementation_time: 8sec
+    :return: headings: Liste des caps (1cap/8sec) à suivre dans le virage (List)
+    """
     headings = []
     if side=="":
         if target_hdg > current_hdg:
