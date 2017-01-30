@@ -12,7 +12,8 @@ from pyrejeu import connection
 
 #Initialisation de la base de données et importation des infos du fichier testfile
 
-testfile="/home/eleve/Documents/RejeuTraffic/pyrejeutest/test_file.txt"
+path = os.path.dirname(__file__)
+testfile = os.path.join(path, "test_file.txt")
 db_file = "/tmp/unittest_importations.db"
 if os.path.isfile(db_file):
     os.unlink(db_file)

@@ -5,6 +5,7 @@ __author__ = "Alban", "Alexandre"
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from pyrejeu import utils
 
 Base = declarative_base()
 
@@ -82,6 +83,11 @@ class Cone(Base):
     def __repr__(self):
         return"<Cone(pos_x=%f, pos_y=%f, vit_x=%d, vit_y=%d, flight_level=%d, rate=%f, tendency=%d, hour=%d, flight=%d, version=%d)>" % \
               (self.pos_x, self.pos_y, self.vit_x, self.vit_y, self.flight_level, self.rate, self.tendency, self.hour, self.flight.id, self.version)
+
+    def format(self):
+        return "%.2f %.2f %s %d" % (self.pos_x/64.0, self.pos_y/64.0,
+                                    utils.sec_to_str(self.hour),
+                                    self.flight_level)
 
 
 class FlightPlan(Base):
