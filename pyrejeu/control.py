@@ -7,8 +7,17 @@ import utils
 import logging
 
 
-# Calcul des nouveaux plots pour un changement de cap.
-def set_heading(session, f_id, target_heading, time, side, rate): # time en sec
+def set_heading(session, f_id, target_heading, time, side, rate):
+    """
+    Calcul des nouveaux plots pour un changement de cap.
+    :param session:
+    :param f_id: Identifiant du vol (Int).
+    :param target_heading: Valeur du nouveau cap (Int).
+    :param time: Heure de début en sec (Int).
+    :param side: Côté de virage demandé (Str: "gauche" ou "droite").
+    :param rate: Taux de virage (Int).
+    :return: NONE
+    """
 
     incrementation_time = 8 # Deux plots successifs sont séparés de 8sec.
 
@@ -71,8 +80,13 @@ def set_heading(session, f_id, target_heading, time, side, rate): # time en sec
     session.commit()
 
 
-# Suppression la dernière version.
 def delete_last_version(session, f_id):
+    """
+    Suppression la dernière version.
+    :param session:
+    :param f_id: Num de vol (Int).
+    :return: NONE
+    """
     flight = session.query(mod.Flight).filter(mod.Flight.id == f_id).first()
 
     list_cones_last_version = session.query(mod.Cone) \

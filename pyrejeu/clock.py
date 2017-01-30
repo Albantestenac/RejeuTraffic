@@ -152,10 +152,10 @@ class RejeuClock(object):
     def set_heading(self, flight_id, new_heading, side="", rate=3):
         """
         Appelle la fonction set_heading de control qui crée la nouvelle route suite à un ordre
-        de changement de cap après réception d'un message Ivy Aircraft Heading
-        :param flight_id:
-        :param new_heading:
-        :return:
+        de changement de cap après réception d'un message Ivy Aircraft Heading.
+        :param flight_id: Num de vol (Int).
+        :param new_heading: Nouveau cap (Int).
+        :return: NONE
         """
         logging.debug("Set Heading")
         session = self.db_con.get_session()
@@ -166,8 +166,8 @@ class RejeuClock(object):
         """
         Appelle la fonction delete_last_version de control qui annule l'ordre de changement de cap
         après réception d'un message Ivy CancelLastOrder
-        :param flight_id:
-        :return:
+        :param flight_id: Num de vol (Int).
+        :return: NONE
         """
         logging.debug("Reset Heading")
         session = self.db_con.get_session()
