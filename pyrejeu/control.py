@@ -47,8 +47,12 @@ def set_heading(session, f_id, target_heading, time, side, rate):
                 mod.Cone.version == mod.Flight.last_version).all()
     list_cones = []
     for cone in list_cones_inf_time:
-        cone.version += 1
-        list_cones.append(cone)
+        #Création d'un nouveau cone dans la bdd avec les mêmes attributs
+        copied_cone = mod.Cone(version=cone.version, pos_x=cone.pos_x, pos_y=cone.pos_y,
+                 vit_x=cone.vit_x, vit_y=cone.vit_y, flight_level=cone.flight_level, rate=cone.rate,
+                 tendency=cone.tendency, hour=cone.hour, flight_id=cone.flight_id, flight=cone.flight)
+        list_cones.append(copied_cone)
+
 
     #Liste des plots modifiés
     modified_cones = [starting_cone]
@@ -80,7 +84,7 @@ def set_heading(session, f_id, target_heading, time, side, rate):
                                                                               modified_cones[i].vit_x, modified_cones[i].vit_y))
 
         # On considère que l'avion restera à la même altitude.
-        n_cone = mod.Cone(version=starting_cone.flight.last_version+1,
+        n_cone = mod.Cone(version=starting_cone.flight.last_version,
                  pos_x=n_pos_x, pos_y=n_pos_y,
                  vit_x=n_vit_x, vit_y=n_vit_y,
                  flight_level=starting_cone.flight_level, rate=0, tendency=0,
@@ -88,6 +92,8 @@ def set_heading(session, f_id, target_heading, time, side, rate):
         modified_cones.append(n_cone)
 
     list_cones += modified_cones
+    for cone in list_cones:
+        cone.version += 1
     session.add_all(list_cones)
     flight.last_version += 1
     session.commit()
@@ -104,16 +110,16 @@ def delete_last_version(session, f_id):
     :return: NONE
     """
     flight = session.query(mod.Flight).filter(mod.Flight.id == f_id).first()
+    if flight.last_version > 1:
+        list_cones_last_version = session.query(mod.Cone) \
+            .join(mod.Cone.flight) \
+            .filter(mod.Cone.flight_id == f_id,
+                    mod.Cone.version == mod.Flight.last_version)
 
-    list_cones_last_version = session.query(mod.Cone) \
-        .join(mod.Cone.flight) \
-        .filter(mod.Cone.flight_id == f_id,
-                mod.Cone.version == mod.Flight.last_version)
-
-    for cone in list_cones_last_version:
-        session.delete(cone)
-    flight.last_version -= 1
-    session.commit()
+        for cone in list_cones_last_version:
+            session.delete(cone)
+        flight.last_version -= 1
+        session.commit()
 
 def capture_heading(current_hdg, target_hdg, side, rate, incrementation_time=8):
     """

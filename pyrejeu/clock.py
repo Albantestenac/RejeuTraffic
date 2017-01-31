@@ -260,6 +260,8 @@ class RejeuClock(object):
         session = self.db_con.get_session()
         control.delete_last_version(session, flight_id)
         session.close()
+        # send trajectory update event
+        IvySendMsg("TrajectoryUpdateEvent Flight={0}".format(flight_id))
 
     def send_trajectory(self, msg_name, flight_id, from_type):
         session = self.db_con.get_session()
@@ -268,6 +270,8 @@ class RejeuClock(object):
             start = self.current_time
         elif re.match("^\d{2}:\d{2}:\d{2}$", from_type):
             start = utils.str_to_sec(from_type)
+        flight = session.query(mod.Flight).filter(mod.Flight.id == flight_id).first()
+        logging.debug("Vol %d : last_version = %d"%(flight.id, flight.last_version))
         cones = session.query(mod.Cone)\
                        .join(mod.Cone.flight)\
                        .filter(mod.Cone.flight_id == flight_id,
