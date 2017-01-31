@@ -29,6 +29,7 @@ class ImportationsTest(unittest.TestCase):
         self.beacons = self.session.query(mod.Beacon).all()
         self.flights = self.session.query(mod.Flight).all()
         self.all_cones = self.session.query(mod.Cone).all()
+        self.flight_plans = self.session.query(mod.FlightPlan).all()
 
     def tearDown(self):
         """Terminaison des tests"""
@@ -148,6 +149,21 @@ class ImportationsTest(unittest.TestCase):
             # Heures de départ et d'arrivée du vol sont celles du premier et dernier plot
             self.assertEqual(flight.h_dep, flight.cones[0].hour)
             self.assertEqual(flight.h_arr, flight.cones[-1].hour)
+
+    def test_cone_flight_level(self):
+        """
+        Vérifie que le niveau de vol d'un plot correspond bien à celui indiqué dans le fichier texte
+        :return: NONE
+        """
+        self.assertEqual(self.all_cones[2].flight_level, 5)
+        self.assertEqual(self.all_cones[1].flight_level, 3)
+        self.assertEqual(self.all_cones[0].flight_level, 2)
+        self.assertEqual(self.all_cones[204].flight_level, 21)
+
+    def test_beacons_flight_plan(self):
+        no_flight_plans = len(self.flight_plans)
+        self.assertEqual(no_flight_plans, 2)
+
 
 
 if __name__ == '__main__':
