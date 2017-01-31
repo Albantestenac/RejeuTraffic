@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Module composé d'une unique classe RejeuClock gérant la simulation, l'horloge et les messages émis/reçu sur le bus.
+"""
 __author__ = "Alban", "Audrey", "Alexandre"
 
 from ivy.std_api import IvyBindMsg
@@ -16,7 +19,9 @@ class RejeuClock(object):
     def __init__(self, db_connection, start_time=0):
         """
         Initialisation d'un objet RejeuClock
+
         :param db_connection: Connexion à la base de données
+
         :param start_time: Heure de départ à 0 secondes par défaut
         """
         self.running = True
@@ -31,6 +36,7 @@ class RejeuClock(object):
     def __set_subscriptions(self):
         """
         Abonnements aux messages du bus Ivy afin de traiter les différentes actions de l'utilisateur
+
         :return: NONE
         """
         IvyBindMsg(lambda *l: self.start(), '^ClockStart')
@@ -50,6 +56,7 @@ class RejeuClock(object):
     def main_loop(self):
         """
         Boucle principale permettant l'utilisation de l'objet RejeuClock
+
         :return: NONE
         """
         list_flights = self.session.query(mod.Flight)
@@ -102,6 +109,7 @@ class RejeuClock(object):
     def stop(self):
         """
         Met en pause l'horloge et donc la simulation
+
         :return: NONE
         """
         logging.debug("Clock Stopped")
@@ -110,6 +118,7 @@ class RejeuClock(object):
     def start(self):
         """
         Lance la simulation en lançant l'horloge
+
         :return: NONE
         """
         logging.debug("Clock Started")
@@ -118,6 +127,7 @@ class RejeuClock(object):
     def close(self):
         """
         Arrête l'horloge et ferme le programme
+
         :return: NONE
         """
         self.running = False
@@ -125,7 +135,9 @@ class RejeuClock(object):
     def set_rate(self, rate_value):
         """
         Modifie la vitesse de la simulation
+
         :param rate_value: Vitesse (Float)
+
         :return: NONE
         """
         logging.debug("SetClock")
@@ -134,7 +146,9 @@ class RejeuClock(object):
     def set_init_time(self, init_time):
         """
         Modifie l'heure à laquelle on effectue la simulation
+
         :param init_time: Heure d'initialisation
+
         :return: NONE
         """
         logging.debug("Set Init Time")
@@ -142,8 +156,10 @@ class RejeuClock(object):
 
     def send_beacons(self, msg_name):
         """
-        En réponse à GetAllBeacons, Rejeu envoie AllBeacons.
-        :param msg_name: Identifiant du msg envoyé et émis en réponse
+        En réponse à GetAllBeacons, Rejeu envoie l'ensemble des balises enregistrées.
+
+        :param msg_name: Identifiant du msg envoyé et émit en réponse
+
         :return: NONE
         """
         session = self.db_con.get_session()
@@ -164,10 +180,14 @@ class RejeuClock(object):
 
     def send_pln(self, msg_name, flight_id, init_order):
         """
-        En réponse à GetPln, Rejeu renvoie Pln.
+        En réponse à GetPln, Rejeu renvoie le plan de vol associé au vol dans le message.
+
         :param msg_name: Identifiant du message envoyé et émis en réponse
+
         :param flight_id: Num de vol (Int)
+
         :param init_order: now, un nom de balise ou une heure (Str)
+
         :return: NONE
         """
         session = self.db_con.get_session()
@@ -195,8 +215,11 @@ class RejeuClock(object):
     def send_sectors_info(self, msg_name, flight_id):
         """
         Envoie la liste des secteurs
+
         :param msg_name: Identifiant du message envoyé et émis en réponse
+
         :param flight_id: Num de vol (Int)
+
         :return: NONE
         """
         msg = "SectorsInfo %s Flight=%d List=--" % (msg_name, flight_id)
@@ -206,8 +229,11 @@ class RejeuClock(object):
         """
         Appelle la fonction set_heading de control qui crée la nouvelle route suite à un ordre
         de changement de cap après réception d'un message Ivy Aircraft Heading.
+
         :param flight_id: Num de vol (Int).
+
         :param new_heading: Nouveau cap (Int).
+
         :return: NONE
         """
         logging.debug("Set Heading")
@@ -225,7 +251,9 @@ class RejeuClock(object):
         """
         Appelle la fonction delete_last_version de control qui annule l'ordre de changement de cap
         après réception d'un message Ivy CancelLastOrder
+
         :param flight_id: Num de vol (Int).
+
         :return: NONE
         """
         logging.debug("Reset Heading")

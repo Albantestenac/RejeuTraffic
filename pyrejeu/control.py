@@ -10,12 +10,19 @@ import logging
 def set_heading(session, f_id, target_heading, time, side, rate):
     """
     Calcul des nouveaux plots pour un changement de cap.
+
     :param session:
+
     :param f_id: Identifiant du vol (Int)
+
     :param target_heading: Valeur du nouveau cap (Int)
+
     :param time: Heure de début en sec (Int)
+
     :param side: Côté de virage demandé (Str: "Right" ou "Left")
+
     :param rate: Taux de virage en °/sec (Int)
+
     :return: NONE
     """
 
@@ -62,16 +69,22 @@ def set_heading(session, f_id, target_heading, time, side, rate):
         else:
             n_vit_x = speed_vector_norm * math.sin(math.radians(target_heading))  # Vitesse en x des nouveaux plots. (kts)
             n_vit_y = speed_vector_norm * math.cos(math.radians(target_heading))  # Vitesse en y des nouveaux plots. (kts)
-
-        n_pos_x = modified_cones[i].pos_x + incrementation_time * modified_cones[i].vit_x/3600*64 # Position en x (1/64 NM) du plot i+1.
-        n_pos_y = modified_cones[i].pos_y + incrementation_time * modified_cones[i].vit_y/3600*64 # Position en y (1/64 NM) du plot i+1.
+        if i==0:
+            n_pos_x = modified_cones[i].pos_x
+            n_pos_y = modified_cones[i].pos_y
+        else:
+            n_pos_x = modified_cones[i].pos_x + incrementation_time * modified_cones[i].vit_x / 3600 * 64  # Position en x (1/64 NM) du plot i+1.
+            n_pos_y = modified_cones[i].pos_y + incrementation_time * modified_cones[i].vit_y / 3600 * 64  # Position en y (1/64 NM) du plot i+1.
+        if i<10:
+            logging.debug("Plot h=%s: pos_x=%f pos_y=%f vit_x=%f vit_y=%f" % (utils.sec_to_str(modified_cones[i].hour), modified_cones[i].pos_x, modified_cones[i].pos_y,
+                                                                              modified_cones[i].vit_x, modified_cones[i].vit_y))
 
         # On considère que l'avion restera à la même altitude.
         n_cone = mod.Cone(version=starting_cone.flight.last_version+1,
                  pos_x=n_pos_x, pos_y=n_pos_y,
                  vit_x=n_vit_x, vit_y=n_vit_y,
                  flight_level=starting_cone.flight_level, rate=0, tendency=0,
-                 hour=t, flight_id=f_id, flight=flight)
+                 hour=t+incrementation_time, flight_id=f_id, flight=flight)
         modified_cones.append(n_cone)
 
     list_cones += modified_cones
@@ -83,8 +96,11 @@ def set_heading(session, f_id, target_heading, time, side, rate):
 def delete_last_version(session, f_id):
     """
     Suppression la dernière version de la trajectoire.
+
     :param session:
+
     :param f_id: Num de vol (Int).
+
     :return: NONE
     """
     flight = session.query(mod.Flight).filter(mod.Flight.id == f_id).first()
@@ -102,11 +118,17 @@ def delete_last_version(session, f_id):
 def capture_heading(current_hdg, target_hdg, side, rate, incrementation_time=8):
     """
     Calcule le cap que prend l'avion pour chaque plot du virage.
+
     :param current_hdg: Cap actuel (Int)
+
     :param target_hdg: Cap demandé (Int)
+
     :param side: Côté du virage (Str: "Right" ou "Left")
+
     :param rate: Taux de virage en °/sec (Int)
+
     :param incrementation_time: 8sec
+
     :return: headings: Liste des caps (1cap/8sec) à suivre dans le virage (List)
     """
     headings = []

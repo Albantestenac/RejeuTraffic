@@ -18,7 +18,9 @@ class RejeuImportation(object):
     def import_file(self, filename):
         """
         Importe les balises, couches, vols, plots et plans de vols contenus dans le fichier texte passé en paramètre
+
         :param filename: nom du fichier contenant les informations de simulation
+
         :return: NONE
         """
         if not os.path.isfile(filename):
@@ -38,9 +40,13 @@ class RejeuImportation(object):
     def __line_search(self, lines, beginning_pattern, ending_pattern):
         """
         Extrait une sous-liste de lignes comprises entre deux motifs (non inclus) à partir d'une liste de lignes
+
         :param lines: liste des lignes à parser
+
         :param beginning_pattern: motif indiquant le debut des lignes utiles (Str)
+
         :param ending_pattern: motif indiquant la fin des lignes utiles
+
         :return: liste des lignes utiles
         """
         for (i, line) in enumerate(lines):
@@ -53,7 +59,9 @@ class RejeuImportation(object):
     def __import_beacons(self, lines):
         """
         Importe les données relatives aux balises a partir d'une liste de lignes en entrée et les stocke dans la BDD
+
         :param lines: liste des lignes contenant les balises a importer
+
         :return: None
         """
         logging.debug("Importation des balises")
@@ -84,7 +92,9 @@ class RejeuImportation(object):
     def __import_flights(self, lines):
         """
         Importe les données relatives aux vols à partir d'une liste de lignes en entrée et les stocke dans la BDD
+
         :param lines: liste des lignes contenant les vols à importer
+
         :return: None
         """
         logging.debug("Importation des vols")
@@ -142,8 +152,11 @@ class RejeuImportation(object):
     def __import_plots(self, lines, flight):
         """
         Importe les plots relatifs à un vol à partir d'une liste de lignes en entrée et les stocke dans la BDD
+
         :param lines: liste des lignes contenant les plots à importer
+
         :param flight: vol dont on veut importer les plots
+
         :return: None
         """
         logging.debug("Importation des plots pour le vol %s" % flight.callsign)
@@ -175,8 +188,11 @@ class RejeuImportation(object):
     def __import_flightplan(self, lines, flight):
         """
         Importe le plan de vol relatif à un vol à partir d'une liste de lignes en entrée et les stocke dans la BDD
+
         :param lines: liste des lignes contenant le plan de vol à importer
+
         :param flight: vol concerné
+
         :return: None
         """
         # Extraction de la ligne correspondant au plan de vol
@@ -214,7 +230,9 @@ class RejeuImportation(object):
     def __import_layer(self, lines):
         """
         Importe les couches à partir d'une liste de lignes en entrée et les stocke dans la BDD
+
         :param lines: liste des lignes contenant les couches à importer
+
         :return: NONE
         """
         logging.debug("Importation des couches")
