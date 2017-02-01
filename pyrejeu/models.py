@@ -11,12 +11,23 @@ Base = declarative_base()
 
 
 class Beacon(Base):
+    """
+    Classe associée à la table contenant l'ensemble des balises
+
+    :param id: Identifiant de la balise dans la table
+
+    :param name: Nom de la balise
+
+    :param pos_x: Position de la balise sur l'axe x (NM)
+
+    :param pos_y: Position de la balise sur l'axe y (NM)
+    """
     __tablename__='beacons'
 
-    id = Column(Integer, primary_key=True)  # Identifiant balise
-    name = Column(String(10))               # Nom de la balise
-    pos_x = Column(Float)                   # Position de la balise sur l'axe x (NM)
-    pos_y = Column(Float)                   # Position de la balise sur l'axe y (NM)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(10))
+    pos_x = Column(Float)
+    pos_y = Column(Float)
 
     def __repr__(self):
         return "<Beacon(name='%s', pos_x=%f, pos_y=%f)>" % (self.name, self.pos_x, self.pos_y)
@@ -27,23 +38,60 @@ class Beacon(Base):
 
 
 class Flight(Base):
+    """
+    Classe associée à la table contenant l'ensemble des vols
+
+    :param id: Numéro de vol
+
+    :param h_dep: Heure de départ (sec à partir de 00:00:00)
+
+    :param h_arr: Heure d'arrivée (sec à partir de 00:00:00)
+
+    :param fl: Niveau de col de croisière
+
+    :param v: Vitesse de croisière (kts)
+
+    :param callsign: Identifiant appel pour controleur
+
+    :param type: Type d'avion
+
+    :param dep: Aéroport de départ
+
+    :param arr: Aéroport d'arrivee
+
+    :param ssr: Code transpondeur
+
+    :param rvsm: TRUE ou FALSE suivant l'équipement RVSM de l'avion.
+
+    :param tcas: OFF ou TA_ONLY ou TA_RA suivant l'équipement TCAS de l'avion
+
+    :param adsb: Equipement adsb : NO ou YES ou OUT_ONLY
+
+    :param dlink: TRUE ou FALSE suivant l'équipement Data Link de l'avion
+
+    :param last_version: Dernière version des plots associés au vol
+
+    :param flight_plan: Plan de vol associé à ce vol
+
+    :param cones: Ensemble des plots du vol
+    """
     __tablename__='flights'
 
-    id = Column(Integer, primary_key=True)                  # Numero de vol
-    h_dep = Column(Integer)                                 # Heure de depart (sec à partir de 00:00:00)
-    h_arr = Column(Integer)                                 # Heure d arrivee (sec à partir de 00:00:00)
-    fl  = Column(Integer)                                   # Niveau de col de croisière
-    v = Column(Integer)                                     # Vitesse de croisière (kts)
-    callsign = Column(String(10))                           # Identifiant appel pour controleur
-    type = Column(String(10))                               # Type d'avion
-    dep = Column(String(10))                                # Aeroport de depart
-    arr = Column(String(10))                                # Aeroport d arrivee
-    ssr = Column(Integer)									# Code transpondeur. 0000 si inconnu.
-    rvsm = Column(String(10))                  			    # rvsm = TRUE ou FALSE suivant l'équipement RVSM de l'avion.)-
-    tcas = Column(String(10))								# tcas = OFF ou TA_ONLY ou TA_RA suivant l'équipement TCAS de l'avion
-    adsb = Column(String(10))								# adbs = NO ou YES ou OUT_ONLY
-    dlink = Column(String(10))								# dlink = TRUE ou FALSE suivant l'équipement Data Link de l'avion
-    last_version = Column(Integer)                          # Dernière version des plots associés au vol
+    id = Column(Integer, primary_key=True)
+    h_dep = Column(Integer)
+    h_arr = Column(Integer)
+    fl  = Column(Integer)
+    v = Column(Integer)
+    callsign = Column(String(10))
+    type = Column(String(10))
+    dep = Column(String(10))
+    arr = Column(String(10))
+    ssr = Column(Integer)
+    rvsm = Column(String(10))
+    tcas = Column(String(10))
+    adsb = Column(String(10))
+    dlink = Column(String(10))
+    last_version = Column(Integer)
 
     # déclaration des relations
     flight_plan = relationship("FlightPlan", uselist=False, back_populates="flight")
@@ -63,19 +111,46 @@ class Flight(Base):
 
 
 class Cone(Base):
+    """
+    Classe associée à la table contenant l'ensemble des plots
+
+    :param id: Identifiant du plot dans la table
+
+    :param pos_x: Position du plot sur l'axe y (1/64 NM, CAUTRA)
+
+    :param pos_y: Position du plot sur l'axe y (1/64 NM, CAUTRA)
+
+    :param vit_x: Vitesse de l'avion correspondant au plot sur l'axe x (kts)
+
+    :param vit_y: Vitesse de l'avion correspondant au plot sur l'axe y (kts)
+
+    :param flight_level: FL de l'avion correspondant au plot
+
+    :param rate: Vitesse verticale de l'avion correspondant au plot (ft/min)
+
+    :param tendency: Tendance, montée/palier/descente
+
+    :param hour: Heure d'activation du plot (sec à partir de 00:00:00)
+
+    :param flight_id: Numéro de vol correspondant au plot
+
+    :param version: Version du cone (modification de trajectoire)
+
+    :param flight: Vol associé au plot
+    """
     __tablename__='cones'
 
-    id = Column(Integer, primary_key=True)                  # Identifiant du plot
-    pos_x = Column(Float)                                   # Position du plot sur l'axe x (1/64 NM, CAUTRA)
-    pos_y = Column(Float)                                   # Position du plot sur l'axe y (1/64 NM, CAUTRA)
-    vit_x = Column(Integer)                                 # Vitesse de l'avion correspondant au plot sur l'axe x (kts)
-    vit_y = Column(Integer)                                 # Vitesse de l'avion correspondant au plot sur l'axe y (kts)
-    flight_level = Column(Integer)                          # FL de l'avion correspondant au plot
-    rate = Column(Integer)                                  # Vitesse verticale de l'avion correspondant au plot (ft/min)
-    tendency = Column(Integer)                              # Tendance, montée/palier/descente
-    hour = Column(Integer)                                  # Heure d'activation du plot (sec à partir de 00:00:00)
-    flight_id = Column(Integer, ForeignKey('flights.id'))   # Numéro de vol correspondant au plot
-    version = Column(Integer)                               # Version du cone (modification de trajectoire)
+    id = Column(Integer, primary_key=True)
+    pos_x = Column(Float)
+    pos_y = Column(Float)
+    vit_x = Column(Integer)
+    vit_y = Column(Integer)
+    flight_level = Column(Integer)
+    rate = Column(Integer)
+    tendency = Column(Integer)
+    hour = Column(Integer)
+    flight_id = Column(Integer, ForeignKey('flights.id'))
+    version = Column(Integer)
 
     # déclaration des relations
     flight = relationship("Flight", back_populates="cones")
@@ -91,10 +166,21 @@ class Cone(Base):
 
 
 class FlightPlan(Base):
+    """
+    Classe associée à la table contenant l'ensemble des plans de vol
+
+    :param id: Identifiant du plan de vol dans la table
+
+    :param flight_id: Numero du vol correspondant
+
+    :param flight: Vol associé à ce plan de vol
+
+    :param beacons: Ensemble des balises du plan de vol (objet FlightPlanBeacon)
+    """
     __tablename__='flightplans'
 
-    id = Column(Integer, primary_key=True)                      # Identifiant du plan de vol
-    flight_id = Column(Integer, ForeignKey('flights.id'))       # Numero du vol correspondant
+    id = Column(Integer, primary_key=True)
+    flight_id = Column(Integer, ForeignKey('flights.id'))
 
     # déclaration des relations
     flight = relationship("Flight", back_populates="flight_plan")
@@ -108,6 +194,25 @@ class FlightPlan(Base):
 
 
 class FlightPlanBeacon(Base):
+    """
+    Classe associée à la table contenant l'ensemble des balises contenues dans des plans de vol
+
+    :param id: Identifiant de la balise dans la table
+
+    :param order: Ordre de la balise dans le plan de vol
+
+    :param hour: Heure de survol (s à partir de 00:00:00)
+
+    :param V_or_A: Passage Vertical (V) ou à proximité (A)
+
+    :param FL: Niveau de vol au survol
+
+    :param flight_plan_id: Id du plan de vol correspondant
+
+    :param beacon_name: Nom de la balise
+
+    :param flight_plan: Plan de vol associé
+    """
     __tablename__='flightplan_beacons'
 
     id = Column(Integer, primary_key=True)
@@ -127,6 +232,25 @@ class FlightPlanBeacon(Base):
 
 
 class Layer(Base):
+    """
+    Classe associée à la table contenant l'ensemble des couches
+
+    :param name: Nom de la couche
+
+    :param floor: Niveau plancher
+
+    :param ceiling: Niveau plafond
+
+    :param climb_delay_first: Temps (min) avant la première balise de la couche.
+                               mettre l'avion dans cette couche, quand il y arrive en descendant
+
+    :param climb_delay_others: Non implémenté
+
+    :param descent_delay: Temps (min) avant la premiere balise de la couche.
+                            mettre l'avion dans cette couche, quand il y arrive en descendant
+
+    :param descent_distance: Non implémenté
+    """
     __tablename__='layer'
 
     name = Column(String, primary_key=True)             # Nome de la couche

@@ -8,6 +8,9 @@ from models import Base
 
 
 class DatabaseConnection(object):
+    """
+    Classe faisant le lien entre la base de données et les classes de models (SQLAlchemy)
+    """
     Session = scoped_session(sessionmaker())
 
     def __init__(self, file_path=None, **kwargs):

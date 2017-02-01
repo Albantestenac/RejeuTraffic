@@ -264,6 +264,17 @@ class RejeuClock(object):
         IvySendMsg("TrajectoryUpdateEvent Flight={0}".format(flight_id))
 
     def send_trajectory(self, msg_name, flight_id, from_type):
+        """
+        Envoie la trajectoire du vol considéré sur réception d'un message GetTrajectory
+
+        :param msg_name: Identifiant du message (renvoyé lors de la réponse)
+
+        :param flight_id: Identifiant du vol
+
+        :param from_type: Instant à partir duquel la trajectoire est désirée ("now", "origin" ou "HH:MM:SS")
+
+        :return: NONE
+        """
         session = self.db_con.get_session()
         start = 0
         if from_type == "now":

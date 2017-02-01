@@ -1,14 +1,14 @@
 """
+utils
+============
+
+.. automodule:: pyrejeu.utils
+    :members:
+
 clock
 ============
 
 .. autoclass:: pyrejeu.clock.RejeuClock
-    :members:
-
-connection
-============
-
-.. autoclass:: pyrejeu.connection.DatabaseConnection
     :members:
 
 control
@@ -44,12 +44,11 @@ models
 .. autoclass:: pyrejeu.models.Layer
     :members:
 
-utils
+connection
 ============
 
-.. automodule:: pyrejeu.utils
+.. autoclass:: pyrejeu.connection.DatabaseConnection
     :members:
-
 """
 
 class PyRejeuException(Exception):
